@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+ <fieldset name="general" label="COM_JUGENDTRAINING_SETUP_GENERAL">
+  <field name="id" type="hidden"/>
+  <field name="title" type="text" label="COM_JUGENDTRAINING_FIELD_SETUP_TITLE" required="true"/>
+  <field name="detail_mode" type="radio" label="COM_JUGENDTRAINING_FIELD_DETAIL_MODE" description="COM_JUGENDTRAINING_FIELD_DETAIL_MODE_DESC" default="0" layout="joomla.form.field.radio.switcher"><option value="0">COM_JUGENDTRAINING_NO</option><option value="1">COM_JUGENDTRAINING_YES</option></field>
+  <field name="notes" type="textarea" label="COM_JUGENDTRAINING_FIELD_NOTES" rows="5"/>
+ </fieldset>
+ <fieldset name="bow" label="COM_JUGENDTRAINING_SETUP_BOW">
+  <field name="riser" type="text" label="COM_JUGENDTRAINING_FIELD_RISER"/>
+  <field name="limbs" type="text" label="COM_JUGENDTRAINING_FIELD_LIMBS"/>
+  <field name="arrow_rest" type="text" label="COM_JUGENDTRAINING_FIELD_ARROW_REST"/>
+  <field name="sight" type="text" label="COM_JUGENDTRAINING_FIELD_SIGHT"/>
+ </fieldset>
+ <fieldset name="button" label="COM_JUGENDTRAINING_SETUP_BUTTON">
+  <field name="button_name" type="text" label="COM_JUGENDTRAINING_FIELD_BUTTON"/>
+  <field name="button_side" type="text" label="COM_JUGENDTRAINING_FIELD_BUTTON_SIDE" showon="detail_mode:1"/>
+  <field name="button_tension" type="text" label="COM_JUGENDTRAINING_FIELD_BUTTON_TENSION" showon="detail_mode:1"/>
+ </fieldset>
+ <fieldset name="string" label="COM_JUGENDTRAINING_SETUP_STRING">
+  <field name="string_name" type="text" label="COM_JUGENDTRAINING_FIELD_STRING"/>
+  <field name="string_material" type="text" label="COM_JUGENDTRAINING_FIELD_STRING_MATERIAL" showon="detail_mode:1"/>
+  <field name="string_strands" type="number" label="COM_JUGENDTRAINING_FIELD_STRING_STRANDS" min="1" showon="detail_mode:1"/>
+ </fieldset>
+ <fieldset name="arrows" label="COM_JUGENDTRAINING_SETUP_ARROWS">
+  <field name="arrows_name" type="text" label="COM_JUGENDTRAINING_FIELD_ARROWS_COMPONENT"/>
+  <field name="arrow_shaft" type="text" label="COM_JUGENDTRAINING_FIELD_ARROW_SHAFT" showon="detail_mode:1"/>
+  <field name="arrow_spine" type="text" label="COM_JUGENDTRAINING_FIELD_ARROW_SPINE" showon="detail_mode:1"/>
+  <field name="arrow_fletching" type="text" label="COM_JUGENDTRAINING_FIELD_ARROW_FLETCHING" showon="detail_mode:1"/>
+  <field name="arrow_point_weight_gr" type="number" label="COM_JUGENDTRAINING_FIELD_ARROW_POINT_WEIGHT" step="0.1" showon="detail_mode:1"/>
+ </fieldset>
+ <fieldset name="stabilizers" label="COM_JUGENDTRAINING_SETUP_STABILIZERS">
+  <field name="stabilizer_mono" type="text" label="COM_JUGENDTRAINING_FIELD_STABILIZER_MONO"/>
+  <field name="stabilizer_side" type="text" label="COM_JUGENDTRAINING_FIELD_STABILIZER_SIDE"/>
+ </fieldset>
+ <fieldset name="measurements" label="COM_JUGENDTRAINING_SETUP_MEASUREMENTS">
+  <field name="brace_height_mm" type="number" label="COM_JUGENDTRAINING_FIELD_BRACE_HEIGHT" step="0.1" showon="detail_mode:1"/>
+  <field name="tiller_top_mm" type="number" label="COM_JUGENDTRAINING_FIELD_TILLER_TOP" step="0.1" showon="detail_mode:1"/>
+  <field name="tiller_bottom_mm" type="number" label="COM_JUGENDTRAINING_FIELD_TILLER_BOTTOM" step="0.1" showon="detail_mode:1"/>
+ </fieldset>
+</form>

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_jugendtraining",
+  "version": "1.8.4",
+  "description": "Assets for com_jugendtraining",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "name": "com_jugendtraining.admin",
+      "type": "style",
+      "uri": "com_jugendtraining/css/admin.css"
+    },
+    {
+      "name": "com_jugendtraining.admin",
+      "type": "script",
+      "uri": "com_jugendtraining/js/admin.js",
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
+      "name": "com_jugendtraining.site",
+      "type": "style",
+      "uri": "com_jugendtraining/css/site.css"
+    },
+    {
+      "name": "com_jugendtraining.site",
+      "type": "script",
+      "uri": "com_jugendtraining/js/site.js",
+      "attributes": {
+        "defer": true
+      }
+    }
+  ]
+}

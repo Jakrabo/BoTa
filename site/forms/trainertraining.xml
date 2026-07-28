@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <fieldset name="details" label="COM_JUGENDTRAINING_TRAINING_DETAILS">
+    <field name="id" type="hidden" />
+    <field name="title" type="text" label="COM_JUGENDTRAINING_FIELD_TRAINING_TITLE" required="true" maxlength="190" />
+    <field name="training_group_id" type="list" label="COM_JUGENDTRAINING_TRAINING_GROUP" required="true">
+      <option value="">COM_JUGENDTRAINING_SELECT_TRAINING_GROUP</option>
+    </field>
+    <field name="training_date" type="calendar" label="COM_JUGENDTRAINING_FIELD_TRAINING_DATE" required="true" format="%Y-%m-%d" showtime="false" filter="user_utc" />
+    <field name="start_time" type="time" label="COM_JUGENDTRAINING_FIELD_START_TIME" filter="raw" />
+    <field name="end_time" type="time" label="COM_JUGENDTRAINING_FIELD_END_TIME" filter="raw" />
+    <field name="location" type="text" label="COM_JUGENDTRAINING_FIELD_LOCATION" maxlength="190" />
+    <field name="notes" type="textarea" label="COM_JUGENDTRAINING_FIELD_TRAINING_NOTES" rows="5" />
+    <field name="create_series" type="radio" label="COM_JUGENDTRAINING_FIELD_CREATE_SERIES" default="0" layout="joomla.form.field.radio.switcher">
+      <option value="0">COM_JUGENDTRAINING_NO</option><option value="1">COM_JUGENDTRAINING_YES</option>
+    </field>
+    <field name="series_interval_days" type="number" label="COM_JUGENDTRAINING_FIELD_SERIES_INTERVAL" default="7" min="1" max="365" showon="create_series:1" />
+    <field name="series_count" type="number" label="COM_JUGENDTRAINING_FIELD_SERIES_COUNT" default="10" min="2" max="100" showon="create_series:1" />
+  </fieldset>
+</form>

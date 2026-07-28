@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<access component="com_jugendtraining">
+  <section name="component">
+    <action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN_COMPONENT_DESC" />
+    <action name="core.options" title="JACTION_OPTIONS" description="JACTION_OPTIONS_COMPONENT_DESC" />
+    <action name="core.manage" title="JACTION_MANAGE" description="JACTION_MANAGE_COMPONENT_DESC" />
+    <action name="core.create" title="JACTION_CREATE" description="JACTION_CREATE_COMPONENT_DESC" />
+    <action name="core.delete" title="JACTION_DELETE" description="JACTION_DELETE_COMPONENT_DESC" />
+    <action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT_COMPONENT_DESC" />
+    <action name="core.edit.state" title="JACTION_EDITSTATE" description="JACTION_EDITSTATE_COMPONENT_DESC" />
+    <action name="core.edit.own" title="JACTION_EDITOWN" description="JACTION_EDITOWN_COMPONENT_DESC" />
+    <action name="trainer.access" title="COM_JUGENDTRAINING_ACTION_TRAINER_ACCESS" description="COM_JUGENDTRAINING_ACTION_TRAINER_ACCESS_DESC" />
+    <action name="athlete.access" title="COM_JUGENDTRAINING_ACTION_ATHLETE_ACCESS" description="COM_JUGENDTRAINING_ACTION_ATHLETE_ACCESS_DESC" />
+    <action name="groups.manage" title="COM_JUGENDTRAINING_ACTION_GROUPS_MANAGE" description="COM_JUGENDTRAINING_ACTION_GROUPS_MANAGE_DESC" />
+    <action name="training.manage" title="COM_JUGENDTRAINING_ACTION_TRAINING_MANAGE" description="COM_JUGENDTRAINING_ACTION_TRAINING_MANAGE_DESC" />
+    <action name="attendance.manage" title="COM_JUGENDTRAINING_ACTION_ATTENDANCE_MANAGE" description="COM_JUGENDTRAINING_ACTION_ATTENDANCE_MANAGE_DESC" />
+    <action name="results.manage" title="COM_JUGENDTRAINING_ACTION_RESULTS_MANAGE" description="COM_JUGENDTRAINING_ACTION_RESULTS_MANAGE_DESC" />
+  </section>
+</access>

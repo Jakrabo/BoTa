@@ -1,0 +1,10 @@
+<?php
+\defined('_JEXEC') or die;
+use Joomla\CMS\Language\Text;use Joomla\CMS\Router\Route;use Joomla\CMS\HTML\HTMLHelper;$a=$this->athlete;$x=$this->assignment;
+?>
+<div class="d-flex justify-content-between align-items-center mb-4"><h1 class="mb-0"><?php echo Text::_($x?'COM_JUGENDTRAINING_EDIT_TRAINING_TASK':'COM_JUGENDTRAINING_ADD_TRAINING_TASK');?></h1><a class="btn btn-outline-secondary" href="<?php echo Route::_('index.php?option=com_jugendtraining&view=trainerathletedetail&id='.(int)$a->id);?>"><?php echo Text::_('COM_JUGENDTRAINING_BACK');?></a></div>
+<form class="card card-body" action="<?php echo Route::_('index.php?option=com_jugendtraining&task=trainerathletetask.save');?>" method="post"><input type="hidden" name="jform[id]" value="<?php echo(int)($x->id??0);?>"><input type="hidden" name="jform[athlete_id]" value="<?php echo(int)$a->id;?>"><div class="row g-3">
+<div class="col-md-7"><label class="form-label"><?php echo Text::_('COM_JUGENDTRAINING_PROGRAM');?></label><select class="form-select" name="jform[program_id]" required><option value=""><?php echo Text::_('COM_JUGENDTRAINING_SELECT_OPTION');?></option><?php foreach($this->programs as$p):?><option value="<?php echo(int)$p->id;?>" <?php echo(int)($x->program_id??0)===(int)$p->id?'selected':'';?>><?php echo htmlspecialchars($p->title,ENT_QUOTES,'UTF-8');?></option><?php endforeach;?></select></div>
+<div class="col-md-3"><label class="form-label"><?php echo Text::_('COM_JUGENDTRAINING_FIELD_DUE_DATE');?></label><input class="form-control" type="date" name="jform[due_date]" value="<?php echo htmlspecialchars((string)($x->due_date??''),ENT_QUOTES,'UTF-8');?>"></div>
+<div class="col-md-2 d-flex align-items-end"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="jform[active]" value="1" <?php echo!isset($x->active)||(int)$x->active===1?'checked':'';?>><label class="form-check-label"><?php echo Text::_('COM_JUGENDTRAINING_ACTIVE');?></label></div></div>
+</div><button class="btn btn-primary mt-3" type="submit"><?php echo Text::_('COM_JUGENDTRAINING_SAVE');?></button><?php echo HTMLHelper::_('form.token');?></form>

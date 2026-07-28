@@ -1,0 +1,24 @@
+DROP TABLE IF EXISTS `#__jt_penalty_register`;
+DROP TABLE IF EXISTS `#__jt_penalty_definitions`;
+DROP TABLE IF EXISTS `#__jt_bow_setups`;
+DROP TABLE IF EXISTS `#__jt_sight_settings`;
+DROP TABLE IF EXISTS `#__jt_training_diary`;
+DROP TABLE IF EXISTS `#__jt_training_group_trainers`;
+DROP TABLE IF EXISTS `#__jt_training_group_athletes`;
+DROP TABLE IF EXISTS `#__jt_training_groups`;
+DROP TABLE IF EXISTS `#__jt_trainer_notes`;
+DROP TABLE IF EXISTS `#__jt_goals`;
+DROP TABLE IF EXISTS `#__jt_program_progress`;
+DROP TABLE IF EXISTS `#__jt_athlete_programs`;
+DROP TABLE IF EXISTS `#__jt_program_exercises`;
+DROP TABLE IF EXISTS `#__jt_training_programs`;
+DROP TABLE IF EXISTS `#__jt_exercises`;
+
+DROP TABLE IF EXISTS `#__jt_audit_log`;
+DROP TABLE IF EXISTS `#__jt_settings`;
+DROP TABLE IF EXISTS `#__jt_attendance`;
+DROP TABLE IF EXISTS `#__jt_training_sessions`;
+DROP TABLE IF EXISTS `#__jt_athletes`;
+DROP TABLE IF EXISTS `#__jt_sportyears`;
+DROP TABLE IF EXISTS `#__jt_classes`;
+DROP TABLE IF EXISTS `#__jt_clubs`;

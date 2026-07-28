@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <fieldset name="details" label="COM_JUGENDTRAINING_TRAINER_NOTE_DETAILS">
+    <field name="id" type="hidden" />
+    <field name="athlete_id" type="sql" label="COM_JUGENDTRAINING_FIELD_ATHLETE" required="true"
+      query="SELECT id AS value, CONCAT(lastname, ', ', firstname) AS text FROM #__jt_athletes WHERE published = 1 ORDER BY lastname, firstname"
+      key_field="value" value_field="text" />
+    <field name="note_date" type="calendar" label="COM_JUGENDTRAINING_FIELD_NOTE_DATE" required="true"
+      format="%Y-%m-%d" showtime="false" filter="user_utc" />
+    <field name="category" type="list" label="COM_JUGENDTRAINING_FIELD_CATEGORY" default="general">
+      <option value="general">COM_JUGENDTRAINING_NOTE_GENERAL</option>
+      <option value="technique">COM_JUGENDTRAINING_CATEGORY_TECHNIQUE</option>
+      <option value="mental">COM_JUGENDTRAINING_CATEGORY_MENTAL</option>
+      <option value="equipment">COM_JUGENDTRAINING_NOTE_EQUIPMENT</option>
+      <option value="competition">COM_JUGENDTRAINING_CATEGORY_COMPETITION</option>
+    </field>
+    <field name="note" type="textarea" label="COM_JUGENDTRAINING_FIELD_NOTE" required="true" rows="8" />
+    <field name="private_note" type="radio" label="COM_JUGENDTRAINING_FIELD_PRIVATE_NOTE"
+      layout="joomla.form.field.radio.switcher" default="1">
+      <option value="0">COM_JUGENDTRAINING_NO</option><option value="1">COM_JUGENDTRAINING_YES</option>
+    </field>
+  </fieldset>
+</form>

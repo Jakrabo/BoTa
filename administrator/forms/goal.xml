@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <fieldset name="documentation" label="COM_JUGENDTRAINING_GOAL_METRICS_HELP_TITLE">
+    <field
+      name="metrics_help"
+      type="note"
+      label="COM_JUGENDTRAINING_GOAL_METRICS_HELP_TITLE"
+      description="COM_JUGENDTRAINING_GOAL_METRICS_HELP"
+      class="alert alert-info"
+    />
+  </fieldset>
+
+  <fieldset name="details" label="COM_JUGENDTRAINING_GOAL_DETAILS">
+    <field name="id" type="hidden" />
+
+    <field name="athlete_id" type="sql" label="COM_JUGENDTRAINING_FIELD_ATHLETE" required="true"
+      query="SELECT id AS value, CONCAT(lastname, ', ', firstname) AS text FROM #__jt_athletes WHERE published = 1 ORDER BY lastname, firstname"
+      key_field="value" value_field="text" />
+
+    <field name="title" type="text" label="COM_JUGENDTRAINING_FIELD_TITLE" required="true" maxlength="190" />
+    <field name="description" type="textarea" label="JGLOBAL_DESCRIPTION" rows="5" />
+
+    <field name="target_type" type="list" label="COM_JUGENDTRAINING_FIELD_TARGET_TYPE" default="score" onchange="if (window.jtGoalHelp) { window.jtGoalHelp(this.value); }">
+      <option value="score">COM_JUGENDTRAINING_TARGET_SCORE</option>
+      <option value="average">COM_JUGENDTRAINING_TARGET_AVERAGE</option>
+      <option value="attendance">COM_JUGENDTRAINING_TARGET_ATTENDANCE</option>
+      <option value="program">COM_JUGENDTRAINING_TARGET_PROGRAM</option>
+      <option value="custom">COM_JUGENDTRAINING_TARGET_CUSTOM</option>
+    </field>
+
+    <field name="calculation_mode" type="list" label="COM_JUGENDTRAINING_FIELD_CALCULATION_MODE" default="automatic">
+      <option value="automatic">COM_JUGENDTRAINING_CALCULATION_AUTOMATIC</option>
+      <option value="manual">COM_JUGENDTRAINING_CALCULATION_MANUAL</option>
+    </field>
+
+    <field name="target_value" type="number" label="COM_JUGENDTRAINING_FIELD_TARGET_VALUE" step="0.01" min="0" required="true" filter="float" />
+    <field name="current_value" type="number" label="COM_JUGENDTRAINING_FIELD_CURRENT_VALUE" step="0.01" min="0" default="0" filter="float" />
+
+    <field name="distance_m" type="number" label="COM_JUGENDTRAINING_FIELD_DISTANCE" min="0" max="100" default="0" filter="uint" />
+    <field name="arrows" type="number" label="COM_JUGENDTRAINING_FIELD_ARROWS" min="0" max="300" default="0" filter="uint" />
+
+    <field name="program_id" type="sql" label="COM_JUGENDTRAINING_FIELD_PROGRAM"
+      query="SELECT id AS value, title AS text FROM #__jt_training_programs WHERE published = 1 ORDER BY title"
+      key_field="value" value_field="text">
+      <option value="0">COM_JUGENDTRAINING_SELECT_PROGRAM</option>
+    </field>
+
+    <field name="due_date" type="calendar" label="COM_JUGENDTRAINING_FIELD_DUE_DATE" format="%Y-%m-%d" showtime="false" filter="user_utc" />
+
+    <field name="completed" type="radio" label="COM_JUGENDTRAINING_FIELD_COMPLETED" layout="joomla.form.field.radio.switcher" default="0">
+      <option value="0">COM_JUGENDTRAINING_NO</option><option value="1">COM_JUGENDTRAINING_YES</option>
+    </field>
+
+    <field name="published" type="list" label="COM_JUGENDTRAINING_FIELD_STATUS" default="1">
+      <option value="1">COM_JUGENDTRAINING_STATUS_PUBLISHED</option><option value="0">COM_JUGENDTRAINING_STATUS_UNPUBLISHED</option>
+    </field>
+  </fieldset>
+</form>

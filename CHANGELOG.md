@@ -1,0 +1,385 @@
+# Changelog
+
+## 1.8.4 — 2026-07-28
+
+- SVG-Farben des Ergebnisdiagramms direkt an den Elementen gesetzt
+- Gesamtringe werden unabhängig vom Template blau dargestellt
+- Ringdurchschnitt wird unabhängig vom CSS als orange-rote Linie dargestellt
+- orange-rote Datenpunkte und grafische Legende ergänzt
+- Darstellung ist nicht mehr von Joomla-CSS-Variablen oder CSS-Klassen abhängig
+
+## 1.8.3 — 2026-07-28
+
+- Ergebnisbalken im Trainer-Schützendetail explizit blau eingefärbt
+- Ringdurchschnitt als deutlich sichtbare orange-rote Linie dargestellt
+- Durchschnittspunkte farblich an die Linie angepasst
+- Diagrammfarben von Joomla-Templatevariablen entkoppelt
+- Zeichenreihenfolge der Durchschnittslinie korrigiert
+
+## 1.8.2 — 2026-07-28
+
+- Ringdurchschnittslinie in der Trainer-Schützendetailseite sichtbar gemacht
+- explizite CSS-Klasse für Linie und Datenpunkte ergänzt
+- Ringdurchschnitt auf Skala 0–10 begrenzt und Punkte mit Tooltip ergänzt
+- Ergebnisdiagramm wird vor dem Rendern sauber neu aufgebaut
+
+## 1.8.1 — 2026-07-28
+
+- technischer Manifestname wieder auf COM_JUGENDTRAINING stabilisiert
+- sichtbarer Komponentenname bleibt über die Sprachdateien BoTa
+- veraltete und doppelte Administrator-Menüeinträge werden vor dem Update bereinigt
+- Fehler beim Erstellen des Joomla-Administratormenüs behoben
+
+## 1.8.0 — 2026-07-28
+
+- sichtbarer Komponentenname auf BoTa geändert
+- Duplicate-Key-Fehler bei erneuter Programmzuordnung behoben
+- Achievement-Auszug im Trainer-Cockpit als drei Bootstrap-Kacheln umgesetzt
+- Kurzzeitfilter der Trainer-Schützendetailseite korrigiert
+- Schützennamen in Trainer-Ampel und Klassenwechsel verlinkt
+
+## 1.7.0 — 2026-07-28
+
+- Achievement-Cockpit zeigt einen Auszug von maximal sechs Kacheln
+- Notizen aus der Schützendetailseite anlegbar und bearbeitbar
+- Trainingsaufgaben aus der Detailseite anlegbar und bearbeitbar
+- Schützendaten durch zugeordnete Trainer bearbeitbar
+- Leistungs- und Pfeildiagramm der Trainerdetailseite vervollständigt
+- Zeitraumfilter um letzte Woche und letzten Monat erweitert
+- Sprachplatzhalter COM_JUGENDTRAINING_TRAINING und Filterbeschriftung ergänzt
+- Backend-Konfiguration um Sprachübersicht und Joomla-Overrides erweitert
+
+## 1.6.0 — 2026-07-28
+
+- Trainer-Notizen mit Anlage, Gruppen-/Schützenfilter und Status ergänzt
+- Standardfilter für aktuelle Notizen ergänzt
+- Achievement-Cockpit als responsives Kachelraster umgesetzt
+- Schützenliste mit Trainer-Detailansicht verknüpft
+- Detailansicht mit Kontakt, Teilnahmen, Notizen, Aufgaben und Diagrammen ergänzt
+- Tagebuchstatistik an den gemeinsamen Zeitraumfilter angebunden
+
+## 1.5.0 — 2026-07-28
+
+- Achievement-Vorschau als drei Kacheln und auf die letzten drei Erfolge begrenzt
+- Reihenfolge und Sichtbarkeit des Schützen- und Trainerdashboards konfigurierbar
+- Zeitraumfilter wirkt auf Ergebnis- und Pfeildiagramm
+- Trainingsgruppen im Trainerdashboard mit gefilterter Schützenansicht verlinkt
+
+## 1.4.0 — 2026-07-28
+
+- Diagramm für Pfeile pro Monat ergänzt
+- Umschaltung auf Pfeile pro Kalenderwoche ergänzt
+- Zeitraumfilter mit letzten 12 Monaten als Standard ergänzt
+- vorhandene Sportjahre als auswählbare Zeiträume ergänzt
+- fehlende Monate und Kalenderwochen werden mit 0 Pfeilen dargestellt
+
+## 1.3.0 — 2026-07-28
+
+- abgeschlossene Trainingsprogramme werden 14 Tage nach Abschluss aus dem Schützendashboard ausgeblendet
+- offene Strafen in Schützen- und Trainerdashboard ergänzt
+- monetäre Strafbilanz und Reset-Zeitpunkt ergänzt
+- Tagebuchstatistiken in der Leistungsentwicklung ergänzt
+- Badge-Grafiken im Dashboard hart auf 48 × 48 Pixel begrenzt
+
+## 1.2.0 — 2026-07-28
+
+- Strafdefinitionen im Konfigurationstab ergänzt
+- monetäre und nichtmonetäre Strafen ergänzt
+- Frontend-Strafregister für Trainer ergänzt
+- Berechtigungsprüfung auf zugeordnete Trainingsgruppen ergänzt
+- offene und erledigte Registereinträge ergänzt
+- Achievement-Vorschau im Schützen-Dashboard verkleinert
+
+## 1.1.1 — 2026-07-28
+
+- fehlende Sprachkonstante COM_JUGENDTRAINING_SELECT_OPTION ergänzt
+- Backend-Menüpunkt in „Konfiguration“ umbenannt
+- Konfigurationsseite in die Tabs „CSV-Import“ und „Tagebuch“ gegliedert
+- zuletzt verwendeter Tab wird innerhalb der Sitzung beibehalten
+
+## 1.1.0 — 2026-07-28
+
+- CSV-Import-Cockpit ergänzt
+- Vorlagen für Ergebnisse, Tagebuch und Achievements ergänzt
+- konfigurierbare Tagebuch-Dropdowns ergänzt
+- aktives Bogensetup als Standard ergänzt
+
+## 1.0.2 — 2026-07-28
+
+- integriertes Hilfesystem vollständig entfernt
+- CSV-Export für Tagebuchdaten und Ergebnisse ergänzt
+- rollenbasierte Exporte für Schützen und Trainer ergänzt
+- UTF-8-BOM, deutsches Zahlenformat und CSV-Injection-Schutz ergänzt
+
+## 1.0.1 — 2026-07-27
+
+- Fehler beim Öffnen der Backend-Hilfe ohne article-Parameter behoben
+- HelpService null-sicher gemacht
+
+## 1.0.0 — 2026-07-27
+
+- rollenabhängiges Hilfecenter im Frontend und Backend ergänzt
+- Markdown-Dokumentation, Suche, Navigation und Druckansicht ergänzt
+- Schützen-, Trainer-, Backend-Trainer- und Administratorhandbuch erstellt
+
+## 0.9.5 — 2026-07-27
+
+- touch-optimierten Trainer-Modus für Anwesenheit ergänzt
+- Dropdowns durch große Statusflächen ersetzt
+- Autosave-Endpunkt und AJAX-Speicherung ergänzt
+- Filter, Statusfarben und einklappbare Kommentare ergänzt
+
+## 0.9.4 — 2026-07-27
+
+- Anwesenheitserfassung in das Trainer-Frontend übernommen
+- Status, Kommentare und Sammelaktion ergänzt
+- Speichern in #__jt_attendance ergänzt
+- mobile Anwesenheitsansicht ergänzt
+
+## 0.9.3 — 2026-07-27
+
+- Badge-Upload ohne Joomla Filesystem Folder/File umgesetzt
+- Badge-Speicherort auf Joomla /images verschoben
+- Auswahl vorhandener Badge-PNGs ergänzt
+- Uploadlimit auf 3 MB erhöht
+
+## 0.9.2 — 2026-07-27
+
+- bestätigte Ergebnisse für Wettkampf-Achievements verpflichtend gemacht
+- Achievement-Verwaltung im Backend und Trainer-Frontend ergänzt
+- Kriterieneditor und PNG-Upload ergänzt
+
+## 0.9.1 — 2026-07-27
+
+- Speichern leerer optionaler Temperatur- und Windfelder korrigiert
+- leere Dezimalfelder werden als NULL gespeichert
+- deutsches Dezimalkomma wird normalisiert
+
+## 0.9.0 — 2026-07-27
+
+- Achievement-System ergänzt
+- automatische und manuelle Vergabe ergänzt
+- PNG-Badges und Schützen-Galerie ergänzt
+- Trainer-Cockpit mit Vergabe und Widerruf ergänzt
+
+## 0.8.2 — 2026-07-27
+
+- Frontend-CSS vollständig neu aufgebaut
+- Fabrik-spezifische Altlasten entfernt
+- modernes responsives Jugend- und Trainerdesign ergänzt
+- Farben, Cards, Tabellen, Formulare, Buttons und Ampeln vereinheitlicht
+
+## 0.8.1 — 2026-07-27
+
+- fehlende Frontend-Sprachschlüssel korrigiert
+- sichtbare Ampelfarben im Trainer-Dashboard korrigiert
+- Frontend-Styles explizit geladen und Asset-Cache erneuert
+
+## 0.8.0 — 2026-07-27
+
+- Trainer-Ampeldashboard ergänzt
+- Klassenwechselvorschau für das nächste Sportjahr ergänzt
+- Statistik- und Korrelationsmodul ergänzt
+- Wetterdaten an Ergebnissen ergänzt
+- Setup-, Pfeilschaft-, Standhöhen- sowie Visier-/Wetterauswertung ergänzt
+
+## 0.7.2 — 2026-07-27
+
+- Language-Cleanup für Frontend und Formulare durchgeführt
+- Joomla-Core-Schlüssel JEDIT, JDELETE, JSAVE und JCANCEL aus sichtbaren Komponentenansichten entfernt
+- einheitliche Komponenten-Schlüssel für Aktionen, Spalten und Status ergänzt
+- Löschbestätigungen vereinheitlicht
+
+## 0.7.1 — 2026-07-27
+
+- dynamische Visiereinstellungszeilen ergänzt
+- Setupformular nach Komponenten strukturiert
+- optische Trennung verbessert
+
+## 0.7.0 — 2026-07-27
+
+- Setup-Revisionssystem ergänzt
+- Visiertabelle je Setup ergänzt
+- Setups mit Ergebnissen verknüpft
+- Trainingstagebuch für Schützen und Trainer ergänzt
+
+## 0.6.5 — 2026-07-27
+
+- Frontend-Sprachschlüssel für Trainingsformular vervollständigt
+- Trainingstitel und Formularfelder korrekt übersetzt
+- Komponenten-Sprache im Trainerformular explizit geladen
+
+## 0.6.4 — 2026-07-27
+
+- Trainingsstruktur vollständig auf Trainingsgruppen umgestellt
+- gruppenbasierte Teilnehmerlisten und Anwesenheitsprüfung ergänzt
+- Frontend-CRUD für Trainings der eigenen Trainergruppen ergänzt
+
+## 0.6.3 — 2026-07-27
+
+- altes Säulendiagramm aus der Schützen-Gesamtübersicht entfernt
+- kombinierte Leistungsdarstellung mit Ringdurchschnittslinie beibehalten
+
+## 0.6.2 — 2026-07-27
+
+- fehlende Modelle für modulare Frontend-Menütypen ergänzt
+- Null-Zuweisungen an typisierte Array-Eigenschaften verhindert
+- Schützen- und Traineransichten gegen leere Ergebnisse abgesichert
+
+## 0.6.1 — 2026-07-27
+
+- Installationsfehler bei der automatischen Benutzergruppenerstellung behoben
+- nicht verfügbare Methode Usergroup::setLocation() entfernt
+- Joomla-Nested-Set für Benutzergruppen korrekt aktualisiert
+
+## 0.6.0 — 2026-07-27
+
+- Trainer-Frontend und Joomla-Rollen ergänzt
+- Trainingsgruppen und gruppenbasierte Datenabgrenzung ergänzt
+- modulare Frontend-Menütypen ergänzt
+- Ringdurchschnittslinie im Leistungsdiagramm ergänzt
+
+## 0.5.5 — 2026-07-27
+
+- Administrator-Sprachdateien Joomla-konform eingebunden
+- fehlende Backend-Titelübersetzungen ergänzt
+- Toolbar-Titel verwenden explizite Text-Übersetzung
+
+## 0.5.4 — 2026-07-27
+
+- Sichtbarkeit von GoalsModel::getItems() korrigiert und 500-Fehler behoben
+- Backend-Übersetzungen für Listen, Module und Toolbar-Titel vervollständigt
+- Administrator-Sprachdateien im Manifest ausdrücklich aufgenommen
+
+## 0.5.3 — 2026-07-27
+
+- Zielmetriken automatisiert
+- Anwesenheit, Bestleistung, Ringdurchschnitt und Programmfortschritt als Datenquellen ergänzt
+- integrierte Metrik-Dokumentation im Ziele-Modul ergänzt
+- automatische und manuelle Berechnung auswählbar
+- Zielabschluss bei erreichtem Sollwert automatisiert
+
+## 0.5.2 — 2026-07-27
+
+- Fehler beim Speichern leerer Dezimal- und Zahlenfelder behoben
+- optionale Zielwerte serverseitig normalisiert
+- leere Datumswerte werden als NULL gespeichert
+- fehlenden Toolbar-Sprachtext ergänzt
+
+## 0.5.1 — 2026-07-27
+
+- Leistungsentwicklung im Frontend ergänzt
+- persönliche Bestleistungen ergänzt
+- Ziele und Fortschrittsanzeige ergänzt
+- Trainernotizen mit Sichtbarkeit ergänzt
+
+## 0.5.0 — 2026-07-27
+
+- Übungskatalog ergänzt
+- Trainingsprogramme und Athletenzuordnung ergänzt
+- Frontend-Fortschrittsverwaltung ergänzt
+- fünf neue Datenbanktabellen ergänzt
+
+## 0.4.6 — 2026-07-27
+
+- fehlende Übersetzungen für Frontend-Ergebnisse ergänzt
+- Sprachschlüssel für Formularfelder, Ereignisarten und Tabellenüberschriften ergänzt
+- Site-Sprachordner im Installationsmanifest abgesichert
+
+## 0.4.5 — 2026-07-27
+
+- `site/forms` in das Joomla-Installationsmanifest aufgenommen
+- Fehler `Form::loadForm could not load file` behoben
+
+## 0.4.4 — 2026-07-27
+
+- falsche Abfrage auf `joomla_user_id` korrigiert
+- Frontend verwendet nun das vorhandene Athletenfeld `user_id`
+- Berechtigungsprüfung für eigene Ergebnisse korrigiert
+
+## 0.4.3 — 2026-07-27
+
+- Joomla-FormController-Berechtigung für Frontend-Ergebnisse ergänzt
+- angemeldete Benutzer mit zugeordnetem Athleten dürfen Ergebnisse anlegen
+- Bearbeitung weiterhin ausschließlich für eigene Ergebnisse erlaubt
+
+## 0.4.2 — 2026-07-27
+
+- fehlende Spalte `joomla_user_id` in `#__jt_athletes` per Migration ergänzt
+- Index für Joomla-Benutzerzuordnung ergänzt
+- Frontend-Ergebnisansichten gegen unvollständige Altinstallationen abgesichert
+
+## 0.4.1 — 2026-07-27
+
+- Frontend-Ergebnisverwaltung für Athleten ergänzt
+- serverseitige Eigentumsprüfung für Anzeigen, Speichern und Löschen ergänzt
+- Prüfstatus für Ergebnisse ergänzt
+- Backend-Freigabe durch Trainer oder Administrator ergänzt
+
+## 0.4.0 — 2026-07-27
+
+- Ergebnisverwaltung ergänzt
+- Filter und Suche ergänzt
+- Durchschnitt je Pfeil wird automatisch berechnet
+- Datenbankmigration für Ergebnisse ergänzt
+
+## 0.3.2 — 2026-07-27
+
+- Trainingsformular vollständig neu aufgebaut
+- Serienfelder sicher in das gerenderte Feldset `details` aufgenommen
+- Joomla-ShowOn-Skript für bedingte Felder eingebunden
+
+## 0.3.1 — 2026-07-27
+
+- Serientermine ergänzt
+- Intervall in Tagen frei wählbar
+- 2 bis 100 Termine möglich
+
+## 0.3.0 — 2026-07-27
+
+- Trainingsverwaltung mit Liste und Bearbeitungsformular ergänzt
+- Anwesenheitserfassung je Training und Athlet ergänzt
+- Status anwesend, verspätet, entschuldigt und unentschuldigt ergänzt
+- Massenaktion „Alle anwesend“ ergänzt
+- Dashboard um kommende Trainings erweitert
+- Datenbankmigration für Trainings- und Anwesenheitstabellen ergänzt
+
+## 0.2.5 — 2026-07-27
+
+- Frontend-Menüeintragstyp `Meine Daten` ergänzt
+- fehlende Layout-Metadaten unter `site/tmpl/dashboard/default.xml` ergänzt
+- deutsche und englische Sprachtexte für den Menüeintrag hinzugefügt
+
+## 0.2.4 — 2026-07-27
+
+- Sportjahrabfrage an das reale Schema mit `date_end` angepasst
+- Altersklassenabfrage auf `min_age` und `max_age` korrigiert
+- automatische Klassenzuordnung im Formular und beim Speichern repariert
+- fehlende Altersobergrenze wird als unbegrenzt behandelt
+
+## 0.2.3 — 2026-07-27
+
+- PHP-Fatal-Error im Athletenformular durch doppelten Factory-Import behoben
+- Datenbankzugriff auf DatabaseInterface umgestellt
+- gesamte PHP-Codebasis erneut syntaktisch geprüft
+
+## 0.2.2 — 2026-07-27
+
+- sichtbare `JOPTION_SELECT`-Platzhalter durch übersetzte Auswahltexte ersetzt
+- Altersklasse wird anhand von Geburtsjahr, Geschlecht und aktivem Sportjahr vorgeschlagen
+- automatische Aktualisierung im Athletenformular ergänzt
+- serverseitige Klassenermittlung beim Speichern ergänzt
+
+## 0.2.1 — 2026-07-27
+
+- Formular-ID aller Bearbeitungsansichten auf Joomla-Standard `adminForm` korrigiert
+- Formularaktionen um die jeweilige View ergänzt
+- Joomla-Formularvalidierung und Keepalive eingebunden
+- Speichern, Speichern & Neu sowie Übernehmen repariert
+
+## 0.2.0 — 2026-07-27
+- CRUD-Verwaltung für Athleten, Vereine, Klassen und Sportjahre
+- Dashboard mit Kennzahlen und zuletzt angelegten Athleten
+- Joomla-Benutzer- und Trainerzuordnung
+- Frontend-Profil „Meine Daten"
+- Datenbankmigration für neue Athletenfelder

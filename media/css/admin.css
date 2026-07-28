@@ -1,0 +1,42 @@
+.jt-dashboard {
+    --jt-radius: 1rem;
+}
+
+.jt-dashboard__hero {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color, #dfe3e7);
+    border-radius: var(--jt-radius);
+    background: var(--body-bg, #fff);
+}
+
+.jt-dashboard__hero h2 {
+    margin: 0 0 .5rem;
+}
+
+.jt-dashboard__eyebrow {
+    margin: 0 0 .25rem;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .65;
+}
+
+.jt-stat-card {
+    border-radius: var(--jt-radius);
+}
+
+.jt-stat-card__value {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.jt-stat-card__label {
+    margin-top: .5rem;
+    opacity: .7;
+}

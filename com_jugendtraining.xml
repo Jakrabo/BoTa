@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" method="upgrade" version="6.0">
+    <name>COM_JUGENDTRAINING</name>
+    <author>JK</author>
+    <creationDate>2026-07</creationDate>
+    <copyright>(C) 2026</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <authorEmail></authorEmail>
+    <authorUrl></authorUrl>
+    <version>1.8.4</version>
+    <description>COM_JUGENDTRAINING_XML_DESCRIPTION</description>
+
+    <scriptfile>script.php</scriptfile>
+
+    <namespace path="src">Jugendtraining\Component\Jugendtraining</namespace>
+
+    <administration>
+        <menu img="class:users">COM_JUGENDTRAINING</menu>
+        <submenu>
+            <menu link="option=com_jugendtraining&amp;view=dashboard">COM_JUGENDTRAINING_SUBMENU_DASHBOARD</menu>
+            <menu link="option=com_jugendtraining&amp;view=athletes">COM_JUGENDTRAINING_SUBMENU_ATHLETES</menu>
+            <menu link="option=com_jugendtraining&amp;view=trainings">COM_JUGENDTRAINING_SUBMENU_TRAININGS</menu>
+            <menu link="option=com_jugendtraining&amp;view=results">COM_JUGENDTRAINING_SUBMENU_RESULTS</menu>
+            <menu link="option=com_jugendtraining&amp;view=exercises">COM_JUGENDTRAINING_SUBMENU_EXERCISES</menu>
+            <menu link="option=com_jugendtraining&amp;view=programs">COM_JUGENDTRAINING_SUBMENU_PROGRAMS</menu>
+            <menu link="option=com_jugendtraining&amp;view=goals">COM_JUGENDTRAINING_SUBMENU_GOALS</menu>
+            <menu link="option=com_jugendtraining&amp;view=traininggroups">COM_JUGENDTRAINING_SUBMENU_TRAINING_GROUPS</menu>
+            <menu link="option=com_jugendtraining&amp;view=achievements">COM_JUGENDTRAINING_SUBMENU_ACHIEVEMENTS</menu>
+            <menu link="option=com_jugendtraining&amp;view=import">COM_JUGENDTRAINING_SUBMENU_IMPORT</menu>
+            <menu link="option=com_jugendtraining&amp;view=trainernotes">COM_JUGENDTRAINING_SUBMENU_TRAINER_NOTES</menu>
+            <menu link="option=com_jugendtraining&amp;view=clubs">COM_JUGENDTRAINING_SUBMENU_CLUBS</menu>
+            <menu link="option=com_jugendtraining&amp;view=classes">COM_JUGENDTRAINING_SUBMENU_CLASSES</menu>
+            <menu link="option=com_jugendtraining&amp;view=sportyears">COM_JUGENDTRAINING_SUBMENU_SPORTYEARS</menu>
+        </submenu>
+        <files folder="administrator">
+            <folder>language</folder>
+            <folder>forms</folder>
+            <folder>services</folder>
+            <folder>sql</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+        </files>
+    
+        <languages folder="administrator/language">
+            <language tag="de-DE">de-DE/com_jugendtraining.ini</language>
+            <language tag="de-DE">de-DE/com_jugendtraining.sys.ini</language>
+            <language tag="en-GB">en-GB/com_jugendtraining.ini</language>
+            <language tag="en-GB">en-GB/com_jugendtraining.sys.ini</language>
+        </languages>
+    </administration>
+
+    <files folder="site">
+        <folder>language</folder>
+        <folder>forms</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+
+    <files folder="site_images" target="images">
+        <folder>jugendtraining</folder>
+    </files>
+
+    <languages folder="site/language">
+        <language tag="de-DE">de-DE/com_jugendtraining.ini</language>
+        <language tag="en-GB">en-GB/com_jugendtraining.ini</language>
+    </languages>
+
+    <media destination="com_jugendtraining" folder="media">
+        <filename>joomla.asset.json</filename>
+        <folder>css</folder>
+        <folder>js</folder>
+        <folder>images</folder>
+    </media>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8mb4">administrator/sql/install.mysql.utf8mb4.sql</file>
+        </sql>
+    </install>
+
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8mb4">administrator/sql/uninstall.mysql.utf8mb4.sql</file>
+        </sql>
+    </uninstall>
+
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic" label="COM_JUGENDTRAINING_CONFIG_BASIC">
+                <field
+                    name="organisation_name"
+                    type="text"
+                    label="COM_JUGENDTRAINING_CONFIG_ORGANISATION_NAME"
+                    default=""
+                />
+                <field
+                    name="default_training_duration"
+                    type="number"
+                    label="COM_JUGENDTRAINING_CONFIG_DEFAULT_TRAINING_DURATION"
+                    default="90"
+                    min="15"
+                    step="5"
+                />
+            </fieldset>
+            <fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL">
+                <field
+                    name="rules"
+                    type="rules"
+                    label="JCONFIG_PERMISSIONS_LABEL"
+                    filter="rules"
+                    validate="rules"
+                    component="com_jugendtraining"
+                    section="component"
+                />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

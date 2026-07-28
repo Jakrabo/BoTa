@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+ <fieldset name="details" label="COM_JUGENDTRAINING_DIARY_DETAILS">
+  <field name="id" type="hidden"/>
+  <field name="training_date" type="calendar" label="COM_JUGENDTRAINING_FIELD_TRAINING_DATE" required="true" format="%Y-%m-%d" showtime="false" filter="user_utc"/>
+  <field name="duration_minutes" type="number" label="COM_JUGENDTRAINING_FIELD_DURATION_MINUTES" min="0" max="1440"/>
+  <field name="arrow_count" type="number" label="COM_JUGENDTRAINING_FIELD_ARROW_COUNT" min="0" max="2000"/>
+  <field name="training_method" type="list" label="COM_JUGENDTRAINING_FIELD_TRAINING_METHOD"><option value="">COM_JUGENDTRAINING_SELECT_OPTION</option></field>
+  <field name="distance_m" type="number" label="COM_JUGENDTRAINING_FIELD_DISTANCE" min="0" max="200" step="0.1"/>
+  <field name="focus_topic" type="list" label="COM_JUGENDTRAINING_FIELD_FOCUS_TOPIC"><option value="">COM_JUGENDTRAINING_SELECT_OPTION</option></field>
+  <field name="intensity" type="range" label="COM_JUGENDTRAINING_FIELD_INTENSITY" min="1" max="5" default="3"/>
+  <field name="feeling" type="range" label="COM_JUGENDTRAINING_FIELD_FEELING" min="1" max="5" default="3"/>
+  <field name="bow_setup_id" type="list" label="COM_JUGENDTRAINING_FIELD_BOW_SETUP">
+   <option value="">COM_JUGENDTRAINING_NO_SETUP</option>
+  </field>
+  <field name="notes" type="textarea" label="COM_JUGENDTRAINING_FIELD_DIARY_NOTES" rows="7"/>
+ </fieldset>
+</form>

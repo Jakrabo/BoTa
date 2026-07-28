@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <fieldset name="details" label="COM_JUGENDTRAINING_TRAINING_GROUP_DETAILS">
+    <field name="id" type="hidden" />
+    <field name="title" type="text" label="COM_JUGENDTRAINING_FIELD_TITLE" required="true" maxlength="190" />
+    <field name="description" type="textarea" label="JGLOBAL_DESCRIPTION" rows="5" />
+    <field name="athlete_ids" type="sql" label="COM_JUGENDTRAINING_GROUP_ATHLETES"
+      query="SELECT id AS value, CONCAT(lastname, ', ', firstname) AS text FROM #__jt_athletes WHERE published = 1 ORDER BY lastname, firstname"
+      key_field="value" value_field="text" multiple="true" layout="joomla.form.field.list-fancy-select" />
+    <field name="trainer_ids" type="usergrouplist" label="COM_JUGENDTRAINING_GROUP_TRAINERS" multiple="true" />
+    <field name="trainer_user_ids" type="sql" label="COM_JUGENDTRAINING_GROUP_TRAINER_USERS"
+      query="SELECT u.id AS value, u.name AS text FROM #__users u INNER JOIN #__user_usergroup_map m ON m.user_id=u.id INNER JOIN #__usergroups g ON g.id=m.group_id WHERE g.title='Jugendtraining - Trainer' ORDER BY u.name"
+      key_field="value" value_field="text" multiple="true" layout="joomla.form.field.list-fancy-select" />
+    <field name="published" type="list" label="COM_JUGENDTRAINING_FIELD_STATUS" default="1">
+      <option value="1">COM_JUGENDTRAINING_STATUS_PUBLISHED</option><option value="0">COM_JUGENDTRAINING_STATUS_UNPUBLISHED</option>
+    </field>
+  </fieldset>
+</form>

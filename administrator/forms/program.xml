@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <fieldset name="details" label="COM_JUGENDTRAINING_PROGRAM_DETAILS">
+    <field name="id" type="hidden" />
+    <field name="title" type="text" label="COM_JUGENDTRAINING_FIELD_TITLE" required="true" maxlength="190" />
+    <field name="category" type="list" label="COM_JUGENDTRAINING_FIELD_CATEGORY" default="technique">
+      <option value="technique">COM_JUGENDTRAINING_CATEGORY_TECHNIQUE</option>
+      <option value="strength">COM_JUGENDTRAINING_CATEGORY_STRENGTH</option>
+      <option value="endurance">COM_JUGENDTRAINING_CATEGORY_ENDURANCE</option>
+      <option value="mental">COM_JUGENDTRAINING_CATEGORY_MENTAL</option>
+      <option value="competition">COM_JUGENDTRAINING_CATEGORY_COMPETITION</option>
+      <option value="mobility">COM_JUGENDTRAINING_CATEGORY_MOBILITY</option>
+    </field>
+    <field name="description" type="textarea" label="JGLOBAL_DESCRIPTION" rows="6" />
+    <field name="published" type="list" label="COM_JUGENDTRAINING_FIELD_STATUS" default="1">
+      <option value="1">COM_JUGENDTRAINING_STATUS_PUBLISHED</option><option value="0">COM_JUGENDTRAINING_STATUS_UNPUBLISHED</option>
+    </field>
+  </fieldset>
+  <fieldset name="assignment" label="COM_JUGENDTRAINING_PROGRAM_ASSIGNMENT">
+    <field name="exercise_ids" type="sql" label="COM_JUGENDTRAINING_FIELD_EXERCISES"
+      query="SELECT id AS value, CONCAT(title, ' – ', category) AS text FROM #__jt_exercises WHERE published = 1 ORDER BY category, ordering, title"
+      key_field="value" value_field="text" multiple="true" layout="joomla.form.field.list-fancy-select" />
+    <field name="athlete_ids" type="sql" label="COM_JUGENDTRAINING_FIELD_ASSIGNED_ATHLETES"
+      query="SELECT id AS value, CONCAT(lastname, ', ', firstname) AS text FROM #__jt_athletes WHERE published = 1 ORDER BY lastname, firstname"
+      key_field="value" value_field="text" multiple="true" layout="joomla.form.field.list-fancy-select" />
+    <field name="due_date" type="calendar" label="COM_JUGENDTRAINING_FIELD_DUE_DATE"
+      format="%Y-%m-%d" showtime="false" filter="user_utc" />
+  </fieldset>
+</form>

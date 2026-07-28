@@ -1,0 +1,12 @@
+<?php
+\defined('_JEXEC') or die;
+use Joomla\CMS\HTML\HTMLHelper;use Joomla\CMS\Language\Text;use Joomla\CMS\Router\Route;
+HTMLHelper::_('behavior.multiselect');
+$cats=['technique','strength','endurance','mental','competition','mobility'];
+?>
+<form action="<?php echo Route::_('index.php?option=com_jugendtraining&view=exercises'); ?>" method="post" name="adminForm" id="adminForm">
+ <div class="row g-2 mb-3"><div class="col-md-6"><input class="form-control" type="search" name="filter_search" value="<?php echo htmlspecialchars((string)$this->state->get('filter.search'),ENT_QUOTES,'UTF-8'); ?>" placeholder="<?php echo Text::_('COM_JUGENDTRAINING_SEARCH_EXERCISES'); ?>"></div><div class="col-md-4"><select class="form-select" name="filter_category"><option value=""><?php echo Text::_('COM_JUGENDTRAINING_ALL_CATEGORIES'); ?></option><?php foreach($cats as $c):?><option value="<?php echo $c;?>" <?php echo $this->state->get('filter.category')===$c?'selected':'';?>><?php echo Text::_('COM_JUGENDTRAINING_CATEGORY_'.strtoupper($c));?></option><?php endforeach;?></select></div><div class="col-md-2"><button class="btn btn-primary w-100" type="submit"><?php echo Text::_('JSEARCH_FILTER_SUBMIT');?></button></div></div>
+ <table class="table table-striped align-middle"><thead><tr><th width="1%"><input type="checkbox" name="checkall-toggle" onclick="Joomla.checkAll(this)"></th><th><?php echo Text::_('COM_JUGENDTRAINING_COLUMN_TITLE');?></th><th><?php echo Text::_('COM_JUGENDTRAINING_FIELD_CATEGORY');?></th><th><?php echo Text::_('COM_JUGENDTRAINING_FIELD_DIFFICULTY');?></th><th><?php echo Text::_('COM_JUGENDTRAINING_FIELD_MATERIAL');?></th><th>ID</th></tr></thead><tbody>
+ <?php foreach($this->items as $i=>$item):?><tr><td><?php echo HTMLHelper::_('grid.id',$i,$item->id);?></td><td><a href="<?php echo Route::_('index.php?option=com_jugendtraining&task=exercise.edit&id='.(int)$item->id);?>"><?php echo htmlspecialchars($item->title,ENT_QUOTES,'UTF-8');?></a></td><td><?php echo Text::_('COM_JUGENDTRAINING_CATEGORY_'.strtoupper($item->category));?></td><td><?php echo str_repeat('●',(int)$item->difficulty);?></td><td><?php echo htmlspecialchars((string)($item->material?:'–'),ENT_QUOTES,'UTF-8');?></td><td><?php echo (int)$item->id;?></td></tr><?php endforeach;?>
+ </tbody></table><?php echo $this->pagination->getListFooter();?><input type="hidden" name="task" value=""><input type="hidden" name="boxchecked" value="0"><?php echo HTMLHelper::_('form.token');?>
+</form>

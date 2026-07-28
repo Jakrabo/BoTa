@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="details" label="COM_JUGENDTRAINING_RESULT_DETAILS">
+        <field name="id" type="hidden" />
+
+        <field
+            name="athlete_id"
+            type="sql"
+            label="COM_JUGENDTRAINING_FIELD_ATHLETE"
+            query="SELECT id AS value, CONCAT(lastname, ', ', firstname) AS text FROM #__jt_athletes WHERE published = 1 ORDER BY lastname, firstname"
+            key_field="value"
+            value_field="text"
+            required="true"
+        >
+            <option value="">COM_JUGENDTRAINING_SELECT_OPTION</option>
+        </field>
+
+        <field name="bow_setup_id" type="sql" label="COM_JUGENDTRAINING_FIELD_BOW_SETUP"
+            query="SELECT id AS value, CONCAT(title, ' · Rev. ', revision_no) AS text FROM #__jt_bow_setups ORDER BY athlete_id, revision_no DESC"
+            key_field="value" value_field="text">
+            <option value="">COM_JUGENDTRAINING_NO_SETUP</option>
+        </field>
+
+        <field
+            name="result_date"
+            type="calendar"
+            label="COM_JUGENDTRAINING_FIELD_RESULT_DATE"
+            required="true"
+            format="%Y-%m-%d"
+            showtime="false"
+            filter="user_utc"
+        />
+
+        <field
+            name="event_type"
+            type="list"
+            label="COM_JUGENDTRAINING_FIELD_EVENT_TYPE"
+            default="training"
+        >
+            <option value="training">COM_JUGENDTRAINING_EVENT_TRAINING</option>
+            <option value="competition">COM_JUGENDTRAINING_EVENT_COMPETITION</option>
+            <option value="qualification">COM_JUGENDTRAINING_EVENT_QUALIFICATION</option>
+            <option value="other">COM_JUGENDTRAINING_EVENT_OTHER</option>
+        </field>
+
+        <field
+            name="event_name"
+            type="text"
+            label="COM_JUGENDTRAINING_FIELD_EVENT_NAME"
+            maxlength="190"
+        />
+
+        <field
+            name="distance_m"
+            type="number"
+            label="COM_JUGENDTRAINING_FIELD_DISTANCE"
+            min="1"
+            max="100"
+            required="true"
+        />
+
+        <field
+            name="arrows"
+            type="number"
+            label="COM_JUGENDTRAINING_FIELD_ARROWS"
+            min="1"
+            max="300"
+            required="true"
+        />
+
+        <field
+            name="score"
+            type="number"
+            label="COM_JUGENDTRAINING_FIELD_SCORE"
+            min="0"
+            max="3000"
+            required="true"
+        />
+
+        <field
+            name="tens"
+            type="number"
+            label="COM_JUGENDTRAINING_FIELD_TENS"
+            min="0"
+            max="300"
+            default="0"
+        />
+
+        <field
+            name="xs"
+            type="number"
+            label="COM_JUGENDTRAINING_FIELD_XS"
+            min="0"
+            max="300"
+            default="0"
+        />
+
+        <field name="weather_condition" type="text" label="COM_JUGENDTRAINING_FIELD_WEATHER_CONDITION" maxlength="100" />
+        <field name="temperature_c" type="number" label="COM_JUGENDTRAINING_FIELD_TEMPERATURE" description="COM_JUGENDTRAINING_FIELD_WEATHER_OPTIONAL_DESC" step="0.1" min="-30" max="60" />
+        <field name="wind_speed_kmh" type="number" label="COM_JUGENDTRAINING_FIELD_WIND_SPEED" description="COM_JUGENDTRAINING_FIELD_WEATHER_OPTIONAL_DESC" step="0.1" min="0" max="200" />
+        <field name="wind_direction" type="text" label="COM_JUGENDTRAINING_FIELD_WIND_DIRECTION" maxlength="50" />
+
+        <field
+            name="notes"
+            type="textarea"
+            label="COM_JUGENDTRAINING_FIELD_RESULT_NOTES"
+            rows="4"
+        />
+
+        <field
+            name="verification_status"
+            type="list"
+            label="COM_JUGENDTRAINING_VERIFICATION_STATUS"
+            default="pending"
+        >
+            <option value="pending">COM_JUGENDTRAINING_VERIFICATION_PENDING</option>
+            <option value="verified">COM_JUGENDTRAINING_VERIFICATION_VERIFIED</option>
+            <option value="rejected">COM_JUGENDTRAINING_VERIFICATION_REJECTED</option>
+        </field>
+
+        <field name="published" type="list" label="COM_JUGENDTRAINING_FIELD_STATUS" default="1">
+            <option value="1">COM_JUGENDTRAINING_STATUS_PUBLISHED</option>
+            <option value="0">COM_JUGENDTRAINING_STATUS_UNPUBLISHED</option>
+        </field>
+    </fieldset>
+</form>

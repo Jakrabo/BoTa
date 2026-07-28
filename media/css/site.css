@@ -1,0 +1,1151 @@
+/* ==========================================================================
+   Jugendtraining 0.8.2
+   Modernes, mobiles Frontend für Jugendliche und Trainer
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Designsystem
+   -------------------------------------------------------------------------- */
+
+:root {
+  --jt-primary: #0f766e;
+  --jt-primary-dark: #115e59;
+  --jt-primary-soft: #ccfbf1;
+
+  --jt-secondary: #2563eb;
+  --jt-secondary-soft: #dbeafe;
+
+  --jt-accent: #7c3aed;
+  --jt-accent-soft: #ede9fe;
+
+  --jt-highlight: #f59e0b;
+  --jt-danger: #dc2626;
+  --jt-success: #16a34a;
+
+  --jt-bg: #f4f7fb;
+  --jt-surface: #ffffff;
+  --jt-surface-soft: #f8fafc;
+
+  --jt-text: #172033;
+  --jt-muted: #64748b;
+  --jt-border: #dfe7f1;
+
+  --jt-radius-sm: 0.75rem;
+  --jt-radius: 1rem;
+  --jt-radius-lg: 1.35rem;
+
+  --jt-shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.06);
+  --jt-shadow: 0 12px 30px rgba(15, 23, 42, 0.09);
+  --jt-shadow-hover: 0 18px 42px rgba(15, 23, 42, 0.14);
+
+  --jt-transition: 160ms ease;
+}
+
+/* --------------------------------------------------------------------------
+   2. Seite und Typografie
+   -------------------------------------------------------------------------- */
+
+body {
+  color: var(--jt-text);
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 24rem),
+    radial-gradient(circle at top right, rgba(15, 118, 110, 0.10), transparent 26rem),
+    var(--jt-bg);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+main,
+.site-grid {
+  min-width: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--jt-text);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: clamp(1.25rem, 3vw, 1.65rem);
+}
+
+a {
+  color: var(--jt-secondary);
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: #1d4ed8;
+}
+
+/* --------------------------------------------------------------------------
+   3. Joomla Header und Navigation
+   -------------------------------------------------------------------------- */
+
+.container-header {
+  position: relative;
+  z-index: 100;
+  background:
+    linear-gradient(120deg, rgba(124, 58, 237, 0.26), transparent 48%),
+    linear-gradient(135deg, #0f3d3a 0%, #0f766e 55%, #2563eb 100%);
+  box-shadow: 0 8px 26px rgba(15, 23, 42, 0.22);
+}
+
+.container-header .navbar-brand,
+.container-header .nav-link,
+.container-header a {
+  color: #ffffff;
+}
+
+.container-header .nav-link {
+  border-radius: 999px;
+  font-weight: 700;
+  transition:
+    background-color var(--jt-transition),
+    transform var(--jt-transition);
+}
+
+.container-header .nav-link:hover,
+.container-header .current > .nav-link {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.container-header .metismenu .mm-collapse {
+  padding: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--jt-radius);
+  background: rgba(15, 61, 58, 0.97);
+  box-shadow: var(--jt-shadow);
+  backdrop-filter: blur(14px);
+}
+
+.container-header .metismenu .mm-collapse a {
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.65rem;
+}
+
+.container-header .metismenu .mm-collapse a:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* --------------------------------------------------------------------------
+   4. Cards und Dashboard
+   -------------------------------------------------------------------------- */
+
+.card {
+  overflow: hidden;
+  border: 1px solid var(--jt-border);
+  border-radius: var(--jt-radius-lg);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--jt-shadow-sm);
+}
+
+a.card {
+  color: inherit;
+  transition:
+    transform var(--jt-transition),
+    border-color var(--jt-transition),
+    box-shadow var(--jt-transition);
+}
+
+a.card:hover {
+  color: inherit;
+  border-color: rgba(37, 99, 235, 0.32);
+  box-shadow: var(--jt-shadow-hover);
+  transform: translateY(-3px);
+}
+
+.card-header {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--jt-border);
+  background:
+    linear-gradient(90deg, rgba(15, 118, 110, 0.07), rgba(37, 99, 235, 0.05)),
+    var(--jt-surface-soft);
+}
+
+.card-body {
+  padding: 1.2rem;
+}
+
+.card .display-5,
+.card .display-6 {
+  color: var(--jt-primary);
+  font-weight: 850;
+  letter-spacing: -0.05em;
+}
+
+.jt-site-dashboard__panel {
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  border: 1px solid var(--jt-border);
+  border-radius: var(--jt-radius-lg);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--jt-shadow);
+}
+
+.jt-site-dashboard__kicker {
+  color: var(--jt-primary);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Unterschiedliche Akzentkante bei Dashboard-Karten */
+
+.row.g-3 > div:nth-child(4n + 1) > a.card,
+.row.g-3 > div:nth-child(4n + 1) > .card {
+  border-top: 4px solid var(--jt-primary);
+}
+
+.row.g-3 > div:nth-child(4n + 2) > a.card,
+.row.g-3 > div:nth-child(4n + 2) > .card {
+  border-top: 4px solid var(--jt-secondary);
+}
+
+.row.g-3 > div:nth-child(4n + 3) > a.card,
+.row.g-3 > div:nth-child(4n + 3) > .card {
+  border-top: 4px solid var(--jt-accent);
+}
+
+.row.g-3 > div:nth-child(4n + 4) > a.card,
+.row.g-3 > div:nth-child(4n + 4) > .card {
+  border-top: 4px solid var(--jt-highlight);
+}
+
+/* --------------------------------------------------------------------------
+   5. Buttons
+   -------------------------------------------------------------------------- */
+
+.btn {
+  min-height: 2.75rem;
+  padding: 0.62rem 1rem;
+  border-radius: 0.85rem;
+  font-weight: 800;
+  transition:
+    transform var(--jt-transition),
+    box-shadow var(--jt-transition),
+    filter var(--jt-transition);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--jt-primary), var(--jt-secondary));
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--jt-primary-dark), #1d4ed8);
+  filter: brightness(1.04);
+}
+
+.btn-secondary {
+  border-color: var(--jt-border);
+  color: var(--jt-text);
+  background: var(--jt-surface);
+}
+
+.btn-outline-primary {
+  border-color: rgba(37, 99, 235, 0.45);
+  color: var(--jt-secondary);
+  background: var(--jt-surface);
+}
+
+.btn-outline-danger {
+  border-color: rgba(220, 38, 38, 0.28);
+  color: var(--jt-danger);
+  background: #ffffff;
+}
+
+.btn-outline-danger:hover {
+  border-color: var(--jt-danger);
+  color: #ffffff;
+  background: var(--jt-danger);
+}
+
+.btn-sm {
+  min-height: 2.25rem;
+  padding: 0.4rem 0.72rem;
+  border-radius: 0.72rem;
+}
+
+/* --------------------------------------------------------------------------
+   6. Formulare
+   -------------------------------------------------------------------------- */
+
+.form-label,
+.control-label,
+legend {
+  color: #334155;
+  font-weight: 800;
+}
+
+.form-control,
+.form-select,
+.form-control:focus,
+.form-select:focus {
+  min-height: 2.85rem;
+  border-radius: 0.8rem;
+}
+
+.form-control,
+.form-select {
+  border: 1px solid #cbd5e1;
+  color: var(--jt-text);
+  background: #ffffff;
+}
+
+textarea.form-control {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--jt-secondary);
+  box-shadow: 0 0 0 0.23rem rgba(37, 99, 235, 0.13);
+}
+
+.control-group {
+  margin-bottom: 0.8rem;
+}
+
+.form-text,
+.text-muted {
+  color: var(--jt-muted) !important;
+}
+
+/* Setupformular */
+
+.jt-setup-section {
+  margin-bottom: 1.25rem;
+}
+
+.jt-setup-section .card-header {
+  border-bottom: 2px solid var(--jt-border);
+}
+
+.jt-setup-section .control-group {
+  margin: 0;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.jt-setup-section .control-group:last-child {
+  border-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. Tabellen
+   -------------------------------------------------------------------------- */
+
+.table-responsive {
+  border-radius: 0 0 var(--jt-radius-lg) var(--jt-radius-lg);
+}
+
+.table {
+  margin-bottom: 0;
+  color: var(--jt-text);
+}
+
+.table thead th {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--jt-border);
+  color: #334155;
+  background: #f8fafc;
+  font-size: 0.82rem;
+  font-weight: 850;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.table tbody td {
+  padding: 0.95rem 1rem;
+  border-color: #edf2f7;
+  vertical-align: middle;
+}
+
+.table tbody tr {
+  transition: background-color var(--jt-transition);
+}
+
+.table tbody tr:hover {
+  background: rgba(37, 99, 235, 0.035);
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: rgba(15, 118, 110, 0.025);
+}
+
+/* Visiertabelle */
+
+#jt-sights td {
+  min-width: 9.5rem;
+}
+
+#jt-sights td:first-child {
+  min-width: 7rem;
+}
+
+#jt-sights td:last-child {
+  min-width: 6rem;
+}
+
+/* --------------------------------------------------------------------------
+   8. Ampel, Badges und Fortschritt
+   -------------------------------------------------------------------------- */
+
+.jt-traffic {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.35rem;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  vertical-align: -0.12rem;
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.18),
+    0 2px 6px rgba(15, 23, 42, 0.18);
+}
+
+.jt-traffic-green {
+  background: #22c55e;
+}
+
+.jt-traffic-yellow {
+  background: #fbbf24;
+}
+
+.jt-traffic-red {
+  background: #ef4444;
+}
+
+.badge {
+  padding: 0.45em 0.7em;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.bg-success {
+  background-color: var(--jt-success) !important;
+}
+
+.bg-secondary {
+  background-color: #64748b !important;
+}
+
+.progress {
+  height: 0.8rem;
+  border-radius: 999px;
+  background: #e2e8f0;
+}
+
+.progress-bar {
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--jt-primary), var(--jt-secondary));
+}
+
+/* --------------------------------------------------------------------------
+   9. Listen und Hinweise
+   -------------------------------------------------------------------------- */
+
+.list-group {
+  overflow: hidden;
+  border: 1px solid var(--jt-border);
+  border-radius: var(--jt-radius);
+}
+
+.list-group-item {
+  padding: 0.9rem 1rem;
+  border-color: #edf2f7;
+}
+
+.alert {
+  border: 0;
+  border-left: 5px solid currentColor;
+  border-radius: var(--jt-radius);
+  box-shadow: var(--jt-shadow-sm);
+}
+
+.alert-info {
+  color: #075985;
+  background: #e0f2fe;
+}
+
+.alert-light {
+  color: #475569;
+  background: #f8fafc;
+}
+
+/* --------------------------------------------------------------------------
+   10. Login-Modul
+   -------------------------------------------------------------------------- */
+
+.mod-login-logout {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.mod-login-logout__login-greeting {
+  margin-bottom: 0.75rem;
+  color: #334155;
+  font-weight: 750;
+}
+
+.mod-login-logout__button .btn-primary {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   11. Fokus und Barrierefreiheit
+   -------------------------------------------------------------------------- */
+
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(245, 158, 11, 0.8);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   12. Mobile
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 767.98px) {
+  body {
+    font-size: 0.96rem;
+  }
+
+  h1 {
+    margin-bottom: 1.15rem;
+  }
+
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    padding-right: 0.85rem;
+    padding-left: 0.85rem;
+  }
+
+  .card {
+    border-radius: var(--jt-radius);
+  }
+
+  .card-header {
+    padding: 0.85rem 0.95rem;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .d-flex.gap-2 > .btn,
+  .d-flex.gap-3 > .btn {
+    width: auto;
+    flex: 1 1 0;
+  }
+
+  .table-responsive {
+    margin-right: -0.2rem;
+    margin-left: -0.2rem;
+  }
+
+  .table thead th,
+  .table tbody td {
+    padding: 0.75rem;
+  }
+
+  #jt-sights {
+    min-width: 58rem;
+  }
+
+  .jt-setup-section .control-group {
+    padding: 0.75rem 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. Große Bildschirme
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 1200px) {
+  .container,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    max-width: 1280px;
+  }
+
+  .card-body {
+    padding: 1.35rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14. Weniger Bewegung auf Wunsch
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Version 0.9.0: Achievements */
+.jt-badge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem}
+.jt-badge-grid-preview{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.jt-badge-grid-compact{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.jt-badge-card{display:flex;align-items:center;gap:1rem;padding:1rem;border:1px solid var(--jt-border,#dfe7f1);border-radius:var(--jt-radius,1rem);background:linear-gradient(145deg,#fff,#f8fafc);box-shadow:var(--jt-shadow-sm,0 4px 14px rgba(15,23,42,.06));transition:transform .16s ease,box-shadow .16s ease}
+.jt-badge-card:hover{transform:translateY(-2px);box-shadow:var(--jt-shadow,0 12px 30px rgba(15,23,42,.09))}
+.jt-badge-card-large{align-items:flex-start}
+.jt-badge-image{width:88px;height:88px;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 8px 12px rgba(15,23,42,.16))}
+.jt-badge-card-large .jt-badge-image{width:128px;height:128px}
+.jt-badge-grid-compact .jt-badge-card{flex-direction:column;text-align:center}.jt-badge-grid-compact .jt-badge-image{width:76px;height:76px}
+.jt-badge-card__body{min-width:0}
+@media(max-width:575.98px){.jt-badge-grid,.jt-badge-grid-preview{grid-template-columns:1fr}.jt-badge-card-large{flex-direction:column}.jt-badge-card-large .jt-badge-image{align-self:center}}
+
+
+/* Version 0.9.4: Frontend attendance */
+.jt-attendance-row[data-status="present"] {
+  box-shadow: inset 4px 0 0 #22c55e;
+}
+
+.jt-attendance-row[data-status="late"] {
+  box-shadow: inset 4px 0 0 #f59e0b;
+}
+
+.jt-attendance-row[data-status="excused"] {
+  box-shadow: inset 4px 0 0 #3b82f6;
+}
+
+.jt-attendance-row[data-status="absent"] {
+  box-shadow: inset 4px 0 0 #ef4444;
+}
+
+@media (max-width: 767.98px) {
+  .jt-attendance-table,
+  .jt-attendance-table tbody,
+  .jt-attendance-table tr,
+  .jt-attendance-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .jt-attendance-table thead {
+    display: none;
+  }
+
+  .jt-attendance-table tbody {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .jt-attendance-table .jt-attendance-row {
+    padding: 0.9rem;
+    border: 1px solid var(--jt-border, #dfe7f1);
+    border-radius: 1rem;
+    background: #fff;
+  }
+
+  .jt-attendance-table .jt-attendance-row td {
+    padding: 0.35rem 0;
+    border: 0;
+  }
+
+  .jt-attendance-table .jt-attendance-row td:first-child {
+    padding-bottom: 0.65rem;
+  }
+}
+
+
+/* Version 0.9.5: touch-first attendance trainer mode */
+.jt-attendance-panel .card-body {
+  overflow: hidden;
+}
+
+.jt-attendance-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 0.75rem;
+  margin: -0.25rem -0.25rem 1rem;
+  border: 1px solid var(--jt-border, #dfe7f1);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+}
+
+.jt-attendance-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.jt-save-state {
+  min-height: 1.4rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.jt-save-state.is-saving {
+  color: #64748b;
+}
+
+.jt-save-state.is-saved {
+  color: #15803d;
+}
+
+.jt-save-state.is-error {
+  color: #b91c1c;
+}
+
+.jt-attendance-cards {
+  display: grid;
+  gap: 1rem;
+}
+
+.jt-attendance-card {
+  --jt-status-color: #94a3b8;
+  position: relative;
+  padding: 1rem;
+  border: 1px solid var(--jt-border, #dfe7f1);
+  border-left: 6px solid var(--jt-status-color);
+  border-radius: 1.15rem;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.jt-attendance-card[data-status="present"] {
+  --jt-status-color: #22c55e;
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.055), #fff 30%);
+}
+
+.jt-attendance-card[data-status="late"] {
+  --jt-status-color: #f59e0b;
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.065), #fff 30%);
+}
+
+.jt-attendance-card[data-status="excused"] {
+  --jt-status-color: #3b82f6;
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.055), #fff 30%);
+}
+
+.jt-attendance-card[data-status="absent"] {
+  --jt-status-color: #ef4444;
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.055), #fff 30%);
+}
+
+.jt-attendance-card.is-saving {
+  opacity: 0.78;
+}
+
+.jt-attendance-card.is-saved {
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
+}
+
+.jt-attendance-card.has-save-error {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.18);
+}
+
+.jt-athlete-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.8rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.jt-athlete-avatar {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #e8eef8;
+  color: #173265;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.jt-athlete-name {
+  margin: 0;
+  font-size: 1.12rem;
+  line-height: 1.2;
+}
+
+.jt-athlete-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.65rem;
+  margin-top: 0.3rem;
+  color: #64748b;
+  font-size: 0.86rem;
+}
+
+.jt-athlete-meta span {
+  position: relative;
+}
+
+.jt-athlete-meta span:not(:last-child)::after {
+  content: "•";
+  position: absolute;
+  right: -0.45rem;
+  color: #cbd5e1;
+}
+
+.jt-card-save-indicator {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  color: #15803d;
+  font-weight: 800;
+}
+
+.jt-status-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.jt-status-button {
+  display: grid;
+  place-items: center;
+  gap: 0.18rem;
+  min-height: 4rem;
+  padding: 0.5rem 0.35rem;
+  border: 1px solid #d6deea;
+  border-radius: 0.85rem;
+  background: #f8fafc;
+  color: #334155;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 100ms ease, background 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.jt-status-button:active {
+  transform: scale(0.97);
+}
+
+.jt-status-icon {
+  display: grid;
+  place-items: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 50%;
+  background: #e2e8f0;
+  font-size: 1rem;
+}
+
+.jt-status-button.is-active {
+  border-color: currentColor;
+  box-shadow: 0 0 0 2px currentColor inset;
+}
+
+.jt-status-present.is-active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.jt-status-present.is-active .jt-status-icon {
+  background: #22c55e;
+  color: #fff;
+}
+
+.jt-status-late.is-active {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.jt-status-late.is-active .jt-status-icon {
+  background: #f59e0b;
+  color: #fff;
+}
+
+.jt-status-excused.is-active {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.jt-status-excused.is-active .jt-status-icon {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.jt-status-absent.is-active {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.jt-status-absent.is-active .jt-status-icon {
+  background: #ef4444;
+  color: #fff;
+}
+
+.jt-status-empty.is-active {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.jt-comment-details {
+  margin-top: 0.75rem;
+  border-top: 1px solid #edf2f7;
+  padding-top: 0.65rem;
+}
+
+.jt-comment-details summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #475569;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
+
+.jt-comment-marker {
+  color: #2563eb;
+}
+
+@media (max-width: 767.98px) {
+  .jt-attendance-panel {
+    margin-left: -0.3rem;
+    margin-right: -0.3rem;
+  }
+
+  .jt-attendance-panel > .card-header,
+  .jt-attendance-panel > .card-body {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
+  .jt-attendance-toolbar {
+    top: 0.25rem;
+  }
+
+  .jt-attendance-toolbar .btn {
+    min-height: 3rem;
+    font-size: 1rem;
+  }
+
+  .jt-status-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .jt-status-button {
+    grid-template-columns: auto minmax(0, 1fr);
+    justify-items: start;
+    min-height: 3.35rem;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.92rem;
+    text-align: left;
+  }
+
+  .jt-status-empty {
+    grid-column: 1 / -1;
+  }
+
+  .jt-athlete-avatar {
+    width: 2.7rem;
+    height: 2.7rem;
+  }
+
+  .jt-athlete-name {
+    font-size: 1.08rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .jt-attendance-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jt-attendance-card,
+  .jt-status-button {
+    transition: none;
+  }
+}
+
+
+/* Version 1.2.0: compact achievement preview on athlete dashboard */
+.jt-achievements-preview .jt-badge-grid-preview {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 280px));
+  justify-content: start;
+}
+
+.jt-achievements-preview .jt-badge-card {
+  min-height: 92px;
+  padding: 0.75rem;
+  gap: 0.75rem;
+}
+
+.jt-achievements-preview .jt-badge-image {
+  width: 64px;
+  height: 64px;
+  max-width: 64px;
+  max-height: 64px;
+}
+
+.jt-achievements-preview .jt-badge-card__body h3 {
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+@media (max-width: 575.98px) {
+  .jt-achievements-preview .jt-badge-grid-preview {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Version 1.3.0: hard limit for achievement badge graphics */
+.jt-achievements-preview .jt-badge-card,
+.jt-achievements-preview article.jt-badge-card {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 76px !important;
+  padding: .65rem !important;
+}
+
+.jt-achievements-preview img.jt-badge-image,
+.jt-achievements-preview .jt-badge-card img {
+  display: block !important;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  object-fit: contain !important;
+  flex: 0 0 48px !important;
+}
+
+.jt-achievements-preview .jt-badge-grid-preview {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 260px)) !important;
+  gap: .75rem !important;
+  justify-content: start !important;
+}
+
+
+/* Version 1.4.0: training diary arrow-volume chart */
+.jt-arrow-chart-wrap { width: 100%; overflow: hidden; }
+.jt-arrow-chart { display: block; width: 100%; height: auto; min-height: 280px; }
+.jt-arrow-grid-line { stroke: var(--jt-border); stroke-width: 1; }
+.jt-arrow-axis { stroke: var(--jt-muted); stroke-width: 1.5; }
+.jt-arrow-axis-label { fill: var(--jt-muted); font-size: 12px; }
+.jt-arrow-axis-title { fill: var(--jt-text); font-size: 13px; font-weight: 700; }
+.jt-arrow-bar { fill: var(--jt-secondary); opacity: .82; transition: opacity var(--jt-transition); }
+.jt-arrow-bar:hover { opacity: 1; }
+@media (max-width: 575.98px) {
+  .jt-arrow-chart { min-height: 220px; }
+  .jt-arrow-axis-label { font-size: 10px; }
+}
+
+/* 1.5.0 achievement tiles */
+.jt-achievements-preview .jt-badge-grid-preview{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:1rem!important;}
+.jt-achievements-preview .jt-badge-card{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;padding:1rem!important;min-height:170px!important;}
+.jt-achievements-preview .jt-badge-card img{width:64px!important;height:64px!important;min-width:64px!important;max-width:64px!important;max-height:64px!important;object-fit:contain!important;}
+@media(max-width:767.98px){.jt-achievements-preview .jt-badge-grid-preview{grid-template-columns:1fr!important;}}
+
+/* Version 1.6.0 trainer achievement cockpit */
+.jt-trainer-achievement-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:1rem!important;}
+.jt-trainer-achievement-grid .jt-badge-card{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;min-height:180px!important;padding:1rem!important;}
+.jt-trainer-achievement-grid .jt-badge-image{width:72px!important;height:72px!important;max-width:72px!important;max-height:72px!important;object-fit:contain!important;}
+@media(max-width:767.98px){.jt-trainer-achievement-grid{grid-template-columns:1fr!important;}}
+
+/* Version 1.7.0 detail charts */
+.jt-detail-chart-wrap{width:100%;overflow:hidden}
+.jt-detail-chart{display:block;width:100%;height:auto;min-height:280px}
+
+/* Version 1.8.2: visible average line in trainer athlete result chart */
+.jt-result-average-line{
+  stroke:var(--cassiopeia-color-link,#d63384);
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+.jt-result-average-point{
+  fill:var(--cassiopeia-color-link,#d63384);
+  stroke:var(--body-bg,#fff);
+  stroke-width:1.5;
+  vector-effect:non-scaling-stroke;
+}
+
+/* Version 1.8.3: explicit result chart colors */
+#jt-detail-result-chart .jt-result-score-bar{
+  fill:#2f6fb0 !important;
+  stroke:none !important;
+  opacity:.82;
+}
+
+#jt-detail-result-chart .jt-result-average-line{
+  fill:none !important;
+  stroke:#f05a28 !important;
+  stroke-width:4px !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+  vector-effect:non-scaling-stroke;
+  opacity:1 !important;
+}
+
+#jt-detail-result-chart .jt-result-average-point{
+  fill:#f05a28 !important;
+  stroke:#ffffff !important;
+  stroke-width:2px !important;
+  vector-effect:non-scaling-stroke;
+}
+
+#jt-detail-result-chart .jt-arrow-axis,
+#jt-detail-result-chart .jt-arrow-grid-line{
+  stroke:#b9c0c7;
+}

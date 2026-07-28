@@ -1,0 +1,1 @@
+-- Initiales Schema. Die Installation erfolgt über install.mysql.utf8mb4.sql.

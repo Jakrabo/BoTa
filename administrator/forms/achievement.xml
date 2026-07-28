@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+ <fieldset name="details" label="COM_JUGENDTRAINING_ACHIEVEMENT_DETAILS">
+  <field name="id" type="hidden"/>
+  <field name="title" type="text" label="COM_JUGENDTRAINING_FIELD_TITLE" required="true" maxlength="190"/>
+  <field name="code" type="text" label="COM_JUGENDTRAINING_FIELD_ACHIEVEMENT_CODE" description="COM_JUGENDTRAINING_FIELD_ACHIEVEMENT_CODE_DESC" required="true" maxlength="100"/>
+  <field name="description" type="textarea" label="JGLOBAL_DESCRIPTION" rows="5"/>
+  <field name="category" type="text" label="COM_JUGENDTRAINING_FIELD_CATEGORY" required="true" maxlength="50"/>
+  <field name="award_mode" type="list" label="COM_JUGENDTRAINING_FIELD_AWARD_MODE" default="manual">
+   <option value="manual">COM_JUGENDTRAINING_AWARD_MANUAL</option><option value="automatic">COM_JUGENDTRAINING_AWARD_AUTOMATIC</option>
+  </field>
+  <field name="rule_type" type="list" label="COM_JUGENDTRAINING_FIELD_RULE_TYPE" showon="award_mode:automatic">
+   <option value="">COM_JUGENDTRAINING_SELECT_RULE</option>
+   <option value="arrows_single_day">COM_JUGENDTRAINING_RULE_ARROWS_DAY</option>
+   <option value="arrows_calendar_week">COM_JUGENDTRAINING_RULE_ARROWS_WEEK</option>
+   <option value="diary_week_streak">COM_JUGENDTRAINING_RULE_DIARY_STREAK</option>
+   <option value="event_name_contains">COM_JUGENDTRAINING_RULE_VERIFIED_EVENT</option>
+  </field>
+  <field name="rule_value" type="number" label="COM_JUGENDTRAINING_FIELD_RULE_VALUE" step="1" min="1" showon="award_mode:automatic"/>
+  <field name="rule_terms" type="text" label="COM_JUGENDTRAINING_FIELD_RULE_TERMS" description="COM_JUGENDTRAINING_FIELD_RULE_TERMS_DESC" maxlength="500" showon="rule_type:event_name_contains"/>
+  <field name="requires_verified_result" type="radio" label="COM_JUGENDTRAINING_FIELD_REQUIRES_VERIFIED" default="0" layout="joomla.form.field.radio.switcher" showon="rule_type:event_name_contains"><option value="0">COM_JUGENDTRAINING_NO</option><option value="1">COM_JUGENDTRAINING_YES</option></field>
+  <field name="badge_image_existing" type="hidden"/>
+  <field name="badge_image" type="text" label="COM_JUGENDTRAINING_FIELD_BADGE_IMAGE" description="COM_JUGENDTRAINING_FIELD_BADGE_IMAGE_DESC" maxlength="500"/>
+  <field name="ordering" type="number" label="JFIELD_ORDERING_LABEL" default="0"/>
+  <field name="published" type="list" label="COM_JUGENDTRAINING_FIELD_STATUS" default="1"><option value="1">COM_JUGENDTRAINING_STATUS_PUBLISHED</option><option value="0">COM_JUGENDTRAINING_STATUS_UNPUBLISHED</option></field>
+ </fieldset>
+</form>
