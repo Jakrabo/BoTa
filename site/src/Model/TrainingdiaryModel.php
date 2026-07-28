@@ -16,9 +16,20 @@ final class TrainingdiaryModel extends AdminModel {
   if(empty($item->id)&&empty($item->bow_setup_id))$item->bow_setup_id=$this->activeSetup();
   return$item;
  }
- public function save($data):bool{$aid=$this->athleteId();if(!$aid)return false;$id=(int)($data['id']??0);if($id&&!$this->owns($id))return false;$data['athlete_id']=$aid;if(empty($data['bow_setup_id']))$data['bow_setup_id']=$this->activeSetup();return parent::save($data);}
+ public function save($data):bool{
+  $aid=$this->athleteId();if(!$aid){$this->setError('JERROR_ALERTNOAUTHOR');return false;}
+  $id=(int)($data['id']??0);if($id&&!$this->owns($id)){$this->setError('JERROR_ALERTNOAUTHOR');return false;}
+  $data['athlete_id']=$aid;
+  $setupId=(int)($data['bow_setup_id']??0);
+  if($setupId>0){
+   $db=$this->getDatabase();$q=$db->getQuery(true)->select('COUNT(*)')->from('#__jt_bow_setups')->where('id='.$setupId)->where('athlete_id='.$aid);$db->setQuery($q);
+   if((int)$db->loadResult()!==1){$this->setError('JERROR_ALERTNOAUTHOR');return false;}
+  }else{$data['bow_setup_id']=$this->activeSetup();}
+  return parent::save($data);
+ }
  protected function prepareTable($t):void{$now=Factory::getDate()->toSql();$uid=(int)Factory::getApplication()->getIdentity()->id;if(empty($t->id)){$t->created=$now;$t->created_by=$uid;}else{$t->modified=$now;$t->modified_by=$uid;}}
  public function deleteOwn(int$id):bool{return$this->owns($id)?$this->delete($id):false;}
+ public function canEditDiary(int$id):bool{return$this->owns($id);}
  private function athleteId():int{$uid=(int)Factory::getApplication()->getIdentity()->id;$db=$this->getDatabase();$q=$db->getQuery(true)->select('id')->from('#__jt_athletes')->where('user_id='.$uid)->where('published=1');$db->setQuery($q,0,1);return(int)$db->loadResult();}
  private function owns(int$id):bool{$aid=$this->athleteId();$db=$this->getDatabase();$q=$db->getQuery(true)->select('COUNT(*)')->from('#__jt_training_diary')->where('id='.$id)->where('athlete_id='.$aid);$db->setQuery($q);return(int)$db->loadResult()===1;}
  private function setups():array{$aid=$this->athleteId();$db=$this->getDatabase();$q=$db->getQuery(true)->select(['id','title','revision_no','is_active'])->from('#__jt_bow_setups')->where('athlete_id='.$aid)->order('is_active DESC, revision_no DESC');$db->setQuery($q);return$db->loadObjectList();}

@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail></authorEmail>
     <authorUrl></authorUrl>
-    <version>1.8.5</version>
+    <version>1.8.6</version>
     <description>COM_JUGENDTRAINING_XML_DESCRIPTION</description>
 
     <scriptfile>script.php</scriptfile>

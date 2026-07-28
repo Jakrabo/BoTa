@@ -154,12 +154,20 @@ public function getLanguageOverview(): array
 
 public function saveLanguageOverrides(string $language,array $values):void
 {
- if(!preg_match('/^[a-z]{2}-[A-Z]{2}$/',$language))throw new \RuntimeException('Ungültige Sprache.');
+ $overview=$this->getLanguageOverview();$allowedLanguages=$overview['languages']??[];
+ if(!in_array($language,$allowedLanguages,true))throw new \RuntimeException('Ungültige Sprache.');
+ if(count($values)>2000)throw new \RuntimeException('Zu viele Sprachwerte.');
+ $allowedKeys=array_flip($overview['keys']??[]);
  $dir=JPATH_ROOT.'/language/overrides';if(!is_dir($dir)&&!mkdir($dir,0755,true)&&!is_dir($dir))throw new \RuntimeException('Override-Verzeichnis konnte nicht angelegt werden.');
  $path=$dir.'/'.$language.'.override.ini';$existing=is_file($path)?(parse_ini_file($path,false,INI_SCANNER_RAW)?:[]):[];
- foreach($values as$key=>$value)if(str_starts_with($key,'COM_JUGENDTRAINING_'))$existing[$key]=trim((string)$value);
+ foreach($values as$key=>$value){
+  if(!isset($allowedKeys[$key])||!str_starts_with($key,'COM_JUGENDTRAINING_'))continue;
+  $value=trim((string)$value);if(mb_strlen($value)>2000)throw new \RuntimeException('Übersetzung ist zu lang: '.$key);
+  $existing[$key]=$value;
+ }
  ksort($existing);$lines=[];foreach($existing as$key=>$value)$lines[]=$key.'="'.str_replace(['\\','"'],['\\\\','\\"'],$value).'"';
  if(file_put_contents($path,implode("\n",$lines)."\n",LOCK_EX)===false)throw new \RuntimeException('Sprach-Override konnte nicht gespeichert werden.');
+ @chmod($path,0644);
 }
  private function decode(string $json,array $default):array{$v=json_decode($json,true);return is_array($v)&&$v?$v:$default;}
  private function upsert(string$key,string$value):void{$db=$this->getDatabase();$q=$db->getQuery(true)->select('id')->from('#__jt_settings')->where('setting_key='.$db->quote($key));$db->setQuery($q);$id=(int)$db->loadResult();$o=(object)['setting_key'=>$key,'setting_value'=>$value];if($id){$o->id=$id;$db->updateObject('#__jt_settings',$o,'id');}else$db->insertObject('#__jt_settings',$o);}

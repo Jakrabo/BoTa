@@ -14,6 +14,9 @@ final class TrainerathletetaskModel extends BaseDatabaseModel{
  if($programId<=0)throw new \RuntimeException('Bitte ein Trainingsprogramm auswählen.');
  $o=(object)['athlete_id'=>$athleteId,'program_id'=>$programId,'due_date'=>trim((string)($data['due_date']??''))?:null,'active'=>!empty($data['active'])?1:0];
  if($id>0){
+  $q=$db->getQuery(true)->select('athlete_id')->from('#__jt_athlete_programs')->where('id='.$id);$db->setQuery($q);
+  $existingAthleteId=(int)$db->loadResult();
+  if($existingAthleteId!==$athleteId || !(new AccessService())->canManageAthlete($existingAthleteId))throw new \RuntimeException('JERROR_ALERTNOAUTHOR',403);
   $q=$db->getQuery(true)->select('id')->from('#__jt_athlete_programs')->where('athlete_id='.$athleteId)->where('program_id='.$programId)->where('id<>'.$id);
   $db->setQuery($q);$duplicateId=(int)$db->loadResult();
   if($duplicateId>0){$o->id=$duplicateId;$db->updateObject('#__jt_athlete_programs',$o,'id');$q=$db->getQuery(true)->delete('#__jt_athlete_programs')->where('id='.$id);$db->setQuery($q)->execute();}

@@ -40,9 +40,13 @@ public function saveNote(array $data): void
  $this->requireTrainer();$athleteId=(int)($data['athlete_id']??0);$id=(int)($data['id']??0);
  if(!$this->canManageAthletePublic($athleteId))throw new \RuntimeException('JERROR_ALERTNOAUTHOR',403);
  $note=trim((string)($data['note']??''));if($note==='')throw new \RuntimeException('Bitte eine Notiz eingeben.');
+ if(mb_strlen($note)>10000)throw new \RuntimeException('Die Notiz ist zu lang.');
+ $noteDate=(string)($data['note_date']??Factory::getDate()->format('Y-m-d'));$date=\DateTimeImmutable::createFromFormat('!Y-m-d',$noteDate);
+ if(!$date||$date->format('Y-m-d')!==$noteDate)throw new \RuntimeException('Ungültiges Datum.');
+ $category=trim((string)($data['category']??'general'))?:'general';if(mb_strlen($category)>30)throw new \RuntimeException('Kategorie ist zu lang.');
  $db=$this->getDatabase();$obj=(object)[
-  'athlete_id'=>$athleteId,'note_date'=>(string)($data['note_date']??Factory::getDate()->format('Y-m-d')),
-  'category'=>trim((string)($data['category']??'general'))?:'general','note'=>$note,
+  'athlete_id'=>$athleteId,'note_date'=>$noteDate,
+  'category'=>$category,'note'=>$note,
   'private_note'=>!empty($data['private_note'])?1:0,'status'=>($data['status']??'current')==='done'?'done':'current',
   'modified'=>Factory::getDate()->toSql(),'modified_by'=>(int)Factory::getApplication()->getIdentity()->id
  ];

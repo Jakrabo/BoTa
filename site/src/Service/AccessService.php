@@ -34,6 +34,7 @@ final class AccessService
         }
 
         return $this->hasTrainerGroupMembership((int) $user->id)
+            || $this->userInNamedGroup((int) $user->id, 'BoTa - Trainer')
             || $this->userInNamedGroup((int) $user->id, 'Jugendtraining - Trainer');
     }
 
@@ -46,6 +47,7 @@ final class AccessService
         }
 
         return $user->authorise('athlete.access', 'com_jugendtraining')
+            || $this->userInNamedGroup((int) $user->id, 'BoTa - Schütze')
             || $this->userInNamedGroup((int) $user->id, 'Jugendtraining - Schütze')
             || $this->hasAthleteRecord((int) $user->id);
     }
@@ -53,7 +55,12 @@ final class AccessService
     public function getTrainerAthleteIds(?int $userId = null): array
     {
         $user = Factory::getApplication()->getIdentity();
-        $userId ??= (int) $user->id;
+        $currentUserId = (int) $user->id;
+        $userId ??= $currentUserId;
+
+        if (!$this->isSuperUser($user) && $userId !== $currentUserId) {
+            return [];
+        }
 
         if ($this->isSuperUser($user)) {
             $query = $this->db->getQuery(true)

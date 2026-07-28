@@ -85,12 +85,15 @@ final class TrainerpenaltiesModel extends BaseDatabaseModel
 
         if(!$definition) throw new \RuntimeException('Die ausgewählte Strafe wurde nicht gefunden.');
 
+        $reasonNote=trim((string)($data['reason_note']??''));
+        if(mb_strlen($reasonNote)>500) throw new \RuntimeException('Begründung ist zu lang.');
+
         $obj=(object)[
             'athlete_id'=>$athleteId,
             'penalty_definition_id'=>$definitionId,
             'assigned_at'=>Factory::getDate()->toSql(),
             'assigned_by'=>(int)Factory::getApplication()->getIdentity()->id,
-            'reason_note'=>trim((string)($data['reason_note']??''))?:null,
+            'reason_note'=>$reasonNote?:null,
             'status'=>'open',
             'amount_snapshot'=>$definition->penalty_type==='monetary'?$definition->amount:null,
             'action_snapshot'=>$definition->penalty_type==='non_monetary'?$definition->non_monetary_action:null
@@ -101,6 +104,7 @@ final class TrainerpenaltiesModel extends BaseDatabaseModel
     public function complete(int $id, string $note=''): void
     {
         $this->guard();
+        $note=trim($note);if(mb_strlen($note)>500)throw new \RuntimeException('Abschlussnotiz ist zu lang.');
         $entry=$this->ownedEntry($id);
         if(!$entry) throw new \RuntimeException('JERROR_ALERTNOAUTHOR',403);
 
@@ -110,7 +114,7 @@ final class TrainerpenaltiesModel extends BaseDatabaseModel
             'status'=>'completed',
             'completed_at'=>Factory::getDate()->toSql(),
             'completed_by'=>(int)Factory::getApplication()->getIdentity()->id,
-            'completion_note'=>trim($note)?:null
+            'completion_note'=>$note?:null
         ];
         $db->updateObject('#__jt_penalty_register',$obj,'id');
     }

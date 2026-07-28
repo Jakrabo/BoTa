@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.8.6 — 2026-07-28
+
+- Anwesenheitsstatus in der Trainer-Schützendetailseite übersetzt
+- Objektberechtigungen für Trainingstagebuch, Bogensetup und Trainingsaufgaben gehärtet
+- Backend-Zugriff explizit mit Joomla-ACL abgesichert
+- Eingabevalidierung für Kontaktdaten, Notizen, Strafen und Sprachwerte erweitert
+- Badge-Uploads stärker validiert und optional sicher neu kodiert
+- sensible Traineransichten gegen Browser-/Proxy-Caching abgesichert
+- Sicherheits- und Datenschutzprüfung als SECURITY_AUDIT.md dokumentiert
+
 ## 1.8.5 — 2026-07-28
 
 - Strafen-Kachel in der Trainer-Schützendetailseite dauerhaft sichtbar

@@ -89,5 +89,10 @@ public function saveLanguage():void
  catch(\Throwable$e){$app->enqueueMessage($e->getMessage(),'error');}
  $this->setRedirect(Route::_('index.php?option=com_jugendtraining&view=import#language',false));
 }
- private function assertTrainer():void{if(!(new AccessService())->isTrainer())throw new \RuntimeException('JERROR_ALERTNOAUTHOR',403);}
+ private function assertTrainer():void{
+ $user=Factory::getApplication()->getIdentity();
+ if((!$user->authorise('core.manage','com_jugendtraining')&&!$user->authorise('core.admin'))||!(new AccessService())->isTrainer()){
+  throw new \RuntimeException('JERROR_ALERTNOAUTHOR',403);
+ }
+}
 }

@@ -6,6 +6,7 @@ namespace Jugendtraining\Component\Jugendtraining\Site\Service;
 final class BadgeUploadService
 {
     private const MAX_SIZE = 3 * 1024 * 1024;
+    private const MAX_DIMENSION = 2048;
     private const RELATIVE_DIRECTORY = 'images/jugendtraining/badges';
 
     public function store(?array $upload): ?string
@@ -32,6 +33,13 @@ final class BadgeUploadService
         if (!$image || ($image['mime'] ?? '') !== 'image/png') {
             throw new \RuntimeException('COM_JUGENDTRAINING_ERROR_BADGE_PNG_ONLY');
         }
+        if((int)($image[0]??0)<=0||(int)($image[1]??0)<=0||(int)$image[0]>self::MAX_DIMENSION||(int)$image[1]>self::MAX_DIMENSION){
+            throw new \RuntimeException('COM_JUGENDTRAINING_ERROR_BADGE_TOO_LARGE');
+        }
+        $signature=@file_get_contents($temporaryFile,false,null,0,8);
+        if($signature!=="\x89PNG\r\n\x1a\n"){
+            throw new \RuntimeException('COM_JUGENDTRAINING_ERROR_BADGE_PNG_ONLY');
+        }
 
         $targetDirectory = JPATH_ROOT . '/' . self::RELATIVE_DIRECTORY;
 
@@ -53,6 +61,17 @@ final class BadgeUploadService
             throw new \RuntimeException('COM_JUGENDTRAINING_ERROR_BADGE_UPLOAD');
         }
 
+        // Re-encode PNG where GD is available. This strips ancillary metadata and
+        // prevents appended/polyglot payloads from being retained in the public file.
+        if(function_exists('imagecreatefrompng')&&function_exists('imagepng')){
+            $resource=@imagecreatefrompng($destination);
+            if(!$resource||!imagepng($resource,$destination,9)){
+                if($resource)imagedestroy($resource);
+                @unlink($destination);
+                throw new \RuntimeException('COM_JUGENDTRAINING_ERROR_BADGE_UPLOAD');
+            }
+            imagedestroy($resource);
+        }
         @chmod($destination, 0644);
 
         return self::RELATIVE_DIRECTORY . '/' . $filename;
