@@ -60,6 +60,7 @@ $activeTab = $this->result ? 'csv-import' : 'csv-import';
         </li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#dashboard-athlete" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_ATHLETE_DASHBOARD'); ?></button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#dashboard-trainer" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_TRAINER_DASHBOARD'); ?></button></li>
+<li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#self-attendance" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_SELF_ATTENDANCE'); ?></button></li>
 <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#calendar-config" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_CALENDAR'); ?></button></li>
 <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#language" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_LANGUAGE'); ?></button></li>
     </ul>
@@ -384,7 +385,7 @@ $activeTab = $this->result ? 'csv-import' : 'csv-import';
         </div>
 <?php
 $dashboardLabels=[
- 'profile'=>'COM_JUGENDTRAINING_DASHBOARD_PROFILE','calendar'=>'COM_JUGENDTRAINING_DASHBOARD_CALENDAR','results'=>'COM_JUGENDTRAINING_DASHBOARD_RESULTS',
+ 'profile'=>'COM_JUGENDTRAINING_DASHBOARD_PROFILE','calendar'=>'COM_JUGENDTRAINING_DASHBOARD_CALENDAR','attendance'=>'COM_JUGENDTRAINING_DASHBOARD_ATTENDANCE','results'=>'COM_JUGENDTRAINING_DASHBOARD_RESULTS',
  'penalties'=>'COM_JUGENDTRAINING_DASHBOARD_PENALTIES','achievements'=>'COM_JUGENDTRAINING_DASHBOARD_ACHIEVEMENTS',
  'programs'=>'COM_JUGENDTRAINING_DASHBOARD_PROGRAMS','overview'=>'COM_JUGENDTRAINING_DASHBOARD_OVERVIEW',
  'performance'=>'COM_JUGENDTRAINING_DASHBOARD_PERFORMANCE','groups'=>'COM_JUGENDTRAINING_DASHBOARD_GROUPS',
@@ -421,6 +422,56 @@ $dashboardLabels=[
  </form>
 </div>
 <?php endforeach; ?>
+<div class="tab-pane fade" id="self-attendance" role="tabpanel">
+ <div class="alert alert-info"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CANCEL_CONFIG_INTRO');?></div>
+ <form action="<?php echo Route::_('index.php?option=com_jugendtraining&task=import.saveSelfCancelSettings');?>" method="post">
+  <div class="card">
+   <div class="card-body">
+    <div class="form-check form-switch mb-4">
+     <input type="hidden" name="jform[enabled]" value="0">
+     <input class="form-check-input" type="checkbox" id="self-cancel-enabled" name="jform[enabled]" value="1" <?php echo!empty($this->selfCancelSettings['enabled'])?'checked':'';?>>
+     <label class="form-check-label" for="self-cancel-enabled"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CANCEL_ENABLE');?></label>
+    </div>
+    <div class="row g-4">
+     <div class="col-md-4">
+      <label class="form-label" for="self-cancel-deadline"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CANCEL_DEADLINE_MINUTES');?></label>
+      <input class="form-control" type="number" id="self-cancel-deadline" name="jform[deadline_minutes]" min="0" max="10080" value="<?php echo(int)($this->selfCancelSettings['deadline_minutes']??60);?>">
+      <div class="form-text"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CANCEL_DEADLINE_HELP');?></div>
+     </div>
+     <div class="col-md-4">
+      <label class="form-label"><?php echo Text::_('COM_JUGENDTRAINING_LATE_CANCEL_PENALTY');?></label>
+      <input type="hidden" name="jform[late_penalty_enabled]" value="0">
+      <div class="form-check form-switch mt-2">
+       <input class="form-check-input" type="checkbox" id="late-cancel-penalty" name="jform[late_penalty_enabled]" value="1" <?php echo!empty($this->selfCancelSettings['late_penalty_enabled'])?'checked':'';?>>
+       <label class="form-check-label" for="late-cancel-penalty"><?php echo Text::_('COM_JUGENDTRAINING_LATE_CANCEL_PENALTY_ENABLE');?></label>
+      </div>
+     </div>
+     <div class="col-md-4">
+      <label class="form-label" for="late-cancel-penalty-definition"><?php echo Text::_('COM_JUGENDTRAINING_PENALTY');?></label>
+      <select class="form-select" id="late-cancel-penalty-definition" name="jform[late_penalty_definition_id]">
+       <option value="0"><?php echo Text::_('COM_JUGENDTRAINING_SELECT_OPTION');?></option>
+       <?php foreach($this->penalties as$penalty):if(!(int)$penalty->published)continue;?>
+        <option value="<?php echo(int)$penalty->id;?>" <?php echo(int)($this->selfCancelSettings['late_penalty_definition_id']??0)===(int)$penalty->id?'selected':'';?>><?php echo htmlspecialchars($penalty->title,ENT_QUOTES,'UTF-8');?></option>
+       <?php endforeach;?>
+      </select>
+      <div class="form-text"><?php echo Text::_('COM_JUGENDTRAINING_LATE_CANCEL_PENALTY_HELP');?></div>
+     </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="form-check form-switch">
+     <input type="hidden" name="jform[late_cancel_set_excused]" value="0">
+     <input class="form-check-input" type="checkbox" id="late-cancel-set-excused" name="jform[late_cancel_set_excused]" value="1" <?php echo!array_key_exists('late_cancel_set_excused',$this->selfCancelSettings)||!empty($this->selfCancelSettings['late_cancel_set_excused'])?'checked':'';?>>
+     <label class="form-check-label" for="late-cancel-set-excused"><?php echo Text::_('COM_JUGENDTRAINING_LATE_CANCEL_SET_EXCUSED');?></label>
+     <div class="form-text"><?php echo Text::_('COM_JUGENDTRAINING_LATE_CANCEL_SET_EXCUSED_HELP');?></div>
+    </div>
+   </div>
+  </div>
+  <button class="btn btn-success mt-3" type="submit"><?php echo Text::_('JSAVE');?></button>
+  <?php echo HTMLHelper::_('form.token');?>
+ </form>
+</div>
 <div class="tab-pane fade" id="calendar-config" role="tabpanel">
  <div class="alert alert-info"><?php echo Text::_('COM_JUGENDTRAINING_CALENDAR_CONFIG_INTRO');?></div>
  <form action="<?php echo Route::_('index.php?option=com_jugendtraining&task=import.saveCalendarCategories');?>" method="post">

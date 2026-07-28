@@ -25,5 +25,19 @@ final class UserpreferencesModel extends BaseDatabaseModel
         if(!$user->save()){
             throw new \RuntimeException($user->getError()?:'Benutzerparameter konnten nicht gespeichert werden.');
         }
+
+        setcookie(
+            'bota_theme',
+            $theme,
+            [
+                'expires'=>time()+31536000,
+                'path'=>'/',
+                'secure'=>Factory::getApplication()->isHttpsForced() || (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']!=='off'),
+                'httponly'=>false,
+                'samesite'=>'Lax',
+            ]
+        );
+
+        $_COOKIE['bota_theme']=$theme;
     }
 }

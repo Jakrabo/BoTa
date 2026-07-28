@@ -1324,3 +1324,324 @@ html[data-bota-theme-resolved="light"] textarea {
   box-shadow: 0 0 0 .2rem rgba(37,99,235,.13);
   transform: translateY(-2px);
 }
+
+
+/* ==========================================================================
+   BoTa 1.10.10 – Theme bridge for Cassiopeia / user.css
+   The user preference (data-bota-theme-resolved) must win over
+   prefers-color-scheme rules from the template.
+   ========================================================================== */
+
+/* ------------------------------
+   DARK
+   ------------------------------ */
+html[data-bota-theme-resolved="dark"] {
+  color-scheme: dark !important;
+
+  --bota-bg: #121417 !important;
+  --bota-surface: #1b1f23 !important;
+  --bota-surface-2: #24292f !important;
+  --bota-text: #e8eaed !important;
+  --bota-muted: #aab0b6 !important;
+  --bota-border: #343a40 !important;
+  --bota-header-bg: #171a1e !important;
+  --bota-header-text: #f1f3f5 !important;
+  --bota-accent: #6ea8fe !important;
+  --bota-accent-soft: rgba(110,168,254,.12) !important;
+  --bota-shadow: rgba(0,0,0,.4) !important;
+
+  --jt-bg: #121417 !important;
+  --jt-surface: #1b1f23 !important;
+  --jt-surface-soft: #24292f !important;
+  --jt-text: #e8eaed !important;
+  --jt-muted: #aab0b6 !important;
+  --jt-border: #343a40 !important;
+  --jt-chart-text: #c9d1d9 !important;
+  --jt-chart-grid: #343b43 !important;
+  --jt-chart-bar: #5a9be6 !important;
+  --jt-chart-line: #ff7a45 !important;
+}
+
+html[data-bota-theme-resolved="dark"],
+html[data-bota-theme-resolved="dark"] body,
+html[data-bota-theme-resolved="dark"] .site-grid,
+html[data-bota-theme-resolved="dark"] main {
+  background: #121417 !important;
+  color: #e8eaed !important;
+}
+
+html[data-bota-theme-resolved="dark"] .container-header {
+  background: #171a1e !important;
+  background-image: none !important;
+  border-color: #343a40 !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,.4) !important;
+}
+
+html[data-bota-theme-resolved="dark"] .container-header .container-topbar .navbar .mod-menu > li > a,
+html[data-bota-theme-resolved="dark"] .container-header .container-topbar .navbar .metismenu-item > a,
+html[data-bota-theme-resolved="dark"] .container-header .navbar-brand,
+html[data-bota-theme-resolved="dark"] .container-header a {
+  color: #f1f3f5 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .container-header .container-topbar .navbar .metismenu-item > a:hover,
+html[data-bota-theme-resolved="dark"] .container-header .container-topbar .navbar .metismenu-item > a:focus,
+html[data-bota-theme-resolved="dark"] .container-header .container-topbar .navbar .metismenu-item.current > a,
+html[data-bota-theme-resolved="dark"] .container-header .container-topbar .navbar .metismenu-item.active > a {
+  color: #6ea8fe !important;
+  background: rgba(110,168,254,.12) !important;
+}
+
+html[data-bota-theme-resolved="dark"] .container-header .navbar-collapse,
+html[data-bota-theme-resolved="dark"] .container-header .metismenu .mm-collapse {
+  background: #171a1e !important;
+  border-color: #343a40 !important;
+}
+
+html[data-bota-theme-resolved="dark"] h1,
+html[data-bota-theme-resolved="dark"] h2,
+html[data-bota-theme-resolved="dark"] h3,
+html[data-bota-theme-resolved="dark"] h4,
+html[data-bota-theme-resolved="dark"] h5,
+html[data-bota-theme-resolved="dark"] h6,
+html[data-bota-theme-resolved="dark"] p,
+html[data-bota-theme-resolved="dark"] label,
+html[data-bota-theme-resolved="dark"] legend,
+html[data-bota-theme-resolved="dark"] dt,
+html[data-bota-theme-resolved="dark"] dd {
+  color: #e8eaed !important;
+}
+
+html[data-bota-theme-resolved="dark"] .text-muted,
+html[data-bota-theme-resolved="dark"] .form-text {
+  color: #aab0b6 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .card,
+html[data-bota-theme-resolved="dark"] .card-body,
+html[data-bota-theme-resolved="dark"] .list-group-item,
+html[data-bota-theme-resolved="dark"] .dropdown-menu,
+html[data-bota-theme-resolved="dark"] .modal-content,
+html[data-bota-theme-resolved="dark"] .mod-breadcrumbs__wrapper {
+  background: #1b1f23 !important;
+  color: #e8eaed !important;
+  border-color: #343a40 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .card-header,
+html[data-bota-theme-resolved="dark"] .card-footer,
+html[data-bota-theme-resolved="dark"] .table thead th {
+  background: #24292f !important;
+  color: #e8eaed !important;
+  border-color: #343a40 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .form-control,
+html[data-bota-theme-resolved="dark"] .form-select,
+html[data-bota-theme-resolved="dark"] select,
+html[data-bota-theme-resolved="dark"] textarea,
+html[data-bota-theme-resolved="dark"] input[type="text"],
+html[data-bota-theme-resolved="dark"] input[type="number"],
+html[data-bota-theme-resolved="dark"] input[type="date"],
+html[data-bota-theme-resolved="dark"] input[type="time"],
+html[data-bota-theme-resolved="dark"] input[type="email"],
+html[data-bota-theme-resolved="dark"] input[type="password"] {
+  background-color: #1b1f23 !important;
+  color: #e8eaed !important;
+  border-color: #3d444b !important;
+  color-scheme: dark !important;
+}
+
+html[data-bota-theme-resolved="dark"] .form-select,
+html[data-bota-theme-resolved="dark"] select.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E") !important;
+}
+
+html[data-bota-theme-resolved="dark"] .form-select option,
+html[data-bota-theme-resolved="dark"] select option {
+  background: #1b1f23 !important;
+  color: #e8eaed !important;
+}
+
+html[data-bota-theme-resolved="dark"] .table {
+  --bs-table-bg: #1b1f23 !important;
+  --bs-table-color: #e8eaed !important;
+  --bs-table-border-color: #343a40 !important;
+  color: #e8eaed !important;
+}
+
+html[data-bota-theme-resolved="dark"] .table > :not(caption) > * > * {
+  background-color: #1b1f23 !important;
+  color: #e8eaed !important;
+  border-color: #343a40 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .btn-outline-secondary {
+  color: #e8eaed !important;
+  border-color: #4b5560 !important;
+  background: #1b1f23 !important;
+}
+
+/* SVG charts */
+html[data-bota-theme-resolved="dark"] svg text,
+html[data-bota-theme-resolved="dark"] .jt-detail-chart text,
+html[data-bota-theme-resolved="dark"] .jt-arrow-chart text,
+html[data-bota-theme-resolved="dark"] .jt-performance-chart text,
+html[data-bota-theme-resolved="dark"] .jt-arrow-axis-title,
+html[data-bota-theme-resolved="dark"] .jt-arrow-axis-label {
+  fill: #c9d1d9 !important;
+  color: #c9d1d9 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-arrow-axis {
+  stroke: #8b949e !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-arrow-grid-line {
+  stroke: #343b43 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-arrow-bar,
+html[data-bota-theme-resolved="dark"] #jt-detail-result-chart .jt-result-score-bar {
+  fill: #5a9be6 !important;
+  opacity: .95 !important;
+}
+
+html[data-bota-theme-resolved="dark"] #jt-detail-result-chart .jt-result-average-line {
+  stroke: #ff7a45 !important;
+}
+
+html[data-bota-theme-resolved="dark"] #jt-detail-result-chart .jt-result-average-point {
+  fill: #ff7a45 !important;
+  stroke: #1b1f23 !important;
+}
+
+/* ------------------------------
+   LIGHT (must also override OS dark)
+   ------------------------------ */
+html[data-bota-theme-resolved="light"] {
+  color-scheme: light !important;
+
+  --bota-bg: #ffffff !important;
+  --bota-surface: #ffffff !important;
+  --bota-surface-2: #f7f9fb !important;
+  --bota-text: #263238 !important;
+  --bota-muted: #6c757d !important;
+  --bota-border: #e5e9ed !important;
+  --bota-header-bg: #ffffff !important;
+  --bota-header-text: #263238 !important;
+  --bota-accent: #0d6efd !important;
+  --bota-accent-soft: rgba(13,110,253,.08) !important;
+  --bota-shadow: rgba(0,0,0,.08) !important;
+
+  --jt-bg: #f4f7fb !important;
+  --jt-surface: #ffffff !important;
+  --jt-surface-soft: #f8fafc !important;
+  --jt-text: #172033 !important;
+  --jt-muted: #64748b !important;
+  --jt-border: #dfe7f1 !important;
+}
+
+html[data-bota-theme-resolved="light"],
+html[data-bota-theme-resolved="light"] body,
+html[data-bota-theme-resolved="light"] .site-grid,
+html[data-bota-theme-resolved="light"] main {
+  background: #ffffff !important;
+  color: #263238 !important;
+}
+
+html[data-bota-theme-resolved="light"] .container-header {
+  background: #ffffff !important;
+  background-image: none !important;
+  border-color: #e5e9ed !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,.08) !important;
+}
+
+html[data-bota-theme-resolved="light"] .container-header .container-topbar .navbar .mod-menu > li > a,
+html[data-bota-theme-resolved="light"] .container-header .container-topbar .navbar .metismenu-item > a,
+html[data-bota-theme-resolved="light"] .container-header .navbar-brand {
+  color: #263238 !important;
+}
+
+html[data-bota-theme-resolved="light"] .container-header .container-topbar .navbar .metismenu-item > a:hover,
+html[data-bota-theme-resolved="light"] .container-header .container-topbar .navbar .metismenu-item > a:focus,
+html[data-bota-theme-resolved="light"] .container-header .container-topbar .navbar .metismenu-item.current > a,
+html[data-bota-theme-resolved="light"] .container-header .container-topbar .navbar .metismenu-item.active > a {
+  color: #0d6efd !important;
+  background: rgba(13,110,253,.08) !important;
+}
+
+html[data-bota-theme-resolved="light"] h1,
+html[data-bota-theme-resolved="light"] h2,
+html[data-bota-theme-resolved="light"] h3,
+html[data-bota-theme-resolved="light"] h4,
+html[data-bota-theme-resolved="light"] h5,
+html[data-bota-theme-resolved="light"] h6,
+html[data-bota-theme-resolved="light"] p,
+html[data-bota-theme-resolved="light"] label,
+html[data-bota-theme-resolved="light"] legend,
+html[data-bota-theme-resolved="light"] dt,
+html[data-bota-theme-resolved="light"] dd {
+  color: #263238 !important;
+}
+
+html[data-bota-theme-resolved="light"] .text-muted,
+html[data-bota-theme-resolved="light"] .form-text {
+  color: #6c757d !important;
+}
+
+html[data-bota-theme-resolved="light"] .card,
+html[data-bota-theme-resolved="light"] .card-body,
+html[data-bota-theme-resolved="light"] .list-group-item,
+html[data-bota-theme-resolved="light"] .dropdown-menu,
+html[data-bota-theme-resolved="light"] .modal-content,
+html[data-bota-theme-resolved="light"] .mod-breadcrumbs__wrapper {
+  background: #ffffff !important;
+  color: #263238 !important;
+  border-color: #e5e9ed !important;
+}
+
+html[data-bota-theme-resolved="light"] .card-header,
+html[data-bota-theme-resolved="light"] .card-footer,
+html[data-bota-theme-resolved="light"] .table thead th {
+  background: #f7f9fb !important;
+  color: #263238 !important;
+  border-color: #e5e9ed !important;
+}
+
+html[data-bota-theme-resolved="light"] .form-control,
+html[data-bota-theme-resolved="light"] .form-select,
+html[data-bota-theme-resolved="light"] select,
+html[data-bota-theme-resolved="light"] textarea {
+  background-color: #ffffff !important;
+  color: #263238 !important;
+  border-color: #cbd5e1 !important;
+  color-scheme: light !important;
+}
+
+html[data-bota-theme-resolved="light"] .form-select option,
+html[data-bota-theme-resolved="light"] select option {
+  background: #ffffff !important;
+  color: #263238 !important;
+}
+
+html[data-bota-theme-resolved="light"] .table {
+  --bs-table-bg: #ffffff !important;
+  --bs-table-color: #263238 !important;
+  --bs-table-border-color: #e5e9ed !important;
+  color: #263238 !important;
+}
+
+html[data-bota-theme-resolved="light"] .table > :not(caption) > * > * {
+  background-color: #ffffff !important;
+  color: #263238 !important;
+  border-color: #e5e9ed !important;
+}
+
+html[data-bota-theme-resolved="light"] svg text,
+html[data-bota-theme-resolved="light"] .jt-detail-chart text,
+html[data-bota-theme-resolved="light"] .jt-arrow-chart text,
+html[data-bota-theme-resolved="light"] .jt-performance-chart text {
+  fill: #475569 !important;
+  color: #475569 !important;
+}

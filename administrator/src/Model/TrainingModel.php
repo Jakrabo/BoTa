@@ -277,18 +277,27 @@ final class TrainingModel extends AdminModel
 
     private function getCurrentSessionId(): int
     {
-        $id = (int) $this->getState('training.id');
-        return $id > 0 ? $id : Factory::getApplication()->getInput()->getInt('id');
+        $id=(int)$this->getState('training.id');
+
+        if($id>0){
+            return $id;
+        }
+
+        return (int) Factory::getApplication()->getInput()->getInt('id',0);
     }
 
     private function getCurrentGroupId(): int
     {
-        $item = $this->getItem($this->getCurrentSessionId());
+        $sessionId=$this->getCurrentSessionId();
 
-        if (!empty($item->training_group_id)) {
-            return (int) $item->training_group_id;
+        if($sessionId>0){
+            $item=$this->getItem($sessionId);
+
+            if(!empty($item->training_group_id)){
+                return (int)$item->training_group_id;
+            }
         }
 
-        return Factory::getApplication()->getInput()->getInt('training_group_id');
+        return (int) Factory::getApplication()->getInput()->getInt('training_group_id',0);
     }
 }

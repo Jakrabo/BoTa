@@ -3,7 +3,7 @@
 <field name="id" type="hidden" />
 <field name="firstname" type="text" label="COM_JUGENDTRAINING_FIELD_FIRSTNAME" required="true" />
 <field name="lastname" type="text" label="COM_JUGENDTRAINING_FIELD_LASTNAME" required="true" />
-<field name="birthdate" type="calendar" label="COM_JUGENDTRAINING_FIELD_BIRTHDATE" format="%Y-%m-%d" showtime="false" filter="user_utc" />
+<field name="birthdate" type="calendar" label="COM_JUGENDTRAINING_FIELD_BIRTHDATE" format="%Y-%m-%d" showtime="false" filter="raw" />
 <field name="gender" type="list" label="COM_JUGENDTRAINING_FIELD_GENDER"><option value="">COM_JUGENDTRAINING_SELECT_OPTION</option><option value="m">COM_JUGENDTRAINING_GENDER_M</option><option value="w">COM_JUGENDTRAINING_GENDER_W</option><option value="d">COM_JUGENDTRAINING_GENDER_D</option></field>
 <field name="bow_type" type="list" label="COM_JUGENDTRAINING_FIELD_BOW_TYPE"><option value="">COM_JUGENDTRAINING_SELECT_OPTION</option><option value="Recurve">Recurve</option><option value="Compound">Compound</option><option value="Blankbogen">Blankbogen</option><option value="Langbogen">Langbogen</option></field>
 <field name="club_id" type="sql" label="COM_JUGENDTRAINING_FIELD_CLUB" query="SELECT id AS value, name AS text FROM #__jt_clubs WHERE published=1 ORDER BY name" key_field="value" value_field="text"><option value="">COM_JUGENDTRAINING_SELECT_OPTION</option></field>

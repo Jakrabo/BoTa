@@ -6,7 +6,7 @@
     <field name="training_group_id" type="list" label="COM_JUGENDTRAINING_TRAINING_GROUP" required="true">
       <option value="">COM_JUGENDTRAINING_SELECT_TRAINING_GROUP</option>
     </field>
-    <field name="training_date" type="calendar" label="COM_JUGENDTRAINING_FIELD_TRAINING_DATE" required="true" format="%Y-%m-%d" showtime="false" filter="user_utc" />
+    <field name="training_date" type="calendar" label="COM_JUGENDTRAINING_FIELD_TRAINING_DATE" required="true" format="%Y-%m-%d" showtime="false" filter="raw" />
     <field name="start_time" type="time" label="COM_JUGENDTRAINING_FIELD_START_TIME" filter="raw" />
     <field name="end_time" type="time" label="COM_JUGENDTRAINING_FIELD_END_TIME" filter="raw" />
     <field name="location" type="text" label="COM_JUGENDTRAINING_FIELD_LOCATION" maxlength="190" />

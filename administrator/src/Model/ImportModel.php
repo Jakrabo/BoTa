@@ -109,10 +109,60 @@ public function deletePenalty(int $id): void
  $q=$db->getQuery(true)->delete('#__jt_penalty_definitions')->where('id='.$id);
  $db->setQuery($q)->execute();
 }
+
+public function getSelfCancelSettings(): array
+{
+ $defaults=[
+  'enabled'=>1,
+  'deadline_minutes'=>60,
+  'late_penalty_enabled'=>0,
+  'late_penalty_definition_id'=>0,
+  'late_cancel_set_excused'=>1,
+ ];
+ $db=$this->getDatabase();
+ $q=$db->getQuery(true)->select(['setting_key','setting_value'])->from('#__jt_settings')
+  ->where('setting_key IN ('
+   .$db->quote('self_cancel_enabled').','
+   .$db->quote('self_cancel_deadline_minutes').','
+   .$db->quote('self_cancel_late_penalty_enabled').','
+   .$db->quote('self_cancel_late_penalty_definition_id').','
+   .$db->quote('self_cancel_late_set_excused')
+  .')');
+ $db->setQuery($q);$rows=$db->loadAssocList('setting_key','setting_value');
+ return[
+  'enabled'=>(int)($rows['self_cancel_enabled']??$defaults['enabled']),
+  'deadline_minutes'=>max(0,min(10080,(int)($rows['self_cancel_deadline_minutes']??$defaults['deadline_minutes']))),
+  'late_penalty_enabled'=>(int)($rows['self_cancel_late_penalty_enabled']??$defaults['late_penalty_enabled']),
+  'late_penalty_definition_id'=>(int)($rows['self_cancel_late_penalty_definition_id']??$defaults['late_penalty_definition_id']),
+  'late_cancel_set_excused'=>(int)($rows['self_cancel_late_set_excused']??$defaults['late_cancel_set_excused']),
+ ];
+}
+
+public function saveSelfCancelSettings(array$data):void
+{
+ $enabled=!empty($data['enabled'])?1:0;
+ $deadline=max(0,min(10080,(int)($data['deadline_minutes']??60)));
+ $lateEnabled=!empty($data['late_penalty_enabled'])?1:0;
+ $definitionId=(int)($data['late_penalty_definition_id']??0);
+ $lateSetExcused=!empty($data['late_cancel_set_excused'])?1:0;
+
+ if($lateEnabled){
+  if($definitionId<=0)throw new \RuntimeException('Bitte eine Strafe für verspätete Abmeldungen auswählen.');
+  $db=$this->getDatabase();$q=$db->getQuery(true)->select('COUNT(*)')->from('#__jt_penalty_definitions')->where('id='.$definitionId)->where('published=1');$db->setQuery($q);
+  if((int)$db->loadResult()!==1)throw new \RuntimeException('Die ausgewählte Strafe ist nicht verfügbar.');
+ }
+
+ $this->upsert('self_cancel_enabled',(string)$enabled);
+ $this->upsert('self_cancel_deadline_minutes',(string)$deadline);
+ $this->upsert('self_cancel_late_penalty_enabled',(string)$lateEnabled);
+ $this->upsert('self_cancel_late_penalty_definition_id',(string)$definitionId);
+ $this->upsert('self_cancel_late_set_excused',(string)$lateSetExcused);
+}
+
 public function getDashboardConfigs(): array
 {
  $athleteDefaults=[
-  ['key'=>'profile','visible'=>1],['key'=>'calendar','visible'=>1],['key'=>'results','visible'=>1],['key'=>'penalties','visible'=>1],
+  ['key'=>'profile','visible'=>1],['key'=>'calendar','visible'=>1],['key'=>'attendance','visible'=>1],['key'=>'results','visible'=>1],['key'=>'penalties','visible'=>1],
   ['key'=>'achievements','visible'=>1],['key'=>'programs','visible'=>1],['key'=>'overview','visible'=>1],
   ['key'=>'performance','visible'=>1]
  ];
@@ -133,7 +183,7 @@ public function saveDashboardConfig(string $type,array $rows):void
 {
  $allowed=$type==='trainer'
   ?['groups','penalty_summary','open_penalties','signals','class_changes','navigation']
-  :['profile','calendar','results','penalties','achievements','programs','overview','performance'];
+  :['profile','calendar','attendance','results','penalties','achievements','programs','overview','performance'];
  $clean=[];
  foreach($rows as$key=>$row){
   if(!in_array($key,$allowed,true))continue;

@@ -32,7 +32,7 @@
             required="true"
             format="%Y-%m-%d"
             showtime="false"
-            filter="user_utc"
+            filter="raw"
         />
 
         <field

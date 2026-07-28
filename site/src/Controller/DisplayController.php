@@ -20,27 +20,64 @@ final class DisplayController extends BaseController
         return parent::display($cachable, $urlparams);
     }
 
-private function applyUserTheme(): void
-{
-    $app=Factory::getApplication();
-    $user=$app->getIdentity();
-    $theme=$user->guest?'auto':(string)$user->getParam('bota_theme','auto');
-    if(!in_array($theme,['auto','light','dark'],true))$theme='auto';
+    private function applyUserTheme(): void
+    {
+        $app=Factory::getApplication();
+        $user=$app->getIdentity();
 
-    $document=$app->getDocument();
-    $document->getWebAssetManager()
-        ->useStyle('com_jugendtraining.site')
-        ->useScript('com_jugendtraining.theme');
+        $theme=$user->guest?'auto':(string)$user->getParam('bota_theme','auto');
 
-    // Script options are rendered before the deferred component script.
-    // A tiny inline bootstrap sets the attribute early to avoid a light-theme flash.
-    $document->addScriptOptions('com_jugendtraining.theme',['theme'=>$theme]);
-    $document->addCustomTag(
-        '<script>document.documentElement.setAttribute("data-bota-theme",'
-        .json_encode($theme,JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT)
-        .');</script>'
-    );
-}
+        if(!in_array($theme,['auto','light','dark'],true)){
+            $theme='auto';
+        }
+
+        setcookie(
+            'bota_theme',
+            $theme,
+            [
+                'expires'=>time()+31536000,
+                'path'=>'/',
+                'secure'=>$app->isHttpsForced() || (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']!=='off'),
+                'httponly'=>false,
+                'samesite'=>'Lax',
+            ]
+        );
+
+        $_COOKIE['bota_theme']=$theme;
+
+        $document=$app->getDocument();
+        $document->getWebAssetManager()->useStyle('com_jugendtraining.site');
+
+        // Apply the resolved theme immediately in the document head.
+        // This deliberately does not depend on the Joomla WebAsset script registry.
+        $themeJson=json_encode(
+            $theme,
+            JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT
+        );
+
+        $document->addCustomTag(
+            '<script>(function(){'
+            .'var configured='.$themeJson.';'
+            .'var mq=window.matchMedia("(prefers-color-scheme: dark)");'
+            .'function apply(){'
+            .'var resolved=configured==="auto"?(mq.matches?"dark":"light"):configured;'
+            .'document.documentElement.setAttribute("data-bota-theme",configured);'
+            .'document.documentElement.setAttribute("data-bota-theme-resolved",resolved);'
+            .'document.documentElement.style.colorScheme=resolved;'
+            .'if(document.body){'
+            .'document.body.classList.toggle("bota-theme-dark",resolved==="dark");'
+            .'document.body.classList.toggle("bota-theme-light",resolved==="light");'
+            .'}'
+            .'}'
+            .'apply();'
+            .'if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",apply,{once:true});}'
+            .'if(configured==="auto"){'
+            .'if(typeof mq.addEventListener==="function"){mq.addEventListener("change",apply);}'
+            .'else if(typeof mq.addListener==="function"){mq.addListener(apply);}'
+            .'}'
+            .'})();</script>'
+        );
+    }
 
     private function syncCurrentSportyear(): void
     {

@@ -40,6 +40,17 @@ final class ImportController extends BaseController
   Factory::getApplication()->enqueueMessage('Dropdownwerte gespeichert.','success');
   $this->setRedirect(Route::_('index.php?option=com_jugendtraining&view=import',false));
  }
+
+public function saveSelfCancelSettings():void
+{
+ Session::checkToken() or jexit('JINVALID_TOKEN');$this->assertTrainer();$app=Factory::getApplication();
+ try{
+  $this->getModel('Import')->saveSelfCancelSettings($app->input->get('jform',[],'array'));
+  $app->enqueueMessage('Abmeldeeinstellungen gespeichert.','success');
+ }catch(\Throwable$e){$app->enqueueMessage($e->getMessage(),'error');}
+ $this->setRedirect(Route::_('index.php?option=com_jugendtraining&view=import#self-attendance',false));
+}
+
 public function saveCalendarCategories():void
 {
  Session::checkToken() or jexit('JINVALID_TOKEN');$this->assertTrainer();$app=Factory::getApplication();

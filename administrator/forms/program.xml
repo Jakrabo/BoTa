@@ -24,6 +24,6 @@
       query="SELECT id AS value, CONCAT(lastname, ', ', firstname) AS text FROM #__jt_athletes WHERE published = 1 ORDER BY lastname, firstname"
       key_field="value" value_field="text" multiple="true" layout="joomla.form.field.list-fancy-select" />
     <field name="due_date" type="calendar" label="COM_JUGENDTRAINING_FIELD_DUE_DATE"
-      format="%Y-%m-%d" showtime="false" filter="user_utc" />
+      format="%Y-%m-%d" showtime="false" filter="raw" />
   </fieldset>
 </form>

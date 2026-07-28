@@ -3,6 +3,7 @@ namespace Jugendtraining\Component\Jugendtraining\Site\Model;
 \defined('_JEXEC') or die;
 use Joomla\CMS\Factory; use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Jugendtraining\Component\Jugendtraining\Site\Service\CalendarService;
+use Jugendtraining\Component\Jugendtraining\Site\Service\SelfAttendanceService;
 class DashboardModel extends BaseDatabaseModel
 {
  public function getAthlete(): ?object { $user=Factory::getApplication()->getIdentity(); if($user->guest)return null; $db=$this->getDatabase();$q=$db->getQuery(true)->select('a.*,c.name club_name,cl.name class_name,t.name trainer_name')->from($db->quoteName('#__jt_athletes','a'))->leftJoin($db->quoteName('#__jt_clubs','c').' ON c.id=a.club_id')->leftJoin($db->quoteName('#__jt_classes','cl').' ON cl.id=a.class_id')->leftJoin($db->quoteName('#__users','t').' ON t.id=a.trainer_user_id')->where('a.user_id='.(int)$user->id)->where('a.published=1');$db->setQuery($q,0,1);return $db->loadObject() ?: null; }
@@ -300,6 +301,17 @@ public function getMyOpenPenalties(): array
 }
 
 
+
+public function getMyUpcomingTrainingSessions(): array
+{
+ return (new SelfAttendanceService())->upcomingSessions(6);
+}
+
+public function getSelfCancelSettings(): object
+{
+ return (new SelfAttendanceService())->settings();
+}
+
 public function getUpcomingCalendarEvents(): array
 {
  $calendar=new CalendarService();
@@ -316,7 +328,7 @@ public function getCalendarCategoryMap(): array
 
 public function getAthleteDashboardConfig(): array
 {
- $defaults=[['key'=>'profile','visible'=>1],['key'=>'calendar','visible'=>1],['key'=>'results','visible'=>1],['key'=>'penalties','visible'=>1],['key'=>'achievements','visible'=>1],['key'=>'programs','visible'=>1],['key'=>'overview','visible'=>1],['key'=>'performance','visible'=>1]];
+ $defaults=[['key'=>'profile','visible'=>1],['key'=>'calendar','visible'=>1],['key'=>'attendance','visible'=>1],['key'=>'results','visible'=>1],['key'=>'penalties','visible'=>1],['key'=>'achievements','visible'=>1],['key'=>'programs','visible'=>1],['key'=>'overview','visible'=>1],['key'=>'performance','visible'=>1]];
  $db=$this->getDatabase();$q=$db->getQuery(true)->select('setting_value')->from('#__jt_settings')->where('setting_key='.$db->quote('athlete_dashboard_config'));
  $db->setQuery($q);$saved=json_decode((string)$db->loadResult(),true);return is_array($saved)?$saved:$defaults;
 }

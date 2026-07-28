@@ -1,5 +1,82 @@
 # Changelog
 
+## 2.0.3 — 2026-07-28
+
+- Warnhinweis bei verspäteter Abmeldung im Schützendashboard entfernt
+- bei aktivierter automatischer Strafe bleibt der normale Abmeldebutton nach Fristablauf sichtbar
+- neue Backend-Option: verspätete Abmeldung trotz Strafe als `excused` übernehmen
+- neue Option ist standardmäßig aktiviert
+- bei deaktivierter Option wird nur die Strafe erzeugt und Attendance bleibt unverändert
+- erfolgreiche verspätete Abmeldungen werden gesondert im Audit-Log protokolliert
+
+## 2.0.2 — 2026-07-28
+
+- reine Datumsfelder werden nicht mehr über `user_utc` in UTC umgerechnet
+- behebt den Sprung eines ausgewählten Tages auf den Vortag bei Zeitzone Europe/Berlin
+- Korrektur gilt konsistent für Trainings-, Ergebnis-, Tagebuch-, Ziel-, Notiz-, Programm- und Geburtsdatumsfelder
+- bei aktivierter automatischer Strafe bleibt der Abmeldebutton auch nach Ablauf der Frist sichtbar
+- verspäteter Klick ändert Attendance weiterhin nicht, kann aber einmalig die konfigurierte Strafe erzeugen
+- Warn- und Bestätigungstexte für verspätete Abmeldeversuche ergänzt
+
+## 2.0.1 — 2026-07-28
+
+- Backend-Fehler bei Training → Neu behoben
+- `getCurrentSessionId()` liefert bei neuen Trainings jetzt sicher `0` statt `null`
+- `getCurrentGroupId()` ruft bei neuen Datensätzen nicht mehr unnötig `getItem(0)` auf
+
+## 2.0.0 — 2026-07-28
+
+- Schützen können sich selbst von kommenden Trainings abmelden
+- Schützen dürfen serverseitig ausschließlich ihren eigenen Attendance-Status auf `excused` setzen
+- Standard-Abmeldeschluss 60 Minuten vor Trainingsbeginn, im Backend konfigurierbar
+- Trainingszuordnung wird über die Trainingsgruppe serverseitig geprüft
+- neue konfigurierbare Dashboard-Kachel „Trainings – Abmeldung“
+- nach Ablauf der Frist ist die Selbstabmeldung gesperrt
+- optional kann ein verspäteter Abmeldeversuch einmalig eine konfigurierte Strafe erzeugen
+- Selbstabmeldungen und verspätete Versuche werden im Audit-Log protokolliert
+- Trainer können Attendance weiterhin korrigieren
+
+## 1.10.10 — 2026-07-28
+
+- Benutzer-Theme wird jetzt über data-bota-theme-resolved auch tatsächlich auf das Layout angewendet
+- Cassiopeia Header und Navigation für Hell/Dunkel überschrieben
+- Cards, Formulare, Selects, Tabellen und Modals an die Benutzerwahl gekoppelt
+- Diagrammtexte, Raster, Balken und Ringdurchschnitt an den gewählten Modus gekoppelt
+- expliziter Hellmodus kann jetzt auch einen dunklen Betriebssystemmodus überschreiben
+- expliziter Dunkelmodus funktioniert unabhängig von prefers-color-scheme
+
+## 1.10.9 — 2026-07-28
+
+- Theme-Anwendung vollständig von Joomla WebAsset-JavaScript entkoppelt
+- Auto / Hell / Dunkel wird direkt im Dokumentkopf gesetzt
+- externer Theme-JavaScript-Asset nicht mehr erforderlich
+- Benutzerparameter und bota_theme-Cookie bleiben unverändert
+- behebt den Fall, dass data-bota-theme-resolved trotz korrektem Cookie nicht gesetzt wurde
+
+## 1.10.8 — 2026-07-28
+
+- Theme-Übertragung von Joomla scriptOptions auf First-Party-Cookie umgestellt
+- `bota_theme` enthält ausschließlich auto / light / dark
+- Cookie wird bei jeder BoTa-Anfrage aus dem Joomla-Benutzerparameter synchronisiert
+- Cookie wird direkt nach dem Speichern der Benutzerparameter aktualisiert
+- Theme-JavaScript ist vollständig unabhängig von Joomla.getOptions und dessen Ladezeitpunkt
+- Auto-Modus folgt weiterhin prefers-color-scheme
+
+## 1.10.7 — 2026-07-28
+
+- Theme-Script wird jetzt mit `defer` geladen
+- Joomla-Scriptoptionen werden erst bei der Theme-Anwendung gelesen
+- verhindert den Fallback auf `auto`, wenn Joomla.getOptions beim Parsen noch nicht verfügbar ist
+- Auto / Hell / Dunkel reagieren jetzt auf den gespeicherten Benutzerparameter
+
+## 1.10.6 — 2026-07-28
+
+- Theme-Auswahl Auto / Hell / Dunkel liest jetzt direkt Joomla scriptOptions
+- Race-Condition zwischen Inline-Attribut und Theme-JavaScript entfernt
+- erzwungener Hell- bzw. Dunkelmodus funktioniert unabhängig von der Systemeinstellung
+- Auto-Modus folgt weiterhin dynamisch prefers-color-scheme
+- Asset-Version angehoben, damit Browser und Joomla die korrigierte Theme-JS neu laden
+
 ## 1.10.5 — 2026-07-28
 
 - persönliche Darstellung Auto / Hell / Dunkel ergänzt

@@ -45,7 +45,7 @@
       <option value="0">COM_JUGENDTRAINING_SELECT_PROGRAM</option>
     </field>
 
-    <field name="due_date" type="calendar" label="COM_JUGENDTRAINING_FIELD_DUE_DATE" format="%Y-%m-%d" showtime="false" filter="user_utc" />
+    <field name="due_date" type="calendar" label="COM_JUGENDTRAINING_FIELD_DUE_DATE" format="%Y-%m-%d" showtime="false" filter="raw" />
 
     <field name="completed" type="radio" label="COM_JUGENDTRAINING_FIELD_COMPLETED" layout="joomla.form.field.radio.switcher" default="0">
       <option value="0">COM_JUGENDTRAINING_NO</option><option value="1">COM_JUGENDTRAINING_YES</option>

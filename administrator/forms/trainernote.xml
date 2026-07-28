@@ -6,7 +6,7 @@
       query="SELECT id AS value, CONCAT(lastname, ', ', firstname) AS text FROM #__jt_athletes WHERE published = 1 ORDER BY lastname, firstname"
       key_field="value" value_field="text" />
     <field name="note_date" type="calendar" label="COM_JUGENDTRAINING_FIELD_NOTE_DATE" required="true"
-      format="%Y-%m-%d" showtime="false" filter="user_utc" />
+      format="%Y-%m-%d" showtime="false" filter="raw" />
     <field name="category" type="list" label="COM_JUGENDTRAINING_FIELD_CATEGORY" default="general">
       <option value="general">COM_JUGENDTRAINING_NOTE_GENERAL</option>
       <option value="technique">COM_JUGENDTRAINING_CATEGORY_TECHNIQUE</option>

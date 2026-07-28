@@ -42,6 +42,61 @@ use Joomla\CMS\Router\Route;
  </div>
 </section>
 
+<section class="jt-dashboard-block" data-dashboard-key="attendance">
+ <div class="card">
+  <div class="card-header">
+   <h2 class="h4 mb-0"><?php echo Text::_('COM_JUGENDTRAINING_MY_UPCOMING_TRAININGS');?></h2>
+  </div>
+  <div class="card-body">
+   <?php if(empty($this->selfCancelSettings->enabled)):?>
+    <p class="text-muted mb-0"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CANCEL_DISABLED_INFO');?></p>
+   <?php elseif($this->myUpcomingTrainingSessions):?>
+    <div class="vstack gap-3">
+     <?php foreach($this->myUpcomingTrainingSessions as$session):?>
+      <div class="border rounded p-3">
+       <div class="d-flex flex-wrap justify-content-between gap-3 align-items-start">
+        <div>
+         <strong class="d-block"><?php echo htmlspecialchars($session->title,ENT_QUOTES,'UTF-8');?></strong>
+         <div class="small text-muted">
+          <?php echo \Joomla\CMS\HTML\HTMLHelper::_('date',$session->training_date,Text::_('DATE_FORMAT_LC4'));?>
+          <?php if($session->start_time):?> · <?php echo htmlspecialchars(substr((string)$session->start_time,0,5),ENT_QUOTES,'UTF-8');?> Uhr<?php endif;?>
+          <?php if($session->location):?> · <?php echo htmlspecialchars($session->location,ENT_QUOTES,'UTF-8');?><?php endif;?>
+          <?php if($session->group_title):?><br><?php echo htmlspecialchars($session->group_title,ENT_QUOTES,'UTF-8');?><?php endif;?>
+         </div>
+        </div>
+        <div class="text-end">
+         <?php if((string)$session->attendance_status==='excused'):?>
+          <span class="badge text-bg-secondary"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CANCELLED');?></span>
+         <?php elseif($session->can_self_cancel):?>
+          <form method="post" action="<?php echo Route::_('index.php?option=com_jugendtraining&task=selfattendance.cancel');?>" onsubmit="return confirm('<?php echo Text::_('COM_JUGENDTRAINING_SELF_CANCEL_CONFIRM');?>');">
+           <input type="hidden" name="session_id" value="<?php echo(int)$session->id;?>">
+           <button class="btn btn-sm btn-outline-danger" type="submit"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CANCEL_BUTTON');?></button>
+           <?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token');?>
+          </form>
+          <?php if($session->deadline_at):?><div class="small text-muted mt-1"><?php echo Text::sprintf('COM_JUGENDTRAINING_SELF_CANCEL_UNTIL',\Joomla\CMS\HTML\HTMLHelper::_('date',$session->deadline_at,'d.m.Y H:i'));?></div><?php endif;?>
+         <?php elseif(!empty($session->can_late_cancel)):?>
+          <form method="post" action="<?php echo Route::_('index.php?option=com_jugendtraining&task=selfattendance.cancel');?>" onsubmit="return confirm('<?php echo Text::_('COM_JUGENDTRAINING_SELF_CANCEL_CONFIRM');?>');">
+           <input type="hidden" name="session_id" value="<?php echo(int)$session->id;?>">
+           <button class="btn btn-sm btn-outline-danger" type="submit"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CANCEL_BUTTON');?></button>
+           <?php echo \Joomla\CMS\HTML\HTMLHelper::_('form.token');?>
+          </form>
+         <?php elseif($session->cancel_reason==='deadline_passed'):?>
+          <span class="badge text-bg-warning"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CANCEL_DEADLINE_PASSED');?></span>
+         <?php elseif($session->cancel_reason==='missing_start_time'):?>
+          <span class="badge text-bg-secondary"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CANCEL_NO_START_TIME_SHORT');?></span>
+         <?php endif;?>
+        </div>
+       </div>
+      </div>
+     <?php endforeach;?>
+    </div>
+   <?php else:?>
+    <p class="text-muted mb-0"><?php echo Text::_('COM_JUGENDTRAINING_NO_UPCOMING_TRAININGS');?></p>
+   <?php endif;?>
+  </div>
+ </div>
+</section>
+
 
 <section class="mt-4 jt-dashboard-block" data-dashboard-key="results">
     <div class="d-flex justify-content-between align-items-center mb-3">
