@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.10.5 — 2026-07-28
+
+- persönliche Darstellung Auto / Hell / Dunkel ergänzt
+- Auswahl wird direkt in den Joomla-Benutzerparametern als `bota_theme` gespeichert
+- Benutzerparameter-Frontendansicht und Menütyp ergänzt
+- Darstellungslink in Schützen- und Trainerdashboard ergänzt
+- BoTa-Formulare, Tabellen, Karten und Diagramme auf erzwungenen Darkmode vorbereitet
+- Auto-Modus reagiert auf Änderungen der Betriebssystemeinstellung
+
 ## 1.10.4 — 2026-07-28
 
 - Testrelease für die Joomla-Updatefunktion

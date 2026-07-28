@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
   "name": "com_jugendtraining",
-  "version": "1.10.4",
+  "version": "1.10.5",
   "description": "Assets for com_jugendtraining",
   "license": "GPL-2.0-or-later",
   "assets": [
@@ -29,6 +29,14 @@
       "uri": "com_jugendtraining/js/site.js",
       "attributes": {
         "defer": true
+      }
+    },
+    {
+      "name": "com_jugendtraining.theme",
+      "type": "script",
+      "uri": "com_jugendtraining/js/theme.js",
+      "attributes": {
+        "defer": false
       }
     }
   ]

@@ -1149,3 +1149,178 @@ textarea:focus-visible {
 #jt-detail-result-chart .jt-arrow-grid-line{
   stroke:#b9c0c7;
 }
+
+
+/* ==========================================================================
+   BoTa 1.10.5 – Benutzerabhängige Darstellung
+   ========================================================================== */
+
+/* Light defaults / forced light */
+html[data-bota-theme-resolved="light"] {
+  color-scheme: light;
+  --jt-bg: #f4f7fb;
+  --jt-surface: #ffffff;
+  --jt-surface-soft: #f8fafc;
+  --jt-text: #172033;
+  --jt-muted: #64748b;
+  --jt-border: #dfe7f1;
+  --jt-chart-text: #475569;
+  --jt-chart-grid: #d7dee8;
+  --jt-chart-bar: #2f6fb0;
+  --jt-chart-line: #f05a28;
+}
+
+html[data-bota-theme-resolved="dark"] {
+  color-scheme: dark;
+  --jt-bg: #111418;
+  --jt-surface: #1b1f24;
+  --jt-surface-soft: #22272e;
+  --jt-text: #e7edf4;
+  --jt-muted: #a8b3bf;
+  --jt-border: #343b44;
+  --jt-primary-soft: #153f3b;
+  --jt-secondary-soft: #172d4e;
+  --jt-accent-soft: #2b2045;
+  --jt-chart-text: #c9d1d9;
+  --jt-chart-grid: #343b43;
+  --jt-chart-bar: #5a9be6;
+  --jt-chart-line: #ff7a45;
+}
+
+html[data-bota-theme-resolved="dark"] body,
+html[data-bota-theme-resolved="dark"] .site-grid {
+  color: var(--jt-text) !important;
+  background: var(--jt-bg) !important;
+}
+
+html[data-bota-theme-resolved="dark"] h1,
+html[data-bota-theme-resolved="dark"] h2,
+html[data-bota-theme-resolved="dark"] h3,
+html[data-bota-theme-resolved="dark"] h4,
+html[data-bota-theme-resolved="dark"] h5,
+html[data-bota-theme-resolved="dark"] h6,
+html[data-bota-theme-resolved="dark"] label,
+html[data-bota-theme-resolved="dark"] legend,
+html[data-bota-theme-resolved="dark"] dt,
+html[data-bota-theme-resolved="dark"] dd {
+  color: var(--jt-text) !important;
+}
+
+html[data-bota-theme-resolved="dark"] .card,
+html[data-bota-theme-resolved="dark"] .card-body,
+html[data-bota-theme-resolved="dark"] .list-group-item,
+html[data-bota-theme-resolved="dark"] .dropdown-menu,
+html[data-bota-theme-resolved="dark"] .modal-content {
+  color: var(--jt-text) !important;
+  background: var(--jt-surface) !important;
+  border-color: var(--jt-border) !important;
+}
+
+html[data-bota-theme-resolved="dark"] .card-header,
+html[data-bota-theme-resolved="dark"] .card-footer,
+html[data-bota-theme-resolved="dark"] .table thead th {
+  color: var(--jt-text) !important;
+  background: var(--jt-surface-soft) !important;
+  border-color: var(--jt-border) !important;
+}
+
+html[data-bota-theme-resolved="dark"] .form-control,
+html[data-bota-theme-resolved="dark"] .form-select,
+html[data-bota-theme-resolved="dark"] select,
+html[data-bota-theme-resolved="dark"] textarea {
+  color: var(--jt-text) !important;
+  background-color: var(--jt-surface) !important;
+  border-color: var(--jt-border) !important;
+  color-scheme: dark !important;
+}
+
+html[data-bota-theme-resolved="dark"] .form-select,
+html[data-bota-theme-resolved="dark"] select.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E") !important;
+}
+
+html[data-bota-theme-resolved="dark"] .form-select option,
+html[data-bota-theme-resolved="dark"] select option {
+  color: var(--jt-text) !important;
+  background: var(--jt-surface) !important;
+}
+
+html[data-bota-theme-resolved="dark"] .table {
+  --bs-table-bg: var(--jt-surface);
+  --bs-table-color: var(--jt-text);
+  --bs-table-border-color: var(--jt-border);
+  color: var(--jt-text) !important;
+}
+
+html[data-bota-theme-resolved="dark"] .table > :not(caption) > * > * {
+  color: var(--jt-text) !important;
+  background-color: var(--jt-surface) !important;
+  border-color: var(--jt-border) !important;
+}
+
+/* SVG/Diagramme */
+html[data-bota-theme-resolved="dark"] .jt-detail-chart text,
+html[data-bota-theme-resolved="dark"] .jt-arrow-chart text,
+html[data-bota-theme-resolved="dark"] .jt-performance-chart text,
+html[data-bota-theme-resolved="dark"] .jt-arrow-axis-label,
+html[data-bota-theme-resolved="dark"] .jt-arrow-axis-title {
+  fill: var(--jt-chart-text) !important;
+  color: var(--jt-chart-text) !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-arrow-grid-line {
+  stroke: var(--jt-chart-grid) !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-arrow-axis {
+  stroke: #8b949e !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-arrow-bar,
+html[data-bota-theme-resolved="dark"] #jt-detail-result-chart .jt-result-score-bar {
+  fill: var(--jt-chart-bar) !important;
+  opacity: .95 !important;
+}
+
+html[data-bota-theme-resolved="dark"] #jt-detail-result-chart .jt-result-average-line {
+  stroke: var(--jt-chart-line) !important;
+}
+
+html[data-bota-theme-resolved="dark"] #jt-detail-result-chart .jt-result-average-point {
+  fill: var(--jt-chart-line) !important;
+  stroke: var(--jt-surface) !important;
+}
+
+/* Forced light must override a template/user.css dark media query where possible. */
+html[data-bota-theme-resolved="light"] body,
+html[data-bota-theme-resolved="light"] .site-grid {
+  color: var(--jt-text) !important;
+  background: var(--jt-bg) !important;
+}
+
+html[data-bota-theme-resolved="light"] .card,
+html[data-bota-theme-resolved="light"] .card-body {
+  color: var(--jt-text) !important;
+  background: var(--jt-surface) !important;
+  border-color: var(--jt-border) !important;
+}
+
+html[data-bota-theme-resolved="light"] .form-control,
+html[data-bota-theme-resolved="light"] .form-select,
+html[data-bota-theme-resolved="light"] select,
+html[data-bota-theme-resolved="light"] textarea {
+  color: var(--jt-text) !important;
+  background-color: #fff !important;
+  border-color: #cbd5e1 !important;
+  color-scheme: light !important;
+}
+
+.jt-theme-choice {
+  cursor: pointer;
+  transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+.jt-theme-choice:has(input:checked) {
+  border-color: var(--jt-secondary);
+  box-shadow: 0 0 0 .2rem rgba(37,99,235,.13);
+  transform: translateY(-2px);
+}
