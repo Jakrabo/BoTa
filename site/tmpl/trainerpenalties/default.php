@@ -8,6 +8,7 @@ use Joomla\CMS\Router\Route;
 use Joomla\CMS\Session\Session;
 
 Factory::getApplication()->getDocument()->getWebAssetManager()->useStyle('com_jugendtraining.site');
+$selectedAthleteId=Factory::getApplication()->input->getInt('athlete_id');
 ?>
 <div class="jt-penalty-register">
     <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
@@ -20,7 +21,7 @@ Factory::getApplication()->getDocument()->getWebAssetManager()->useStyle('com_ju
         </a>
     </div>
 
-    <div class="card mb-4">
+    <div class="card mb-4" id="penalty-editor">
         <div class="card-body">
             <h2 class="h4"><?php echo Text::_('COM_JUGENDTRAINING_ASSIGN_PENALTY'); ?></h2>
 
@@ -34,7 +35,7 @@ Factory::getApplication()->getDocument()->getWebAssetManager()->useStyle('com_ju
                             <select class="form-select" id="penalty-athlete" name="jform[athlete_id]" required>
                                 <option value=""><?php echo Text::_('COM_JUGENDTRAINING_SELECT_OPTION'); ?></option>
                                 <?php foreach ($this->athletes as $athlete) : ?>
-                                    <option value="<?php echo (int)$athlete->id; ?>">
+                                    <option value="<?php echo (int)$athlete->id; ?>" <?php echo $selectedAthleteId===(int)$athlete->id?'selected':''; ?>>
                                         <?php echo htmlspecialchars($athlete->athlete_name,ENT_QUOTES,'UTF-8'); ?>
                                     </option>
                                 <?php endforeach; ?>

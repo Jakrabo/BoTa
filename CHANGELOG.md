@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.8.5 — 2026-07-28
+
+- Strafen-Kachel in der Trainer-Schützendetailseite dauerhaft sichtbar
+- Detailseite zeigt ausschließlich offene Strafen des Schützen
+- Anzahl offener Strafen als Badge ergänzt
+- Button „Strafe hinzufügen“ ergänzt
+- Schütze wird im Strafregister beim Aufruf aus der Detailseite vorausgewählt
+
 ## 1.8.4 — 2026-07-28
 
 - SVG-Farben des Ergebnisdiagramms direkt an den Elementen gesetzt

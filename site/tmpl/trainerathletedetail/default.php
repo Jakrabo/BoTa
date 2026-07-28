@@ -22,6 +22,50 @@ $resultRows=$this->results;
 <div class="col-lg-6"><div class="card h-100"><div class="card-header d-flex justify-content-between align-items-center"><h2 class="h4 mb-0"><?php echo Text::_('COM_JUGENDTRAINING_TRAINING_TASKS');?></h2><a class="btn btn-sm btn-primary" href="<?php echo Route::_('index.php?option=com_jugendtraining&view=trainerathletetask&athlete_id='.(int)$a->id);?>"><?php echo Text::_('COM_JUGENDTRAINING_ADD_TRAINING_TASK');?></a></div><div class="list-group list-group-flush"><?php foreach($this->tasks as$t):?><a class="list-group-item list-group-item-action" href="<?php echo Route::_('index.php?option=com_jugendtraining&view=trainerathletetask&athlete_id='.(int)$a->id.'&assignment_id='.(int)$t->assignment_id);?>"><strong><?php echo htmlspecialchars($t->program_title,ENT_QUOTES,'UTF-8');?></strong><div><?php echo(int)$t->completed?'✓':'○';?> <?php echo htmlspecialchars($t->exercise_title,ENT_QUOTES,'UTF-8');?></div></a><?php endforeach;?></div></div></div>
 </div>
 
+<div class="card mb-4">
+ <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-3">
+  <div class="d-flex align-items-center gap-2">
+   <h2 class="h4 mb-0"><?php echo Text::_('COM_JUGENDTRAINING_PENALTIES');?></h2>
+   <span class="badge <?php echo $this->openPenalties?'text-bg-warning':'text-bg-success';?>"><?php echo count($this->openPenalties);?> <?php echo Text::_('COM_JUGENDTRAINING_OPEN');?></span>
+  </div>
+  <a class="btn btn-sm btn-primary" href="<?php echo Route::_('index.php?option=com_jugendtraining&view=trainerpenalties&athlete_id='.(int)$a->id.'#penalty-editor');?>">
+   <?php echo Text::_('COM_JUGENDTRAINING_ADD_PENALTY');?>
+  </a>
+ </div>
+ <div class="card-body">
+  <?php if($this->openPenalties):?>
+   <div class="table-responsive">
+    <table class="table align-middle mb-0">
+     <thead><tr>
+      <th><?php echo Text::_('JDATE');?></th>
+      <th><?php echo Text::_('COM_JUGENDTRAINING_PENALTY');?></th>
+      <th><?php echo Text::_('COM_JUGENDTRAINING_PENALTY_VALUE');?></th>
+      <th><?php echo Text::_('COM_JUGENDTRAINING_REASON_NOTE');?></th>
+     </tr></thead>
+     <tbody>
+     <?php foreach($this->openPenalties as$penalty):?>
+      <tr class="table-warning">
+       <td><?php echo HTMLHelper::_('date',$penalty->assigned_at,Text::_('DATE_FORMAT_LC4'));?></td>
+       <td><strong><?php echo htmlspecialchars($penalty->title,ENT_QUOTES,'UTF-8');?></strong></td>
+       <td>
+        <?php if($penalty->penalty_type==='monetary'):?>
+         <?php echo number_format((float)$penalty->amount_snapshot,2,',','.');?> €
+        <?php else:?>
+         <?php echo htmlspecialchars((string)$penalty->action_snapshot,ENT_QUOTES,'UTF-8');?>
+        <?php endif;?>
+       </td>
+       <td><?php echo htmlspecialchars((string)$penalty->reason_note,ENT_QUOTES,'UTF-8');?></td>
+      </tr>
+     <?php endforeach;?>
+     </tbody>
+    </table>
+   </div>
+  <?php else:?>
+   <p class="text-muted mb-0"><?php echo Text::_('COM_JUGENDTRAINING_NO_OPEN_PENALTIES_FOR_ATHLETE');?></p>
+  <?php endif;?>
+ </div>
+</div>
+
 <section class="mb-4">
 <h2><?php echo Text::_('COM_JUGENDTRAINING_PERFORMANCE_DEVELOPMENT');?></h2>
 <p class="text-muted"><?php echo Text::_('COM_JUGENDTRAINING_RESULT_CHART_DESCRIPTION');?></p>

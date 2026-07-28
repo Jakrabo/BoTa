@@ -32,6 +32,16 @@ final class TrainerathletedetailModel extends TrainerModel
    ->leftJoin('#__jt_program_progress pp ON pp.athlete_program_id=ap.id AND pp.exercise_id=e.id')
    ->where('ap.athlete_id='.$id)->where('ap.active=1')->order('p.title,pe.ordering,e.ordering');$db->setQuery($q);return$db->loadObjectList();
  }
+
+ public function getOpenPenalties():array{
+  $id=$this->athleteId();$db=$this->getDatabase();
+  $q=$db->getQuery(true)->select(['r.*','d.title','d.penalty_type'])
+   ->from('#__jt_penalty_register r')
+   ->innerJoin('#__jt_penalty_definitions d ON d.id=r.penalty_definition_id')
+   ->where('r.athlete_id='.$id)->where("r.status='open'")
+   ->order('r.assigned_at DESC,r.id DESC');
+  $db->setQuery($q);return$db->loadObjectList();
+ }
  public function getResultDevelopment():array{
   $id=$this->athleteId();[$start,$end]=$this->period();$db=$this->getDatabase();$q=$db->getQuery(true)->select(['result_date','score','average','event_name'])
    ->from('#__jt_results')->where('athlete_id='.$id)->where('published=1')->where('result_date>='.$db->quote($start))->where('result_date<='.$db->quote($end))->order('result_date,id');$db->setQuery($q);return$db->loadObjectList();
