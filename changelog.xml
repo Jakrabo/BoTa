@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelogs>
+  <changelog>
+    <element>com_jugendtraining</element>
+    <type>component</type>
+    <version>1.9.0</version>
+    <security>
+      <item>PDF-Anhänge werden validiert und geschützt aus der Datenbank ausgeliefert.</item>
+    </security>
+    <new>
+      <item>Saisonkalender für Trainer, Schützen und Backend.</item>
+      <item>Konfigurierbare Kalender-Kategorien und umfangreiche Terminfilter.</item>
+      <item>Automatische Umschaltung des aktuellen Sportjahres.</item>
+      <item>GitHub-basierte Joomla-Updatequelle.</item>
+    </new>
+  </changelog>
+</changelogs>

@@ -311,3 +311,14 @@ Joomla-6-Komponente für die Jugendtrainingsverwaltung.
 - stabiler technischer Manifestname für Joomla-Updates
 - automatische Bereinigung alter Administrator-Menüeinträge
 - sichtbarer Name bleibt BoTa
+
+## Version 1.9.0 – GitHub-Updates
+
+Das Manifest verwendet:
+`https://raw.githubusercontent.com/Jakrabo/BoTa/main/updates.xml`
+
+Für automatische Updates:
+1. `updates.xml` und `changelog.xml` aus diesem Paket in den Root des Branches `main` committen.
+2. GitHub Release `v1.9.0` anlegen.
+3. Das Installationspaket dort exakt als `com_bota-1.9.0.zip` als Release Asset hochladen.
+4. Bei künftigen Releases Version und Download-URL in `updates.xml` anpassen.

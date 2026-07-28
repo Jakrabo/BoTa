@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS `#__jt_calendar_attachments`;
+DROP TABLE IF EXISTS `#__jt_calendar_events`;
 DROP TABLE IF EXISTS `#__jt_penalty_register`;
 DROP TABLE IF EXISTS `#__jt_penalty_definitions`;
 DROP TABLE IF EXISTS `#__jt_bow_setups`;

@@ -60,6 +60,7 @@ $activeTab = $this->result ? 'csv-import' : 'csv-import';
         </li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#dashboard-athlete" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_ATHLETE_DASHBOARD'); ?></button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#dashboard-trainer" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_TRAINER_DASHBOARD'); ?></button></li>
+<li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#calendar-config" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_CALENDAR'); ?></button></li>
 <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#language" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_LANGUAGE'); ?></button></li>
     </ul>
 
@@ -420,6 +421,13 @@ $dashboardLabels=[
  </form>
 </div>
 <?php endforeach; ?>
+<div class="tab-pane fade" id="calendar-config" role="tabpanel">
+ <div class="alert alert-info"><?php echo Text::_('COM_JUGENDTRAINING_CALENDAR_CONFIG_INTRO');?></div>
+ <form action="<?php echo Route::_('index.php?option=com_jugendtraining&task=import.saveCalendarCategories');?>" method="post">
+  <div class="mb-3"><label class="form-label" for="calendar-categories"><?php echo Text::_('COM_JUGENDTRAINING_CALENDAR_CATEGORIES');?></label><textarea class="form-control" id="calendar-categories" name="jform[categories]" rows="10"><?php echo htmlspecialchars(implode("\n",$this->calendarCategories),ENT_QUOTES,'UTF-8');?></textarea><div class="form-text"><?php echo Text::_('COM_JUGENDTRAINING_CALENDAR_CATEGORIES_HELP');?></div></div>
+  <button class="btn btn-success" type="submit"><?php echo Text::_('JSAVE');?></button><?php echo HTMLHelper::_('form.token');?>
+ </form>
+</div>
 <div class="tab-pane fade" id="language" role="tabpanel">
  <div class="alert alert-info"><?php echo Text::_('COM_JUGENDTRAINING_LANGUAGE_INTRO'); ?></div>
  <ul class="nav nav-pills mb-3" role="tablist">

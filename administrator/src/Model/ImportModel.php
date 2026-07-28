@@ -23,6 +23,20 @@ final class ImportModel extends BaseDatabaseModel
    $this->upsert($key,json_encode($values,JSON_UNESCAPED_UNICODE));
   }
  }
+public function getCalendarCategories(): array
+{
+ $db=$this->getDatabase();$q=$db->getQuery(true)->select('setting_value')->from('#__jt_settings')->where('setting_key='.$db->quote('calendar_categories'));
+ $db->setQuery($q);$v=json_decode((string)$db->loadResult(),true);
+ return is_array($v)&&$v?$v:['Liga','Wettkampf','Training','Lehrgang','Vereinstermin','Sonstiges'];
+}
+public function saveCalendarCategories(array$data):void
+{
+ $raw=(string)($data['categories']??'');$values=array_values(array_unique(array_filter(array_map('trim',preg_split('/\R/',$raw)))));
+ if(!$values)throw new \RuntimeException('Mindestens eine Kategorie ist erforderlich.');
+ if(count($values)>50)throw new \RuntimeException('Maximal 50 Kategorien.');
+ foreach($values as$v)if(mb_strlen($v)>100)throw new \RuntimeException('Kategorie ist zu lang.');
+ $this->upsert('calendar_categories',json_encode($values,JSON_UNESCAPED_UNICODE));
+}
 public function getPenalties(): array
 {
  $db=$this->getDatabase();

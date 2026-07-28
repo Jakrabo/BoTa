@@ -8,6 +8,7 @@ final class DisplayController extends BaseController
  protected $default_view = 'dashboard';
  public function display($cachable=false, $urlparams=[])
  {
+  $this->syncCurrentSportyear();
   $user=Factory::getApplication()->getIdentity();
   if(!$user->authorise('core.manage','com_jugendtraining')&&!$user->authorise('core.admin')){
    throw new \RuntimeException('JERROR_ALERTNOAUTHOR',403);
@@ -21,5 +22,12 @@ final class DisplayController extends BaseController
    return false;
   }
   return parent::display($cachable,$urlparams);
+ }
+ private function syncCurrentSportyear():void
+ {
+  $db=Factory::getContainer()->get('DatabaseDriver');$today=Factory::getDate()->format('Y-m-d');
+  $q=$db->getQuery(true)->select('id')->from('#__jt_sportyears')->where('published=1')->where('date_start<='.$db->quote($today))->where('date_end>='.$db->quote($today))->order('date_start DESC,id DESC');$db->setQuery($q,0,1);$id=(int)$db->loadResult();
+  $q=$db->getQuery(true)->update('#__jt_sportyears')->set('is_current=0')->where('is_current<>0');$db->setQuery($q)->execute();
+  if($id>0){$q=$db->getQuery(true)->update('#__jt_sportyears')->set('is_current=1')->where('id='.$id);$db->setQuery($q)->execute();}
  }
 }

@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail></authorEmail>
     <authorUrl></authorUrl>
-    <version>1.8.6</version>
+    <version>1.9.0</version>
     <description>COM_JUGENDTRAINING_XML_DESCRIPTION</description>
 
     <scriptfile>script.php</scriptfile>
@@ -31,6 +31,7 @@
             <menu link="option=com_jugendtraining&amp;view=clubs">COM_JUGENDTRAINING_SUBMENU_CLUBS</menu>
             <menu link="option=com_jugendtraining&amp;view=classes">COM_JUGENDTRAINING_SUBMENU_CLASSES</menu>
             <menu link="option=com_jugendtraining&amp;view=sportyears">COM_JUGENDTRAINING_SUBMENU_SPORTYEARS</menu>
+            <menu link="option=com_jugendtraining&amp;view=calendar">COM_JUGENDTRAINING_SUBMENU_CALENDAR</menu>
         </submenu>
         <files folder="administrator">
             <folder>language</folder>
@@ -123,4 +124,7 @@
             </fieldset>
         </fields>
     </config>
+    <updateservers>
+        <server type="extension" priority="1" name="BoTa Updates">https://raw.githubusercontent.com/Jakrabo/BoTa/main/updates.xml</server>
+    </updateservers>
 </extension>

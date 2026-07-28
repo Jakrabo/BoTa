@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.9.0 — 2026-07-28
+
+- Saisonkalender im Frontend für Trainer und Schützen
+- Kalenderverwaltung im Joomla-Backend
+- Filter nach Zeitraum, Zukunft/Vergangenheit, Kategorie und Ort
+- Mehrere PDF-Anhänge pro Termin mit geschützter Datenbankablage
+- Kalender-Kategorien in der Konfiguration pflegbar
+- fehlende Backend-Sprachplatzhalter ergänzt
+- aktuelles Sportjahr wird bei Komponentenaufruf automatisch anhand des Datums synchronisiert
+- GitHub-Updatequelle und update.xml/changelog.xml ergänzt
+
 ## 1.8.6 — 2026-07-28
 
 - Anwesenheitsstatus in der Trainer-Schützendetailseite übersetzt

@@ -40,6 +40,13 @@ final class ImportController extends BaseController
   Factory::getApplication()->enqueueMessage('Dropdownwerte gespeichert.','success');
   $this->setRedirect(Route::_('index.php?option=com_jugendtraining&view=import',false));
  }
+public function saveCalendarCategories():void
+{
+ Session::checkToken() or jexit('JINVALID_TOKEN');$this->assertTrainer();$app=Factory::getApplication();
+ try{$this->getModel('Import')->saveCalendarCategories($app->input->get('jform',[],'array'));$app->enqueueMessage('Kalender-Kategorien gespeichert.','success');}
+ catch(\Throwable$e){$app->enqueueMessage($e->getMessage(),'error');}
+ $this->setRedirect(Route::_('index.php?option=com_jugendtraining&view=import#calendar-config',false));
+}
 public function savePenalty():void
 {
  Session::checkToken() or jexit('JINVALID_TOKEN');$this->assertTrainer();
