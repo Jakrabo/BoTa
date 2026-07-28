@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.10.4 — 2026-07-28
+
+- Testrelease für die Joomla-Updatefunktion
+- keine funktionalen Änderungen gegenüber 1.10.3
+
+## 1.10.3 — 2026-07-28
+
+- einzelnen Kalender-Link im Schützendashboard entfernt
+- Kalender als konfigurierbare Dashboard-Kachel ergänzt
+- Kachel zeigt die nächsten drei für den Schützen sichtbaren Termine
+- Kategorie-Farben werden auch in der Dashboard-Kachel verwendet
+- Position und Sichtbarkeit unter Konfiguration → Schützendashboard steuerbar
+
+## 1.10.2 — 2026-07-28
+
+- rollenabhängiges Login-Ziel ergänzt
+- Trainer werden nach Login auf das Trainerdashboard geleitet
+- Schützen werden nach Login auf das Schützendashboard geleitet
+- sonstige Benutzer fallen auf die Startseite zurück
+- token-geschützte Logout-Task mit Weiterleitung auf Home ergänzt
+- Joomla-Menütyp „Login-Ziel BoTa“ ergänzt
+
 ## 1.10.1 — 2026-07-28
 
 - fehlenden Import `Joomla\\CMS\\Router\\Route` im Schützendashboard ergänzt

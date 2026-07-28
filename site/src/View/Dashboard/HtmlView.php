@@ -13,6 +13,8 @@ final class HtmlView extends BaseHtmlView {
  public array $myAchievements=[];
  public int $myAchievementCount=0;
  public array $myOpenPenalties=[];
+ public array $upcomingCalendarEvents=[];
+ public array $calendarCategoryMap=[];
  public object $myDiaryStatistics;
  public array $athleteDashboardConfig=[];
  public function display($tpl=null):void{
@@ -26,6 +28,8 @@ final class HtmlView extends BaseHtmlView {
   $this->myAchievements = (array) ($this->get('MyAchievements') ?? []);
   $this->myAchievementCount = (int) ($this->get('MyAchievementCount') ?? 0);
   $this->myOpenPenalties = (array) ($this->get('MyOpenPenalties') ?? []);
+  $this->upcomingCalendarEvents=(array)($this->get('UpcomingCalendarEvents')??[]);
+  $this->calendarCategoryMap=(array)($this->get('CalendarCategoryMap')??[]);
   $this->myDiaryStatistics = $this->get('MyDiaryStatistics') ?? (object)[];
   $this->athleteDashboardConfig=(array)($this->get('AthleteDashboardConfig')??[]);
   parent::display($tpl);

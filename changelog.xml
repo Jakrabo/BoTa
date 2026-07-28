@@ -3,7 +3,7 @@
   <changelog>
     <element>com_jugendtraining</element>
     <type>component</type>
-    <version>1.10.0</version>
+    <version>1.10.4</version>
     <security>
       <item>PDF-Anhänge werden validiert und geschützt aus der Datenbank ausgeliefert.</item>
     </security>

@@ -3,7 +3,44 @@
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 ?>
-<div id="jt-athlete-dashboard" class="d-flex flex-column gap-4"><div class="text-end"><a class="btn btn-outline-primary" href="<?php echo Route::_('index.php?option=com_jugendtraining&view=calendar');?>"><?php echo Text::_('COM_JUGENDTRAINING_CALENDAR');?></a></div><div class="jt-profile jt-dashboard-block" data-dashboard-key="profile"><h1><?php echo Text::_('COM_JUGENDTRAINING_MY_DATA'); ?></h1><?php if(!$this->athlete): ?><div class="alert alert-info"><?php echo Text::_('COM_JUGENDTRAINING_NO_ATHLETE_LINKED'); ?></div><?php else: ?><div class="card"><div class="card-body"><h2><?php echo htmlspecialchars($this->athlete->firstname.' '.$this->athlete->lastname); ?></h2><dl class="row"><dt class="col-sm-4"><?php echo Text::_('COM_JUGENDTRAINING_FIELD_CLUB'); ?></dt><dd class="col-sm-8"><?php echo htmlspecialchars($this->athlete->club_name ?: '–'); ?></dd><dt class="col-sm-4"><?php echo Text::_('COM_JUGENDTRAINING_FIELD_CLASS'); ?></dt><dd class="col-sm-8"><?php echo htmlspecialchars($this->athlete->class_name ?: '–'); ?></dd><dt class="col-sm-4"><?php echo Text::_('COM_JUGENDTRAINING_FIELD_BOW_TYPE'); ?></dt><dd class="col-sm-8"><?php echo htmlspecialchars($this->athlete->bow_type ?: '–'); ?></dd><dt class="col-sm-4"><?php echo Text::_('COM_JUGENDTRAINING_FIELD_TRAINER'); ?></dt><dd class="col-sm-8"><?php echo htmlspecialchars($this->athlete->trainer_name ?: '–'); ?></dd></dl></div></div><?php endif; ?></div>
+<div id="jt-athlete-dashboard" class="d-flex flex-column gap-4"><div class="jt-profile jt-dashboard-block" data-dashboard-key="profile"><h1><?php echo Text::_('COM_JUGENDTRAINING_MY_DATA'); ?></h1><?php if(!$this->athlete): ?><div class="alert alert-info"><?php echo Text::_('COM_JUGENDTRAINING_NO_ATHLETE_LINKED'); ?></div><?php else: ?><div class="card"><div class="card-body"><h2><?php echo htmlspecialchars($this->athlete->firstname.' '.$this->athlete->lastname); ?></h2><dl class="row"><dt class="col-sm-4"><?php echo Text::_('COM_JUGENDTRAINING_FIELD_CLUB'); ?></dt><dd class="col-sm-8"><?php echo htmlspecialchars($this->athlete->club_name ?: '–'); ?></dd><dt class="col-sm-4"><?php echo Text::_('COM_JUGENDTRAINING_FIELD_CLASS'); ?></dt><dd class="col-sm-8"><?php echo htmlspecialchars($this->athlete->class_name ?: '–'); ?></dd><dt class="col-sm-4"><?php echo Text::_('COM_JUGENDTRAINING_FIELD_BOW_TYPE'); ?></dt><dd class="col-sm-8"><?php echo htmlspecialchars($this->athlete->bow_type ?: '–'); ?></dd><dt class="col-sm-4"><?php echo Text::_('COM_JUGENDTRAINING_FIELD_TRAINER'); ?></dt><dd class="col-sm-8"><?php echo htmlspecialchars($this->athlete->trainer_name ?: '–'); ?></dd></dl></div></div><?php endif; ?></div>
+
+<section class="jt-dashboard-block" data-dashboard-key="calendar">
+ <div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center gap-3">
+   <h2 class="h4 mb-0"><?php echo Text::_('COM_JUGENDTRAINING_UPCOMING_EVENTS');?></h2>
+   <a class="btn btn-sm btn-outline-primary" href="<?php echo Route::_('index.php?option=com_jugendtraining&view=calendar');?>"><?php echo Text::_('COM_JUGENDTRAINING_VIEW_CALENDAR');?></a>
+  </div>
+  <div class="card-body">
+   <?php if($this->upcomingCalendarEvents):?>
+    <div class="row g-3">
+     <?php foreach($this->upcomingCalendarEvents as$event):
+      $cfg=$this->calendarCategoryMap[$event->category]??['color'=>'#6c757d'];
+      $bg=(string)($cfg['color']??'#6c757d');
+      $hex=ltrim($bg,'#');$fg='#fff';
+      if(strlen($hex)===6){$r=hexdec(substr($hex,0,2));$g=hexdec(substr($hex,2,2));$b=hexdec(substr($hex,4,2));$fg=(($r*299+$g*587+$b*114)/1000)>160?'#111':'#fff';}
+      $endDate=$event->event_date_end?:$event->event_date;
+     ?>
+      <div class="col-12 col-lg-4">
+       <article class="border rounded h-100 p-3">
+        <span class="badge mb-2" style="background:<?php echo htmlspecialchars($bg,ENT_QUOTES,'UTF-8');?>;color:<?php echo$fg;?>"><?php echo htmlspecialchars($event->category,ENT_QUOTES,'UTF-8');?></span>
+        <h3 class="h6 mb-2"><?php echo htmlspecialchars($event->title,ENT_QUOTES,'UTF-8');?></h3>
+        <div class="small text-muted">
+         <?php echo \Joomla\CMS\HTML\HTMLHelper::_('date',$event->event_date,Text::_('DATE_FORMAT_LC4'));?>
+         <?php if($endDate!==$event->event_date):?> – <?php echo \Joomla\CMS\HTML\HTMLHelper::_('date',$endDate,Text::_('DATE_FORMAT_LC4'));?><?php endif;?>
+         <?php if($event->event_time):?><br><?php echo htmlspecialchars(substr((string)$event->event_time,0,5),ENT_QUOTES,'UTF-8');?> Uhr<?php endif;?>
+         <?php if($event->location):?><br><?php echo htmlspecialchars($event->location,ENT_QUOTES,'UTF-8');?><?php endif;?>
+        </div>
+       </article>
+      </div>
+     <?php endforeach;?>
+    </div>
+   <?php else:?>
+    <p class="text-muted mb-0"><?php echo Text::_('COM_JUGENDTRAINING_NO_UPCOMING_EVENTS');?></p>
+   <?php endif;?>
+  </div>
+ </div>
+</section>
 
 
 <section class="mt-4 jt-dashboard-block" data-dashboard-key="results">

@@ -322,3 +322,25 @@ Für automatische Updates:
 2. GitHub Release `v1.9.0` anlegen.
 3. Das Installationspaket dort exakt als `com_bota-1.9.0.zip` als Release Asset hochladen.
 4. Bei künftigen Releases Version und Download-URL in `updates.xml` anpassen.
+
+## Version 1.10.2 – Login-/Logout-Weiterleitung
+
+BoTa enthält den Frontend-Menütyp **„Login-Ziel BoTa“** (`view=loginredirect`).
+
+Empfohlene Joomla-Konfiguration:
+
+1. Einen Menüeintrag vom Typ **BoTa → Login-Ziel BoTa** anlegen.
+   Er kann in einem versteckten Menü liegen.
+2. Im Joomla-Login-Modul diesen Menüeintrag als **Weiterleitung nach Anmeldung** wählen.
+3. Im selben Login-Modul **Startseite/Home** als **Weiterleitung nach Abmeldung** wählen.
+
+Das Login-Ziel prüft serverseitig:
+- Trainer → `view=trainerdashboard`
+- Schütze → `view=dashboard`
+- sonstige Benutzer → Startseite
+
+Wenn ein Benutzer sowohl Trainer als auch Schütze ist, hat die Trainerrolle Priorität.
+
+Zusätzlich steht die token-geschützte BoTa-Task
+`index.php?option=com_jugendtraining&task=session.logout`
+für eigene BoTa-Logout-Links zur Verfügung; sie meldet ab und leitet immer auf die Startseite.

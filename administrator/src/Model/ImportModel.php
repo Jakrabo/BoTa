@@ -112,7 +112,7 @@ public function deletePenalty(int $id): void
 public function getDashboardConfigs(): array
 {
  $athleteDefaults=[
-  ['key'=>'profile','visible'=>1],['key'=>'results','visible'=>1],['key'=>'penalties','visible'=>1],
+  ['key'=>'profile','visible'=>1],['key'=>'calendar','visible'=>1],['key'=>'results','visible'=>1],['key'=>'penalties','visible'=>1],
   ['key'=>'achievements','visible'=>1],['key'=>'programs','visible'=>1],['key'=>'overview','visible'=>1],
   ['key'=>'performance','visible'=>1]
  ];
@@ -133,7 +133,7 @@ public function saveDashboardConfig(string $type,array $rows):void
 {
  $allowed=$type==='trainer'
   ?['groups','penalty_summary','open_penalties','signals','class_changes','navigation']
-  :['profile','results','penalties','achievements','programs','overview','performance'];
+  :['profile','calendar','results','penalties','achievements','programs','overview','performance'];
  $clean=[];
  foreach($rows as$key=>$row){
   if(!in_array($key,$allowed,true))continue;
