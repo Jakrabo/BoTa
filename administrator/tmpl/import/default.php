@@ -424,8 +424,11 @@ $dashboardLabels=[
 <div class="tab-pane fade" id="calendar-config" role="tabpanel">
  <div class="alert alert-info"><?php echo Text::_('COM_JUGENDTRAINING_CALENDAR_CONFIG_INTRO');?></div>
  <form action="<?php echo Route::_('index.php?option=com_jugendtraining&task=import.saveCalendarCategories');?>" method="post">
-  <div class="mb-3"><label class="form-label" for="calendar-categories"><?php echo Text::_('COM_JUGENDTRAINING_CALENDAR_CATEGORIES');?></label><textarea class="form-control" id="calendar-categories" name="jform[categories]" rows="10"><?php echo htmlspecialchars(implode("\n",$this->calendarCategories),ENT_QUOTES,'UTF-8');?></textarea><div class="form-text"><?php echo Text::_('COM_JUGENDTRAINING_CALENDAR_CATEGORIES_HELP');?></div></div>
-  <button class="btn btn-success" type="submit"><?php echo Text::_('JSAVE');?></button><?php echo HTMLHelper::_('form.token');?>
+  <div class="table-responsive"><table class="table align-middle" id="jt-calendar-category-table"><thead><tr><th><?php echo Text::_('COM_JUGENDTRAINING_CATEGORY');?></th><th style="width:150px"><?php echo Text::_('COM_JUGENDTRAINING_COLOR');?></th><th style="width:120px"><?php echo Text::_('COM_JUGENDTRAINING_ACTIVE');?></th><th style="width:80px"></th></tr></thead><tbody>
+  <?php foreach($this->calendarCategories as$i=>$c):?><tr><td><input class="form-control" name="jform[categories][<?php echo$i;?>][name]" value="<?php echo htmlspecialchars($c['name'],ENT_QUOTES,'UTF-8');?>" maxlength="100"></td><td><input class="form-control form-control-color" type="color" name="jform[categories][<?php echo$i;?>][color]" value="<?php echo htmlspecialchars($c['color'],ENT_QUOTES,'UTF-8');?>"></td><td><input type="hidden" name="jform[categories][<?php echo$i;?>][active]" value="0"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="jform[categories][<?php echo$i;?>][active]" value="1" <?php echo!empty($c['active'])?'checked':'';?>></div></td><td><button class="btn btn-sm btn-outline-danger jt-remove-category" type="button">×</button></td></tr><?php endforeach;?>
+  </tbody></table></div>
+  <button class="btn btn-outline-primary mb-3" id="jt-add-category" type="button"><?php echo Text::_('COM_JUGENDTRAINING_ADD_CATEGORY');?></button>
+  <div><button class="btn btn-success" type="submit"><?php echo Text::_('JSAVE');?></button></div><?php echo HTMLHelper::_('form.token');?>
  </form>
 </div>
 <div class="tab-pane fade" id="language" role="tabpanel">
@@ -481,4 +484,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
+
+document.getElementById('jt-add-category')?.addEventListener('click',function(){
+ const tbody=document.querySelector('#jt-calendar-category-table tbody');const i=Date.now();
+ const tr=document.createElement('tr');tr.innerHTML='<td><input class="form-control" name="jform[categories]['+i+'][name]" maxlength="100"></td><td><input class="form-control form-control-color" type="color" name="jform[categories]['+i+'][color]" value="#6c757d"></td><td><input type="hidden" name="jform[categories]['+i+'][active]" value="0"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="jform[categories]['+i+'][active]" value="1" checked></div></td><td><button class="btn btn-sm btn-outline-danger jt-remove-category" type="button">×</button></td>';tbody.appendChild(tr);
+});
+document.addEventListener('click',function(e){if(e.target.classList.contains('jt-remove-category'))e.target.closest('tr')?.remove();});
 </script>

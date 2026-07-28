@@ -25,17 +25,18 @@ final class ImportModel extends BaseDatabaseModel
  }
 public function getCalendarCategories(): array
 {
- $db=$this->getDatabase();$q=$db->getQuery(true)->select('setting_value')->from('#__jt_settings')->where('setting_key='.$db->quote('calendar_categories'));
- $db->setQuery($q);$v=json_decode((string)$db->loadResult(),true);
- return is_array($v)&&$v?$v:['Liga','Wettkampf','Training','Lehrgang','Vereinstermin','Sonstiges'];
+ $db=$this->getDatabase();$q=$db->getQuery(true)->select('setting_value')->from('#__jt_settings')->where('setting_key='.$db->quote('calendar_categories'));$db->setQuery($q);$raw=json_decode((string)$db->loadResult(),true);
+ $defaults=[['name'=>'Liga','color'=>'#6f42c1','active'=>1],['name'=>'Wettkampf','color'=>'#dc3545','active'=>1],['name'=>'Training','color'=>'#198754','active'=>1],['name'=>'Lehrgang','color'=>'#0d6efd','active'=>1],['name'=>'Vereinstermin','color'=>'#fd7e14','active'=>1],['name'=>'Sonstiges','color'=>'#6c757d','active'=>1]];
+ if(!is_array($raw)||!$raw)return$defaults;$out=[];
+ foreach(array_values($raw)as$i=>$r){if(is_string($r))$r=['name'=>trim($r),'color'=>$defaults[$i%count($defaults)]['color'],'active'=>1];if(!is_array($r))continue;$name=trim((string)($r['name']??''));if($name==='')continue;$color=preg_match('/^#[0-9A-Fa-f]{6}$/',(string)($r['color']??''))?(string)$r['color']:'#6c757d';$out[]=['name'=>$name,'color'=>$color,'active'=>!empty($r['active'])?1:0];}
+ return$out?:$defaults;
 }
 public function saveCalendarCategories(array$data):void
 {
- $raw=(string)($data['categories']??'');$values=array_values(array_unique(array_filter(array_map('trim',preg_split('/\R/',$raw)))));
- if(!$values)throw new \RuntimeException('Mindestens eine Kategorie ist erforderlich.');
- if(count($values)>50)throw new \RuntimeException('Maximal 50 Kategorien.');
- foreach($values as$v)if(mb_strlen($v)>100)throw new \RuntimeException('Kategorie ist zu lang.');
- $this->upsert('calendar_categories',json_encode($values,JSON_UNESCAPED_UNICODE));
+ $rows=$data['categories']??[];if(!is_array($rows))throw new \RuntimeException('Ungültige Kategorien.');$clean=[];$names=[];
+ foreach($rows as$r){if(!is_array($r))continue;$name=trim((string)($r['name']??''));if($name==='')continue;if(mb_strlen($name)>100)throw new \RuntimeException('Kategorie ist zu lang.');$key=mb_strtolower($name);if(isset($names[$key]))continue;$names[$key]=1;$color=(string)($r['color']??'');if(!preg_match('/^#[0-9A-Fa-f]{6}$/',$color))$color='#6c757d';$clean[]=['name'=>$name,'color'=>$color,'active'=>!empty($r['active'])?1:0];}
+ if(!$clean)throw new \RuntimeException('Mindestens eine Kategorie ist erforderlich.');if(count($clean)>50)throw new \RuntimeException('Maximal 50 Kategorien.');
+ $this->upsert('calendar_categories',json_encode($clean,JSON_UNESCAPED_UNICODE));
 }
 public function getPenalties(): array
 {

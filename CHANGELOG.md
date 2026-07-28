@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.10.1 — 2026-07-28
+
+- fehlenden Import `Joomla\\CMS\\Router\\Route` im Schützendashboard ergänzt
+- alle Frontend-Templates auf unqualifizierte `Route::_()`-Aufrufe geprüft
+
+## 1.10.0 — 2026-07-28
+
+- gemeinsamer Frontend-Kalender für Schützen und Trainer
+- mehrtägige Termine mit Start-/Enddatum und Start-/Endzeit
+- trainerinterne Termine, optional auf eine Trainingsgruppe beschränkt
+- serverseitige Sichtbarkeitsprüfung für trainerinterne und gruppenbezogene Termine sowie PDF-Anhänge
+- Kategorien mit konfigurierbarer Farbe und Aktivstatus
+- Kategorie-Badges verwenden die konfigurierte Farbe und automatische Kontrastschrift
+- Datumsfilter berücksichtigt Überschneidungen mehrtägiger Veranstaltungen
+- alte athletecalendar-/trainercalendar-Views leiten auf den gemeinsamen Kalender weiter
+
+## 1.9.1 — 2026-07-28
+
+- Backend-Kalender akzeptiert leere Von-/Bis-Filter ohne TypeError
+- Frontend-Kalenderfilter ebenfalls defensiv gegen leere Datumswerte abgesichert
+- Joomla-Menütypen für Schützenkalender und Trainerkalender ergänzt
+- Menütyp-Sprachwerte in Deutsch und Englisch ergänzt
+
 ## 1.9.0 — 2026-07-28
 
 - Saisonkalender im Frontend für Trainer und Schützen
