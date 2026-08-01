@@ -1,3 +1,53 @@
+:root {
+    --bota-bg: var(--body-bg);
+    --bota-card: var(--body-bg);
+    --bota-surface: var(--body-bg);
+    --bota-surface-raised: var(--template-bg-light);
+    --bota-border: var(--border-color);
+    --bota-text: var(--body-color);
+    --bota-text-muted: var(--secondary-color);
+    --bota-primary: var(--template-link-color);
+    --bota-input-bg: var(--body-bg);
+    --bota-input-border: var(--border-color);
+    --bota-input-text: var(--body-color);
+    --bota-table-header: var(--template-bg-light);
+    --bota-table-row: var(--body-bg);
+    --bota-table-hover: var(--template-bg-light);
+    --bota-modal-bg: var(--body-bg);
+    --bota-dropdown-bg: var(--body-bg);
+    --bota-dropdown-hover: var(--template-bg-light);
+}
+
+.com_jugendtraining .card,
+.com_jugendtraining .modal-content,
+.com_jugendtraining .dropdown-menu {
+    color: var(--bota-text);
+    border-color: var(--bota-border);
+    background-color: var(--bota-surface);
+}
+
+.com_jugendtraining .card-header,
+.com_jugendtraining .card-footer,
+.com_jugendtraining .table thead th {
+    color: var(--bota-text);
+    border-color: var(--bota-border);
+    background-color: var(--bota-surface-raised);
+}
+
+.com_jugendtraining .table {
+    --bs-table-bg: var(--bota-table-row);
+    --bs-table-color: var(--bota-text);
+    --bs-table-border-color: var(--bota-border);
+    --bs-table-hover-bg: var(--bota-table-hover);
+}
+
+.com_jugendtraining .form-control,
+.com_jugendtraining .form-select {
+    color: var(--bota-input-text);
+    border-color: var(--bota-input-border);
+    background-color: var(--bota-input-bg);
+}
+
 .jt-dashboard {
     --jt-radius: 1rem;
 }
@@ -8,9 +58,10 @@
     justify-content: space-between;
     gap: 1.5rem;
     padding: 1.5rem;
-    border: 1px solid var(--border-color, #dfe3e7);
+    border: 1px solid var(--bota-border);
     border-radius: var(--jt-radius);
-    background: var(--body-bg, #fff);
+    color: var(--bota-text);
+    background: var(--bota-surface);
 }
 
 .jt-dashboard__hero h2 {
