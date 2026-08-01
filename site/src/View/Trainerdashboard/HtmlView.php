@@ -7,6 +7,7 @@
 public array $athletes=[];
 public array $results=[];
 public array $trainings=[];
+public array $todayTrainings=[];
 public array $programs=[];
 public array $goals=[];
 public array $notes=[];
@@ -20,6 +21,7 @@ public array $trainerDashboardConfig=[];
  $this->athletes = (array) ($this->get('Athletes') ?? []);
  $this->results = (array) ($this->get('Results') ?? []);
  $this->trainings = (array) ($this->get('Trainings') ?? []);
+ $this->todayTrainings = (array) ($this->get('TodayTrainings') ?? []);
  $this->programs = (array) ($this->get('Programs') ?? []);
  $this->goals = (array) ($this->get('Goals') ?? []);
  $this->notes = (array) ($this->get('Notes') ?? []);

@@ -2,6 +2,38 @@
 <div class="d-flex justify-content-between align-items-center gap-3 mb-3"><h1 class="mb-0"><?php echo Text::_('COM_JUGENDTRAINING_TRAINER_DASHBOARD');?></h1><a class="btn btn-sm btn-outline-secondary" href="<?php echo Route::_('index.php?option=com_jugendtraining&view=userpreferences');?>">⚙ <?php echo Text::_('COM_JUGENDTRAINING_APPEARANCE');?></a></div><div id="jt-trainer-dashboard" class="d-flex flex-column gap-4">
 <div class="row g-3 mb-4 jt-dashboard-block" data-dashboard-key="groups"><?php foreach($this->groups as$g):?><div class="col-md-4"><a class="card h-100 text-decoration-none" href="<?php echo Route::_('index.php?option=com_jugendtraining&view=trainerathletes&group_id='.(int)$g->id);?>"><div class="card-body"><h2 class="h4"><?php echo htmlspecialchars($g->title,ENT_QUOTES,'UTF-8');?></h2><p><?php echo(int)$g->athlete_count;?> <?php echo Text::_('COM_JUGENDTRAINING_ATHLETES');?></p></div></a></div><?php endforeach;?></div>
 
+<?php $dashboardReturn=base64_encode('index.php?option=com_jugendtraining&view=trainerdashboard'); ?>
+<section class="card mb-4 jt-dashboard-block" data-dashboard-key="today_trainings">
+ <div class="card-header"><h2 class="h4 mb-0"><?php echo Text::_('COM_JUGENDTRAINING_TODAY_TRAININGS'); ?></h2></div>
+ <?php if ($this->todayTrainings) : ?>
+ <div class="card-body"><div class="row g-3">
+ <?php foreach ($this->todayTrainings as $training) :
+  $editBase='index.php?option=com_jugendtraining&view=trainertraining&layout=edit&id='.(int)$training->id.'&return='.rawurlencode($dashboardReturn);
+  $metrics=[
+   'all'=>['COM_JUGENDTRAINING_EXPECTED_PARTICIPANTS',(int)$training->expected_total,'secondary'],
+   'open'=>['COM_JUGENDTRAINING_FILTER_OPEN',(int)$training->open_total,'secondary'],
+   'present'=>['COM_JUGENDTRAINING_ATTENDANCE_PRESENT',(int)$training->present_total,'success'],
+   'excused'=>['COM_JUGENDTRAINING_ATTENDANCE_EXCUSED',(int)$training->excused_total,'warning'],
+   'late'=>['COM_JUGENDTRAINING_ATTENDANCE_LATE',(int)$training->late_total,'info'],
+   'absent'=>['COM_JUGENDTRAINING_ATTENDANCE_ABSENT',(int)$training->absent_total,'danger'],
+  ];
+ ?>
+  <div class="col-12 col-xl-6"><article class="border rounded p-3 h-100">
+   <div class="d-flex flex-wrap justify-content-between gap-2 mb-3">
+    <div><h3 class="h5 mb-1"><?php echo htmlspecialchars((string)$training->group_title,ENT_QUOTES,'UTF-8'); ?></h3>
+     <div class="text-muted small"><?php echo htmlspecialchars((string)($training->location?:'–'),ENT_QUOTES,'UTF-8'); ?> · <?php echo htmlspecialchars(substr((string)$training->start_time,0,5),ENT_QUOTES,'UTF-8'); ?><?php if($training->end_time):?>–<?php echo htmlspecialchars(substr((string)$training->end_time,0,5),ENT_QUOTES,'UTF-8'); ?><?php endif; ?></div>
+    </div>
+    <?php if ((int)$training->training_unit_id > 0) : ?><a class="btn btn-sm btn-outline-primary" href="<?php echo Route::_('index.php?option=com_jugendtraining&view=trainertrainingunit&id='.(int)$training->training_unit_id.'&return='.rawurlencode($dashboardReturn)); ?>"><?php echo Text::_('COM_JUGENDTRAINING_TRAINING_UNIT'); ?></a><?php endif; ?>
+   </div>
+   <div class="jt-today-training-metrics">
+    <?php foreach($metrics as $filter=>$metric): ?><a class="badge text-bg-<?php echo $metric[2]; ?> text-decoration-none" href="<?php echo Route::_($editBase.'&attendance_filter='.$filter); ?>" title="<?php echo Text::_($metric[0]); ?>"><strong><?php echo $metric[1]; ?></strong><span><?php echo Text::_($metric[0]); ?></span></a><?php endforeach; ?>
+   </div>
+  </article></div>
+ <?php endforeach; ?>
+ </div></div>
+ <?php else : ?><div class="card-body text-muted"><?php echo Text::_('COM_JUGENDTRAINING_NO_TRAININGS_TODAY'); ?></div><?php endif; ?>
+</section>
+
 <div class="row g-3 mb-4 jt-dashboard-block" data-dashboard-key="penalty_summary">
   <div class="col-md-4">
     <a class="card h-100 text-decoration-none border-warning" href="<?php echo Route::_('index.php?option=com_jugendtraining&view=trainerpenalties'); ?>">

@@ -102,8 +102,13 @@ CREATE TABLE IF NOT EXISTS `#__jt_training_sessions` (
   `end_time` time DEFAULT NULL,
   `location_id` int unsigned NOT NULL DEFAULT 0,
   `location` varchar(190) DEFAULT NULL,
+  `training_unit_id` int unsigned DEFAULT NULL,
   `trainer_user_id` int unsigned NOT NULL DEFAULT 0,
   `notes` text DEFAULT NULL,
+  `cancelled` tinyint NOT NULL DEFAULT 0,
+  `cancelled_at` datetime DEFAULT NULL,
+  `cancelled_by` int unsigned NOT NULL DEFAULT 0,
+  `cancellation_reason` text DEFAULT NULL,
   `weather_condition` varchar(100) DEFAULT NULL,
   `temperature_c` decimal(5,2) DEFAULT NULL,
   `wind_speed_kmh` decimal(6,2) DEFAULT NULL,
@@ -121,6 +126,8 @@ CREATE TABLE IF NOT EXISTS `#__jt_training_sessions` (
   KEY `idx_jt_training_group_id` (`training_group_id`),
   KEY `idx_jt_training_trainer` (`trainer_user_id`),
   KEY `idx_jt_training_location` (`location_id`),
+  KEY `idx_jt_training_cancelled` (`cancelled`),
+  KEY `idx_jt_training_unit` (`training_unit_id`),
   KEY `idx_jt_training_published` (`published`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 

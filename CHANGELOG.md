@@ -1,3 +1,11 @@
+## 2.6.0
+
+- Trainerdashboard um heutige Trainings, verlinkte Anwesenheitsfilter und Trainingseinheiten-Link erweitert.
+- Mobile Karten-/Tabellenumschaltung und Sticky-Aktionen in der Trainer-Anwesenheit ergänzt.
+- Mobile Trainingsliste als Kartenlayout umgesetzt.
+- Athleten- und Trainingsfilter im Backend erweitert.
+- Live-Schemafelder für Trainingseinheiten-Zuordnung und Stornierungsstatus synchronisiert.
+
 ## 2.2.3
 
 - Recovery-Version zur Synchronisierung von Manifest, Updatefeed, Changelog und WebAsset-Version.

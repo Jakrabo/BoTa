@@ -81,6 +81,7 @@ public function getTrainerDashboardConfig(): array
 {
  $defaults=[
   ['key'=>'groups','visible'=>1],
+  ['key'=>'today_trainings','visible'=>1],
   ['key'=>'penalty_summary','visible'=>1],
   ['key'=>'open_penalties','visible'=>1],
   ['key'=>'signals','visible'=>1],

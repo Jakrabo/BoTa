@@ -33,13 +33,15 @@ $groupId=(int)($this->trainingFilter->group_id??0);
  </div>
 </form>
 <?php if($this->trainings):?>
-<div class="table-responsive"><table class="table table-striped"><thead><tr>
-<th><?php echo Text::_('COM_JUGENDTRAINING_FIELD_TRAINING_DATE');?></th><th><?php echo Text::_('COM_JUGENDTRAINING_COLUMN_TITLE');?></th><th><?php echo Text::_('COM_JUGENDTRAINING_TRAINING_GROUP');?></th><th><?php echo Text::_('COM_JUGENDTRAINING_FIELD_LOCATION');?></th><th></th>
+<div class="table-responsive jt-trainertrainings-list"><table class="table table-striped"><thead><tr>
+<th><?php echo Text::_('COM_JUGENDTRAINING_FIELD_TRAINING_DATE');?></th><th><?php echo Text::_('COM_JUGENDTRAINING_COLUMN_TITLE');?></th><th><?php echo Text::_('COM_JUGENDTRAINING_TRAINING_GROUP');?></th><th><?php echo Text::_('COM_JUGENDTRAINING_FIELD_LOCATION');?></th><th><?php echo Text::_('COM_JUGENDTRAINING_PARTICIPANTS');?></th><th><?php echo Text::_('COM_JUGENDTRAINING_COLUMN_STATUS');?></th><th></th>
 </tr></thead><tbody>
 <?php foreach($this->trainings as$t):?><tr>
-<td><?php echo HTMLHelper::_('date',$t->training_date,Text::_('DATE_FORMAT_LC4'));?><?php if($t->start_time):?><div class="small text-muted"><?php echo htmlspecialchars(substr((string)$t->start_time,0,5),ENT_QUOTES,'UTF-8');?> Uhr</div><?php endif;?></td>
-<td><?php echo htmlspecialchars((string)$t->title,ENT_QUOTES,'UTF-8');?></td><td><?php echo htmlspecialchars((string)$t->group_title,ENT_QUOTES,'UTF-8');?></td><td><?php echo htmlspecialchars((string)$t->location,ENT_QUOTES,'UTF-8');?></td>
-<td class="text-nowrap"><a class="btn btn-sm btn-outline-primary" href="<?php echo Route::_('index.php?option=com_jugendtraining&task=trainertraining.edit&id='.(int)$t->id);?>"><?php echo Text::_('COM_JUGENDTRAINING_BUTTON_EDIT');?></a>
+<td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_TRAINING_DATE');?>"><?php echo HTMLHelper::_('date',$t->training_date,Text::_('DATE_FORMAT_LC4'));?><?php if($t->start_time):?><div class="small text-muted"><?php echo htmlspecialchars(substr((string)$t->start_time,0,5),ENT_QUOTES,'UTF-8');?> Uhr</div><?php endif;?></td>
+<td data-label="<?php echo Text::_('COM_JUGENDTRAINING_COLUMN_TITLE');?>"><?php echo htmlspecialchars((string)$t->title,ENT_QUOTES,'UTF-8');?></td><td data-label="<?php echo Text::_('COM_JUGENDTRAINING_TRAINING_GROUP');?>"><?php echo htmlspecialchars((string)$t->group_title,ENT_QUOTES,'UTF-8');?></td><td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_LOCATION');?>"><?php echo htmlspecialchars((string)($t->location_name?:'–'),ENT_QUOTES,'UTF-8');?></td>
+<td data-label="<?php echo Text::_('COM_JUGENDTRAINING_PARTICIPANTS');?>"><?php echo (int)$t->attendance_total; ?> / <?php echo (int)$t->participant_total; ?></td>
+<td data-label="<?php echo Text::_('COM_JUGENDTRAINING_COLUMN_STATUS');?>"><span class="badge text-bg-<?php echo (int)($t->cancelled??0)===1?'danger':((int)$t->published===1?'success':'secondary'); ?>"><?php echo Text::_((int)($t->cancelled??0)===1?'COM_JUGENDTRAINING_STATUS_CANCELLED':((int)$t->published===1?'COM_JUGENDTRAINING_STATUS_PLANNED':'COM_JUGENDTRAINING_STATUS_UNPUBLISHED')); ?></span></td>
+<td class="text-nowrap jt-training-actions"><a class="btn btn-sm btn-outline-primary" href="<?php echo Route::_('index.php?option=com_jugendtraining&view=trainertraining&layout=edit&id='.(int)$t->id);?>"><?php echo Text::_('COM_JUGENDTRAINING_BUTTON_EDIT');?></a>
 <a class="btn btn-sm btn-outline-danger" onclick="return confirm('<?php echo Text::_('COM_JUGENDTRAINING_CONFIRM_DELETE_TRAINING');?>');" href="<?php echo Route::_('index.php?option=com_jugendtraining&task=trainertraining.delete&id='.(int)$t->id.'&'.Session::getFormToken().'=1');?>"><?php echo Text::_('COM_JUGENDTRAINING_BUTTON_DELETE');?></a></td>
 </tr><?php endforeach;?></tbody></table></div>
 <?php else:?><div class="alert alert-info"><?php echo Text::_('COM_JUGENDTRAINING_NO_TRAININGS_FILTER');?></div><?php endif;?>

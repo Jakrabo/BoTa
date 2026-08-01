@@ -19,10 +19,18 @@ final class TrainertrainingsModel extends TrainerModel
         catch(\Throwable){$today=new \DateTimeImmutable('today');}
 
         $db=$this->getDatabase();
-        $q=$db->getQuery(true)->select(['s.*','g.title group_title'])
+        $q=$db->getQuery(true)->select([
+                's.*','g.title group_title','COALESCE(l.name,s.location) location_name',
+                'COUNT(DISTINCT CASE WHEN athlete.published=1 THEN athlete.id END) participant_total',
+                'COUNT(DISTINCT CASE WHEN attendance.status IS NOT NULL THEN attendance.athlete_id END) attendance_total'
+            ])
             ->from($db->quoteName('#__jt_training_sessions','s'))
             ->leftJoin($db->quoteName('#__jt_training_groups','g').' ON g.id=s.training_group_id')
+            ->leftJoin($db->quoteName('#__jt_training_locations','l').' ON l.id=s.location_id')
             ->leftJoin($db->quoteName('#__jt_training_group_trainers','gt').' ON gt.group_id=s.training_group_id')
+            ->leftJoin($db->quoteName('#__jt_training_group_athletes','group_athlete').' ON group_athlete.group_id=s.training_group_id')
+            ->leftJoin($db->quoteName('#__jt_athletes','athlete').' ON athlete.id=group_athlete.athlete_id')
+            ->leftJoin($db->quoteName('#__jt_attendance','attendance').' ON attendance.training_session_id=s.id AND attendance.athlete_id=athlete.id')
             ->where('(gt.user_id='.$uid.' OR s.trainer_user_id='.$uid.')');
 
         if($groupId>0){

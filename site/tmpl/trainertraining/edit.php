@@ -13,29 +13,33 @@ $wa->useScript('keepalive')
     ->useStyle('com_jugendtraining.site');
 
 $statusOptions = [
-    '' => [
-        'label' => Text::_('COM_JUGENDTRAINING_ATTENDANCE_NOT_RECORDED'),
-        'icon' => '○',
-    ],
     'present' => [
         'label' => Text::_('COM_JUGENDTRAINING_ATTENDANCE_PRESENT'),
-        'icon' => '✓',
-    ],
-    'late' => [
-        'label' => Text::_('COM_JUGENDTRAINING_ATTENDANCE_LATE'),
-        'icon' => '◷',
-    ],
-    'excused' => [
-        'label' => Text::_('COM_JUGENDTRAINING_ATTENDANCE_EXCUSED'),
-        'icon' => 'i',
+        'icon' => '✅',
     ],
     'absent' => [
         'label' => Text::_('COM_JUGENDTRAINING_ATTENDANCE_ABSENT'),
-        'icon' => '×',
+        'icon' => '❌',
+    ],
+    'late' => [
+        'label' => Text::_('COM_JUGENDTRAINING_ATTENDANCE_LATE'),
+        'icon' => '⏰',
+    ],
+    'excused' => [
+        'label' => Text::_('COM_JUGENDTRAINING_ATTENDANCE_EXCUSED'),
+        'icon' => '☝️',
+    ],
+    '' => [
+        'label' => Text::_('COM_JUGENDTRAINING_ATTENDANCE_NOT_RECORDED'),
+        'icon' => '◯',
     ],
 ];
 
 $tokenName = Factory::getApplication()->getSession()->getFormToken();
+$requestedFilter = Factory::getApplication()->getInput()->getCmd('attendance_filter', 'all');
+$allowedFilters = ['all', 'open', 'present', 'excused', 'late', 'absent'];
+$activeFilter = in_array($requestedFilter, $allowedFilters, true) ? $requestedFilter : 'all';
+$returnToken = Factory::getApplication()->getInput()->get('return', '', 'BASE64');
 $ajaxUrl = Route::_(
     'index.php?option=com_jugendtraining&task=trainertraining.saveAttendance&format=json',
     false
@@ -94,7 +98,8 @@ $ajaxUrl = Route::_(
             </div>
           <?php else : ?>
             <div class="jt-attendance-toolbar mb-4">
-              <div class="d-grid d-sm-flex gap-2">
+              <div class="d-grid d-sm-flex gap-2 justify-content-between">
+               <div class="d-grid d-sm-flex gap-2">
                 <button
                   type="button"
                   class="btn btn-success jt-set-all"
@@ -109,6 +114,11 @@ $ajaxUrl = Route::_(
                 >
                   ○ <?php echo Text::_('COM_JUGENDTRAINING_CLEAR_ATTENDANCE'); ?>
                 </button>
+               </div>
+               <div class="btn-group" role="group" aria-label="<?php echo Text::_('COM_JUGENDTRAINING_VIEW_MODE'); ?>">
+                <button type="button" class="btn btn-sm btn-primary jt-view-mode" data-view-mode="cards"><?php echo Text::_('COM_JUGENDTRAINING_CARD_VIEW'); ?></button>
+                <button type="button" class="btn btn-sm btn-outline-secondary jt-view-mode" data-view-mode="table"><?php echo Text::_('COM_JUGENDTRAINING_TABLE_VIEW'); ?></button>
+               </div>
               </div>
 
               <div class="jt-attendance-filters mt-3" role="group" aria-label="<?php echo Text::_('COM_JUGENDTRAINING_ATTENDANCE_FILTER'); ?>">
@@ -118,15 +128,14 @@ $ajaxUrl = Route::_(
                 <button type="button" class="btn btn-sm btn-outline-secondary jt-filter" data-filter="open">
                   <?php echo Text::_('COM_JUGENDTRAINING_FILTER_OPEN'); ?>
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-secondary jt-filter" data-filter="absent">
-                  <?php echo Text::_('COM_JUGENDTRAINING_FILTER_MISSING'); ?>
-                </button>
+                <?php foreach (['present','excused','late','absent'] as $filterStatus) : ?><button type="button" class="btn btn-sm btn-outline-secondary jt-filter" data-filter="<?php echo $filterStatus; ?>"><?php echo $statusOptions[$filterStatus]['icon']; ?> <?php echo $statusOptions[$filterStatus]['label']; ?></button><?php endforeach; ?>
               </div>
             </div>
 
             <div class="jt-save-state" aria-live="polite"></div>
 
-            <div class="jt-attendance-cards">
+            <div class="jt-attendance-table-head" aria-hidden="true"><span><?php echo Text::_('COM_JUGENDTRAINING_NAME'); ?></span><span><?php echo Text::_('COM_JUGENDTRAINING_ATTENDANCE_STATUS'); ?></span></div>
+            <div class="jt-attendance-cards" data-active-filter="<?php echo htmlspecialchars($activeFilter,ENT_QUOTES,'UTF-8'); ?>">
               <?php foreach ($this->athletes as $athlete) :
                   $athleteId = (int) $athlete['id'];
                   $entry = $this->attendance[$athleteId] ?? [
@@ -218,7 +227,7 @@ $ajaxUrl = Route::_(
     </div>
   </div>
 
-  <div class="d-flex gap-2 mt-4">
+  <div class="jt-sticky-actions d-flex gap-2 mt-4">
     <button
       type="button"
       class="btn btn-primary"
@@ -233,9 +242,11 @@ $ajaxUrl = Route::_(
     >
       <?php echo Text::_('COM_JUGENDTRAINING_BUTTON_CANCEL'); ?>
     </button>
+    <?php if ($this->item->id) : ?><a class="btn btn-danger ms-auto" onclick="return confirm('<?php echo Text::_('COM_JUGENDTRAINING_CONFIRM_DELETE_TRAINING'); ?>');" href="<?php echo Route::_('index.php?option=com_jugendtraining&task=trainertraining.delete&id='.(int)$this->item->id.'&return='.rawurlencode($returnToken).'&'.$tokenName.'=1'); ?>"><?php echo Text::_('COM_JUGENDTRAINING_BUTTON_DELETE'); ?></a><?php endif; ?>
   </div>
 
   <input type="hidden" name="task" value="">
+  <input type="hidden" name="return" value="<?php echo htmlspecialchars($returnToken,ENT_QUOTES,'UTF-8'); ?>">
   <?php echo HTMLHelper::_('form.token'); ?>
 </form>
 
@@ -246,6 +257,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const sessionId = <?php echo (int) $this->item->id; ?>;
   const saveState = document.querySelector('.jt-save-state');
   const pendingTimers = new Map();
+  const attendanceContainer = document.querySelector('.jt-attendance-cards');
+  const initialFilter = attendanceContainer?.dataset.activeFilter || 'all';
 
   const setGlobalState = (message, type = '') => {
     if (!saveState) {
@@ -416,13 +429,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (filter === 'open') {
           visible = status === 'empty';
-        } else if (filter === 'absent') {
-          visible = ['absent', 'excused', 'late'].includes(status);
+        } else if (filter !== 'all') {
+          visible = status === filter;
         }
 
         card.hidden = !visible;
       });
     });
   });
+
+  const applyFilter = (filter) => {
+    const button = document.querySelector('.jt-filter[data-filter="' + filter + '"]');
+    if (button) button.click();
+  };
+
+  document.querySelectorAll('.jt-view-mode').forEach((button) => {
+    button.addEventListener('click', () => {
+      const tableMode = button.dataset.viewMode === 'table';
+      attendanceContainer?.classList.toggle('is-table-view', tableMode);
+      document.querySelector('.jt-attendance-table-head')?.classList.toggle('is-visible', tableMode);
+      document.querySelectorAll('.jt-view-mode').forEach((item) => {
+        const active = item === button;
+        item.classList.toggle('btn-primary', active);
+        item.classList.toggle('btn-outline-secondary', !active);
+      });
+      try {
+        window.localStorage.setItem('botaAttendanceView', tableMode ? 'table' : 'cards');
+      } catch (error) {
+        // The selected view still works when browser storage is unavailable.
+      }
+    });
+  });
+
+  try {
+    if (window.localStorage.getItem('botaAttendanceView') === 'table') {
+      document.querySelector('.jt-view-mode[data-view-mode="table"]')?.click();
+    }
+  } catch (error) {
+    // Use the default card view when browser storage is unavailable.
+  }
+
+  applyFilter(initialFilter);
 });
 </script>

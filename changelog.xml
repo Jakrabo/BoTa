@@ -3,6 +3,20 @@
   <changelog>
     <element>com_jugendtraining</element>
     <type>component</type>
+    <version>2.6.0</version>
+    <new>
+      <item>Trainerdashboard zeigt heutige Trainings mit filterbaren Anwesenheitszahlen.</item>
+      <item>Mobile Karten- und Tabellenansichten für Trainertrainings.</item>
+      <item>Erweiterte Backendfilter für Athleten und Trainings.</item>
+    </new>
+    <fix>
+      <item>Dashboard-Strafregister berücksichtigt ausschließlich offene Strafen.</item>
+      <item>Trainingsstornierungen werden in Listen und Dashboardauswertungen berücksichtigt.</item>
+    </fix>
+  </changelog>
+  <changelog>
+    <element>com_jugendtraining</element>
+    <type>component</type>
     <version>2.2.3</version>
     <fix>
       <item>Manifest, Updatefeed, Changelog und WebAsset-Version wurden synchronisiert.</item>

@@ -27,14 +27,14 @@ final class TrainertrainingController extends FormController
     {
         Session::checkToken() or jexit('JINVALID_TOKEN');
         $result = parent::save($key, $urlVar);
-        $this->setRedirect(Route::_('index.php?option=com_jugendtraining&view=trainertrainings', false));
+        $this->setRedirect($this->getReturnUrl());
         return $result;
     }
 
     public function cancel($key = null)
     {
         $result = parent::cancel($key);
-        $this->setRedirect(Route::_('index.php?option=com_jugendtraining&view=trainertrainings', false));
+        $this->setRedirect($this->getReturnUrl());
         return $result;
     }
 
@@ -82,6 +82,23 @@ final class TrainertrainingController extends FormController
             Factory::getApplication()->enqueueMessage($model->getError(), 'error');
         }
 
-        $this->setRedirect(Route::_('index.php?option=com_jugendtraining&view=trainertrainings', false));
+        $this->setRedirect($this->getReturnUrl());
+    }
+
+    private function getReturnUrl(): string
+    {
+        $encoded = Factory::getApplication()->getInput()->get('return', '', 'BASE64');
+        $decoded = $encoded !== '' ? base64_decode($encoded, true) : false;
+
+        if (
+            is_string($decoded)
+            && str_starts_with($decoded, 'index.php?option=com_jugendtraining')
+            && !str_contains($decoded, "\r")
+            && !str_contains($decoded, "\n")
+        ) {
+            return Route::_($decoded, false);
+        }
+
+        return Route::_('index.php?option=com_jugendtraining&view=trainertrainings', false);
     }
 }

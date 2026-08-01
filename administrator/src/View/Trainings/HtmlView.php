@@ -13,12 +13,16 @@ final class HtmlView extends BaseHtmlView
     public $items;
     public $pagination;
     public $state;
+    public array $trainingGroups = [];
+    public array $trainingLocations = [];
 
     public function display($tpl = null): void
     {
         $this->items = $this->get('Items');
         $this->pagination = $this->get('Pagination');
         $this->state = $this->get('State');
+        $this->trainingGroups = (array) ($this->get('TrainingGroups') ?? []);
+        $this->trainingLocations = (array) ($this->get('TrainingLocations') ?? []);
 
         ToolbarHelper::title(Text::_('COM_JUGENDTRAINING_TRAININGS'), 'calendar');
         ToolbarHelper::addNew('training.add');

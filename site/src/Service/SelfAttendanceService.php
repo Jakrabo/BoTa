@@ -85,6 +85,7 @@ final class SelfAttendanceService
             ->leftJoin('#__jt_training_groups g ON g.id=s.training_group_id')
             ->leftJoin('#__jt_attendance a ON a.training_session_id=s.id AND a.athlete_id='.(int)$athlete->id)
             ->where('s.published=1')
+            ->where('s.cancelled=0')
             ->where('s.training_date>='.$this->db->quote($today))
             ->order('s.training_date ASC,s.start_time ASC,s.id ASC');
 
@@ -223,6 +224,7 @@ final class SelfAttendanceService
             ->leftJoin('#__jt_training_groups g ON g.id=s.training_group_id')
             ->where('s.id='.$sessionId)
             ->where('s.published=1');
+        $q->where('s.cancelled=0');
         $this->db->setQuery($q,0,1);
         return$this->db->loadObject()?:null;
     }
