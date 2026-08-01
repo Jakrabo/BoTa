@@ -1799,3 +1799,73 @@ html[data-bota-theme-resolved="light"] .jt-performance-chart text {
   min-width:86px;
   font-size:2.25rem;
 }
+
+/* BoTa 2.6.0 AP1 dark-mode completion.
+   Kept after the light/dark bridge so component tiles win the cascade. */
+html[data-bota-theme-resolved="dark"] .jt-dashboard-block .card,
+html[data-bota-theme-resolved="dark"] .jt-today-training-card,
+html[data-bota-theme-resolved="dark"] .jt-attendance-card,
+html[data-bota-theme-resolved="dark"] .jt-trainertrainings-list tr {
+  background: #1b1f23 !important;
+  color: #e8eaed !important;
+  border-color: #343a40 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-attendance-toolbar,
+html[data-bota-theme-resolved="dark"] .jt-sticky-actions,
+html[data-bota-theme-resolved="dark"] .jt-attendance-table-head {
+  background: rgba(27, 31, 35, .97) !important;
+  color: #e8eaed !important;
+  border-color: #343a40 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-status-button {
+  background: #24292f !important;
+  color: #e8eaed !important;
+  border-color: #4b5560 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-status-icon,
+html[data-bota-theme-resolved="dark"] .jt-athlete-avatar {
+  background: #343a40 !important;
+  color: #e8eaed !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-status-present.is-active {
+  background: #123524 !important;
+  color: #86efac !important;
+  border-color: #22c55e !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-status-absent.is-active {
+  background: #451a1a !important;
+  color: #fca5a5 !important;
+  border-color: #ef4444 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-status-late.is-active {
+  background: #422f0b !important;
+  color: #fcd34d !important;
+  border-color: #f59e0b !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-status-excused.is-active {
+  background: #172554 !important;
+  color: #93c5fd !important;
+  border-color: #3b82f6 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-status-empty.is-active {
+  background: #343a40 !important;
+  color: #e8eaed !important;
+  border-color: #94a3b8 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-comment-details {
+  border-color: #343a40 !important;
+}
+
+html[data-bota-theme-resolved="dark"] .jt-comment-details summary,
+html[data-bota-theme-resolved="dark"] .jt-athlete-meta {
+  color: #aab0b6 !important;
+}

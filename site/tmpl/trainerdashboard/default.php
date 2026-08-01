@@ -18,7 +18,7 @@
    'absent'=>['COM_JUGENDTRAINING_ATTENDANCE_ABSENT',(int)$training->absent_total,'danger'],
   ];
  ?>
-  <div class="col-12 col-xl-6"><article class="border rounded p-3 h-100">
+  <div class="col-12 col-xl-6"><article class="jt-today-training-card border rounded p-3 h-100">
    <div class="d-flex flex-wrap justify-content-between gap-2 mb-3">
     <div><h3 class="h5 mb-1"><?php echo htmlspecialchars((string)$training->group_title,ENT_QUOTES,'UTF-8'); ?></h3>
      <div class="text-muted small"><?php echo htmlspecialchars((string)($training->location?:'–'),ENT_QUOTES,'UTF-8'); ?> · <?php echo htmlspecialchars(substr((string)$training->start_time,0,5),ENT_QUOTES,'UTF-8'); ?><?php if($training->end_time):?>–<?php echo htmlspecialchars(substr((string)$training->end_time,0,5),ENT_QUOTES,'UTF-8'); ?><?php endif; ?></div>

@@ -5,6 +5,7 @@
 - Mobile Trainingsliste als Kartenlayout umgesetzt.
 - Athleten- und Trainingsfilter im Backend erweitert.
 - Live-Schemafelder für Trainingseinheiten-Zuordnung und Stornierungsstatus synchronisiert.
+- Darkmode-Oberflächen der Dashboard-, Anwesenheits- und mobilen Trainingskacheln vervollständigt.
 
 ## 2.2.3
 
