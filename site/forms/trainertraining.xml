@@ -9,7 +9,9 @@
     <field name="training_date" type="calendar" label="COM_JUGENDTRAINING_FIELD_TRAINING_DATE" required="true" format="%Y-%m-%d" showtime="false" filter="raw" />
     <field name="start_time" type="time" label="COM_JUGENDTRAINING_FIELD_START_TIME" filter="raw" />
     <field name="end_time" type="time" label="COM_JUGENDTRAINING_FIELD_END_TIME" filter="raw" />
-    <field name="location" type="text" label="COM_JUGENDTRAINING_FIELD_LOCATION" maxlength="190" />
+    <field name="location_id" type="list" label="COM_JUGENDTRAINING_FIELD_TRAINING_LOCATION" required="true">
+      <option value="">COM_JUGENDTRAINING_SELECT_TRAINING_LOCATION</option>
+    </field>
     <field name="notes" type="textarea" label="COM_JUGENDTRAINING_FIELD_TRAINING_NOTES" rows="5" />
     <field name="create_series" type="radio" label="COM_JUGENDTRAINING_FIELD_CREATE_SERIES" default="0" layout="joomla.form.field.radio.switcher">
       <option value="0">COM_JUGENDTRAINING_NO</option><option value="1">COM_JUGENDTRAINING_YES</option>

@@ -61,6 +61,7 @@ $activeTab = $this->result ? 'csv-import' : 'csv-import';
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#dashboard-athlete" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_ATHLETE_DASHBOARD'); ?></button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#dashboard-trainer" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_TRAINER_DASHBOARD'); ?></button></li>
 <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#self-attendance" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_SELF_ATTENDANCE'); ?></button></li>
+<li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#self-checkin" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_SELF_CHECKIN'); ?></button></li>
 <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#calendar-config" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_CALENDAR'); ?></button></li>
 <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#language" type="button"><?php echo Text::_('COM_JUGENDTRAINING_CONFIG_TAB_LANGUAGE'); ?></button></li>
     </ul>
@@ -470,6 +471,21 @@ $dashboardLabels=[
   </div>
   <button class="btn btn-success mt-3" type="submit"><?php echo Text::_('JSAVE');?></button>
   <?php echo HTMLHelper::_('form.token');?>
+ </form>
+</div>
+
+<div class="tab-pane fade" id="self-checkin" role="tabpanel">
+ <div class="alert alert-info"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_CONFIG_INTRO');?></div>
+ <form action="<?php echo Route::_('index.php?option=com_jugendtraining&task=import.saveSelfCheckinSettings');?>" method="post">
+  <div class="card"><div class="card-body">
+   <div class="form-check form-switch mb-4"><input type="hidden" name="jform[enabled]" value="0"><input class="form-check-input" type="checkbox" id="self-checkin-enabled" name="jform[enabled]" value="1" <?php echo !empty($this->selfCheckinSettings['enabled'])?'checked':'';?>><label class="form-check-label" for="self-checkin-enabled"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_ENABLE');?></label></div>
+   <div class="row g-3">
+   <div class="col-md-4"><label class="form-label" for="self-checkin-radius"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_RADIUS');?></label><div class="input-group"><input class="form-control" type="number" id="self-checkin-radius" name="jform[radius_m]" min="10" max="5000" value="<?php echo (int)($this->selfCheckinSettings['radius_m']??100);?>"><span class="input-group-text">m</span></div><div class="form-text"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_RADIUS_HELP');?></div></div>
+   <div class="col-md-4"><label class="form-label" for="self-checkin-lead"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_LEAD_MINUTES');?></label><div class="input-group"><input class="form-control" type="number" id="self-checkin-lead" name="jform[lead_minutes]" min="0" max="1440" value="<?php echo (int)($this->selfCheckinSettings['lead_minutes']??60);?>"><span class="input-group-text">min</span></div><div class="form-text"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_LEAD_MINUTES_HELP');?></div></div>
+   <div class="col-md-4"><label class="form-label" for="self-checkin-fallback"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_FALLBACK_DURATION');?></label><div class="input-group"><input class="form-control" type="number" id="self-checkin-fallback" name="jform[fallback_duration_minutes]" min="1" max="1440" value="<?php echo (int)($this->selfCheckinSettings['fallback_duration_minutes']??120);?>"><span class="input-group-text">min</span></div><div class="form-text"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_FALLBACK_DURATION_HELP');?></div></div>
+  </div>
+  </div></div>
+  <button class="btn btn-success mt-3" type="submit"><?php echo Text::_('JSAVE');?></button><?php echo HTMLHelper::_('form.token');?>
  </form>
 </div>
 <div class="tab-pane fade" id="calendar-config" role="tabpanel">

@@ -1,0 +1,14 @@
+<?php
+\defined('_JEXEC') or die;use Joomla\CMS\HTML\HTMLHelper;use Joomla\CMS\Language\Text;use Joomla\CMS\Router\Route;use Joomla\CMS\Uri\Uri;
+
+?>
+<div class="jt-selfcheckin"><h1><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_TITLE');?></h1><?php if(!$this->settings->enabled):?><div class="alert alert-info"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_DISABLED');?></div><?php elseif(!$this->sessions):?><div class="alert alert-info"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_NO_SESSION');?></div><?php else:?><div class="card"><div class="card-body"><p class="text-muted"><?php echo Text::sprintf('COM_JUGENDTRAINING_SELF_CHECKIN_PRIVACY',(int)$this->settings->radius_m);?></p><form id="jt-selfcheckin-form" action="<?php echo Route::_('index.php?option=com_jugendtraining&task=selfcheckin.checkin');?>" method="post"><div class="mb-3"><label class="form-label" for="jt-selfcheckin-session"><?php echo Text::_('COM_JUGENDTRAINING_TRAINING');?></label><select class="form-select" id="jt-selfcheckin-session" name="session_id" required><?php foreach($this->sessions as$i=>$s):?><option value="<?php echo(int)$s->id;?>" <?php echo$i===0?'selected':'';?>><?php echo htmlspecialchars(HTMLHelper::_('date',$s->training_date,Text::_('DATE_FORMAT_LC4')).' · '.substr((string)$s->start_time,0,5).' · '.$s->title.' · '.$s->location_name,ENT_QUOTES,'UTF-8');?></option><?php endforeach;?></select></div><input type="hidden" id="jt-selfcheckin-latitude" name="latitude"><input type="hidden" id="jt-selfcheckin-longitude" name="longitude"><button class="btn btn-primary" type="button" id="jt-selfcheckin-button"
+ data-unavailable="<?php echo htmlspecialchars(Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_GEOLOCATION_UNAVAILABLE'),ENT_QUOTES,'UTF-8');?>"
+ data-locating="<?php echo htmlspecialchars(Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_LOCATING'),ENT_QUOTES,'UTF-8');?>"
+ data-error="<?php echo htmlspecialchars(Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_LOCATION_ERROR'),ENT_QUOTES,'UTF-8');?>"
+ data-insecure="<?php echo htmlspecialchars(Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_HTTPS_REQUIRED'),ENT_QUOTES,'UTF-8');?>"
+ data-denied="<?php echo htmlspecialchars(Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_PERMISSION_DENIED'),ENT_QUOTES,'UTF-8');?>"
+ data-position-unavailable="<?php echo htmlspecialchars(Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_POSITION_UNAVAILABLE'),ENT_QUOTES,'UTF-8');?>"
+ data-timeout="<?php echo htmlspecialchars(Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_TIMEOUT'),ENT_QUOTES,'UTF-8');?>"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_GPS_BUTTON');?></button><div id="jt-selfcheckin-status" class="small mt-3" role="status" aria-live="polite"></div><?php echo HTMLHelper::_('form.token');?></form></div></div><?php endif;?></div>
+
+<script src="<?php echo htmlspecialchars(Uri::root(true) . '/media/com_jugendtraining/js/selfcheckin.js?v=2.2.2', ENT_QUOTES, 'UTF-8'); ?>" defer></script>

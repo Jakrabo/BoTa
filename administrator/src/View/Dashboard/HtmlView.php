@@ -6,6 +6,7 @@ namespace Jugendtraining\Component\Jugendtraining\Administrator\View\Dashboard;
 
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Toolbar\ToolbarHelper;
+use Joomla\CMS\Language\Text;
 
 final class HtmlView extends BaseHtmlView
 {
@@ -21,7 +22,7 @@ final class HtmlView extends BaseHtmlView
         $this->recentAthletes = $this->get('RecentAthletes');
         $this->upcomingTrainings = $this->get('UpcomingTrainings');
 
-        ToolbarHelper::title('COM_JUGENDTRAINING_DASHBOARD', 'home');
+        ToolbarHelper::title(Text::_('COM_JUGENDTRAINING_DASHBOARD'), 'home');
         ToolbarHelper::preferences('com_jugendtraining');
 
         parent::display($tpl);

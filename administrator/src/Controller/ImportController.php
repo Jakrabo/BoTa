@@ -4,6 +4,7 @@ namespace Jugendtraining\Component\Jugendtraining\Administrator\Controller;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Controller\BaseController;
 use Joomla\CMS\Session\Session;
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Jugendtraining\Component\Jugendtraining\Administrator\Service\CsvImportService;
 use Jugendtraining\Component\Jugendtraining\Site\Service\AccessService;
@@ -49,6 +50,14 @@ public function saveSelfCancelSettings():void
   $app->enqueueMessage('Abmeldeeinstellungen gespeichert.','success');
  }catch(\Throwable$e){$app->enqueueMessage($e->getMessage(),'error');}
  $this->setRedirect(Route::_('index.php?option=com_jugendtraining&view=import#self-attendance',false));
+}
+
+public function saveSelfCheckinSettings():void
+{
+ Session::checkToken() or jexit('JINVALID_TOKEN');$this->assertTrainer();$app=Factory::getApplication();
+ try{$this->getModel('Import')->saveSelfCheckinSettings($app->input->get('jform',[],'array'));$app->enqueueMessage(Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_SETTINGS_SAVED'),'success');}
+ catch(\Throwable$e){$app->enqueueMessage($e->getMessage(),'error');}
+ $this->setRedirect(Route::_('index.php?option=com_jugendtraining&view=import#self-checkin',false));
 }
 
 public function saveCalendarCategories():void

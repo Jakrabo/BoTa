@@ -27,6 +27,8 @@ final class ProgramModel extends AdminModel {
     $exerciseIds=array_values(array_unique(array_filter(array_map('intval',(array)($data['exercise_ids']??[])))));
     $athleteIds=array_values(array_unique(array_filter(array_map('intval',(array)($data['athlete_ids']??[])))));
     $dueDate=!empty($data['due_date'])?(string)$data['due_date']:null;
+    $existingProgramId=(int)($data['id']??0);
+    $previousAthleteIds=$existingProgramId>0?array_values(array_unique($this->getLinkedIds('#__jt_athlete_programs','athlete_id','program_id',$existingProgramId,'active = 1'))):[];
     unset($data['exercise_ids'],$data['athlete_ids'],$data['due_date']);
     if(!parent::save($data))return false;
     $programId=(int)$this->getState($this->getName().'.id');
@@ -35,14 +37,14 @@ final class ProgramModel extends AdminModel {
     try{
       $q=$db->getQuery(true)->delete($db->quoteName('#__jt_program_exercises'))->where('program_id='.(int)$programId);$db->setQuery($q)->execute();
       foreach($exerciseIds as $i=>$eid){$q=$db->getQuery(true)->insert($db->quoteName('#__jt_program_exercises'))->columns(['program_id','exercise_id','ordering'])->values($programId.','.$eid.','.(int)$i);$db->setQuery($q)->execute();}
-      $q=$db->getQuery(true)->update($db->quoteName('#__jt_athlete_programs'))->set('active=0')->where('program_id='.(int)$programId);$db->setQuery($q)->execute();
+
+      $removed=array_values(array_diff($previousAthleteIds,$athleteIds));
+      if($removed){$q=$db->getQuery(true)->update($db->quoteName('#__jt_athlete_programs'))->set('active=0')->where('program_id='.(int)$programId)->where('athlete_id IN ('.implode(',',array_map('intval',$removed)).')');$db->setQuery($q)->execute();}
+
+      $added=array_values(array_diff($athleteIds,$previousAthleteIds));
       $uid=(int)Factory::getApplication()->getIdentity()->id;$now=$db->quote(Factory::getDate()->toSql());$due=$dueDate?$db->quote($dueDate):'NULL';
-      foreach($athleteIds as $aid){
-        $q=$db->getQuery(true)->select('id')->from($db->quoteName('#__jt_athlete_programs'))->where('program_id='.(int)$programId)->where('athlete_id='.(int)$aid);$db->setQuery($q);$existing=(int)$db->loadResult();
-        if($existing){$q=$db->getQuery(true)->update($db->quoteName('#__jt_athlete_programs'))->set(['active=1','due_date='.$due])->where('id='.$existing);}
-        else{$q=$db->getQuery(true)->insert($db->quoteName('#__jt_athlete_programs'))->columns(['athlete_id','program_id','assigned_by','assigned_at','due_date','active'])->values($aid.','.$programId.','.$uid.','.$now.','.$due.',1');}
-        $db->setQuery($q)->execute();
-      }
+      foreach($added as $aid){$q=$db->getQuery(true)->insert($db->quoteName('#__jt_athlete_programs'))->columns(['athlete_id','program_id','assigned_by','assigned_at','due_date','active','completed_at'])->values((int)$aid.','.$programId.','.$uid.','.$now.','.$due.',1,NULL');$db->setQuery($q)->execute();}
+
       $db->transactionCommit();
     }catch(\Throwable $e){$db->transactionRollback();$this->setError($e->getMessage());return false;}
     return true;

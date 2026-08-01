@@ -1645,3 +1645,37 @@ html[data-bota-theme-resolved="light"] .jt-performance-chart text {
   fill: #475569 !important;
   color: #475569 !important;
 }
+
+.jt-badge-fallback{
+  width:72px;
+  height:72px;
+  min-width:72px;
+  border-radius:50%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2rem;
+  font-weight:700;
+  line-height:1;
+  border:2px solid currentColor;
+  opacity:.72;
+}
+.jt-badge-fallback--sm{
+  width:48px;
+  height:48px;
+  min-width:48px;
+  font-size:1.35rem;
+}
+.jt-badge-fallback--xs{
+  width:44px;
+  height:44px;
+  min-width:44px;
+  font-size:1.2rem;
+}
+.jt-badge-fallback--lg{
+  width:86px;
+  height:86px;
+  min-width:86px;
+  font-size:2.25rem;
+}
+

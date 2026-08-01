@@ -17,6 +17,7 @@ final class HtmlView extends BaseHtmlView {
  public array $calendarCategoryMap=[];
  public array $myUpcomingTrainingSessions=[];
  public object $selfCancelSettings;
+ public object $selfCheckinSettings;
  public object $myDiaryStatistics;
  public array $athleteDashboardConfig=[];
  public function display($tpl=null):void{
@@ -34,6 +35,7 @@ final class HtmlView extends BaseHtmlView {
   $this->calendarCategoryMap=(array)($this->get('CalendarCategoryMap')??[]);
   $this->myUpcomingTrainingSessions=(array)($this->get('MyUpcomingTrainingSessions')??[]);
   $this->selfCancelSettings=$this->get('SelfCancelSettings')??(object)[];
+  $this->selfCheckinSettings=$this->get('SelfCheckinSettings')??(object)[];
   $this->myDiaryStatistics = $this->get('MyDiaryStatistics') ?? (object)[];
   $this->athleteDashboardConfig=(array)($this->get('AthleteDashboardConfig')??[]);
   parent::display($tpl);

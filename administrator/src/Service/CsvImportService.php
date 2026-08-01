@@ -104,7 +104,7 @@ final class CsvImportService
             'arrows'=>$arrows,'score'=>$score,'average'=>$avg,
             'tens'=>$this->uint($r['tens']??'0','tens',false),
             'xs'=>$this->uint($r['xs']??'0','xs',false),
-            'notes'=>$r['notes']?:null,'verification_status'=>$status,
+            'note'=>$r['notes']?:null,'verification_status'=>$status,
             'verified_by'=>$status==='verified'?$this->userId:0,
             'verified_at'=>$status==='verified'?$now:null,
             'published'=>1,'created'=>$now,'created_by'=>$this->userId,
@@ -125,7 +125,7 @@ final class CsvImportService
             'focus_topic'=>$r['focus_topic']?:null,
             'intensity'=>$this->range($r['intensity']??'',1,5),
             'feeling'=>$this->range($r['feeling']??'',1,5),
-            'bow_setup_id'=>$this->activeSetup($aid),'notes'=>$r['notes']?:null,
+            'bow_setup_id'=>$this->activeSetup($aid),'note'=>$r['notes']?:null,
             'created'=>$now,'created_by'=>$this->userId
         ];
         $this->db->insertObject('#__jt_training_diary',$obj);
@@ -142,7 +142,7 @@ final class CsvImportService
         $obj=(object)[
             'athlete_id'=>$aid,'achievement_id'=>$achievementId,
             'awarded_at'=>$date.' 00:00:00','awarded_by'=>$this->userId,
-            'notes'=>$r['notes']?:null
+            'note'=>$r['notes']?:null
         ];
         try {$this->db->insertObject('#__jt_athlete_achievements',$obj);}
         catch (\Throwable $e) {

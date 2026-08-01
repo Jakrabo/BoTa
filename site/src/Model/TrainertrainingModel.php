@@ -37,6 +37,14 @@ final class TrainertrainingModel extends AdminModel
             foreach ($this->getOwnGroups() as $group) {
                 $field->addOption($group->title, ['value' => (int) $group->id]);
             }
+
+            $locationField = $form->getField('location_id');
+            if ($locationField) {
+                $locationField->addOption('COM_JUGENDTRAINING_SELECT_TRAINING_LOCATION', ['value' => '']);
+                foreach ($this->getTrainingLocations() as $location) {
+                    $locationField->addOption($location->name, ['value' => (int) $location->id]);
+                }
+            }
         }
 
         return $form;
@@ -58,6 +66,7 @@ final class TrainertrainingModel extends AdminModel
     {
         $userId = (int) Factory::getApplication()->getIdentity()->id;
         $groupId = (int) ($data['training_group_id'] ?? 0);
+        $locationId = (int) ($data['location_id'] ?? 0);
         $id = (int) ($data['id'] ?? 0);
 
         if (!$this->access->isTrainer() || !$this->ownsGroup($groupId)) {
@@ -69,6 +78,13 @@ final class TrainertrainingModel extends AdminModel
             $this->setError('JERROR_ALERTNOAUTHOR');
             return false;
         }
+
+        $location = $this->getTrainingLocation($locationId);
+        if (!$location) {
+            $this->setError('COM_JUGENDTRAINING_ERROR_TRAINING_LOCATION_REQUIRED');
+            return false;
+        }
+        $data['location'] = (string) $location->name;
 
         $createSeries = $id === 0 && (int) ($data['create_series'] ?? 0) === 1;
         $count = max(2, min(100, (int) ($data['series_count'] ?? 10)));
@@ -384,4 +400,23 @@ final class TrainertrainingModel extends AdminModel
         $db->setQuery($q);
         return (int) $db->loadResult() === 1;
     }
+    private function getTrainingLocations(): array
+    {
+        $db=$this->getDatabase();
+        $q=$db->getQuery(true)->select(['id','name'])->from($db->quoteName('#__jt_training_locations'))
+            ->where('published=1')->order('ordering,name');
+        $db->setQuery($q);
+        return $db->loadObjectList();
+    }
+
+    private function getTrainingLocation(int $locationId): ?object
+    {
+        if ($locationId <= 0) return null;
+        $db=$this->getDatabase();
+        $q=$db->getQuery(true)->select(['id','name'])->from($db->quoteName('#__jt_training_locations'))
+            ->where('id=' . $locationId)->where('published=1');
+        $db->setQuery($q,0,1);
+        return $db->loadObject() ?: null;
+    }
+
 }

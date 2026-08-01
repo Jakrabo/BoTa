@@ -99,11 +99,19 @@ final class TrainingModel extends AdminModel
     public function save($data): bool
     {
         $groupId = (int) ($data['training_group_id'] ?? 0);
+        $locationId = (int) ($data['location_id'] ?? 0);
 
         if ($groupId <= 0 || !$this->groupExists($groupId)) {
             $this->setError('COM_JUGENDTRAINING_ERROR_TRAINING_GROUP_REQUIRED');
             return false;
         }
+
+        $location = $this->getTrainingLocation($locationId);
+        if (!$location) {
+            $this->setError('COM_JUGENDTRAINING_ERROR_TRAINING_LOCATION_REQUIRED');
+            return false;
+        }
+        $data['location'] = (string) $location->name;
 
         $db = $this->getDatabase();
         $db->transactionStart();
@@ -300,4 +308,14 @@ final class TrainingModel extends AdminModel
 
         return (int) Factory::getApplication()->getInput()->getInt('training_group_id',0);
     }
+    private function getTrainingLocation(int $locationId): ?object
+    {
+        if ($locationId <= 0) return null;
+        $db = $this->getDatabase();
+        $q = $db->getQuery(true)->select(['id','name'])->from($db->quoteName('#__jt_training_locations'))
+            ->where('id=' . $locationId)->where('published=1');
+        $db->setQuery($q, 0, 1);
+        return $db->loadObject() ?: null;
+    }
+
 }

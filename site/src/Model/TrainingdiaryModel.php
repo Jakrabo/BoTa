@@ -13,7 +13,14 @@ final class TrainingdiaryModel extends AdminModel {
  }
  protected function loadFormData(){
   $item=$this->getItem();if(!empty($item->id)&&!$this->owns((int)$item->id))throw new \RuntimeException('JERROR_ALERTNOAUTHOR',403);
-  if(empty($item->id)&&empty($item->bow_setup_id))$item->bow_setup_id=$this->activeSetup();
+  if(empty($item->id)){
+   if(empty($item->bow_setup_id))$item->bow_setup_id=$this->activeSetup();
+   if(empty($item->training_date)){
+    $timezone=(string)Factory::getApplication()->get('offset','UTC');
+    try{$item->training_date=(new \DateTimeImmutable('now',new \DateTimeZone($timezone?:'UTC')))->format('Y-m-d');}
+    catch(\Throwable){$item->training_date=Factory::getDate()->format('Y-m-d');}
+   }
+  }
   return$item;
  }
  public function save($data):bool{

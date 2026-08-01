@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `#__jt_training_locations`;
 DROP TABLE IF EXISTS `#__jt_calendar_attachments`;
 DROP TABLE IF EXISTS `#__jt_calendar_events`;
 DROP TABLE IF EXISTS `#__jt_penalty_register`;

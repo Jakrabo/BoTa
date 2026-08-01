@@ -50,11 +50,16 @@
         />
 
         <field
-            name="location"
-            type="text"
-            label="COM_JUGENDTRAINING_FIELD_LOCATION"
-            maxlength="190"
-        />
+            name="location_id"
+            type="sql"
+            label="COM_JUGENDTRAINING_FIELD_TRAINING_LOCATION"
+            required="true"
+            query="SELECT id AS value, name AS text FROM #__jt_training_locations WHERE published = 1 ORDER BY ordering, name"
+            key_field="value"
+            value_field="text"
+        >
+            <option value="">COM_JUGENDTRAINING_SELECT_TRAINING_LOCATION</option>
+        </field>
 
         <field
             name="trainer_user_id"

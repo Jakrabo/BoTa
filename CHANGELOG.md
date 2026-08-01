@@ -1,4 +1,42 @@
+## 2.2.2
+- GPS-Check-in-JavaScript wird in der Self-Check-in-View direkt geladen und ist damit nicht mehr von einer möglicherweise veralteten Joomla-WebAsset-Registry abhängig.
+- Behebt den Fall, dass beim Klick auf „Per GPS einchecken“ keinerlei Reaktion erfolgt.
+- Vorhandene HTTPS-, Berechtigungs-, Positions- und Timeout-Fehlermeldungen bleiben erhalten.
+
+## 2.2.1
+- GPS-Check-in robuster angebunden und mit verständlichen Browser-/HTTPS-/Berechtigungsfehlern versehen.
+- Check-in-Vorlauf konfigurierbar (Standard 60 Minuten).
+- Check-in endet bei vorhandener Trainings-Endzeit mit der Endzeit.
+- Ohne Endzeit gilt eine konfigurierbare Check-in-Dauer ab Trainingsbeginn (Standard 120 Minuten).
+
 # Changelog
+
+## 2.2.0
+
+- GPS Self-Check-in für Schützen mit konfigurierbarem Geofencing und ohne Speicherung der GPS-Position.
+- Trainingsorte als neue Stammdaten mit Koordinaten; Trainings referenzieren einen Trainingsort.
+- Trainingsprogramme können demselben Schützen mehrfach als getrennte Aufgaben zugewiesen werden; Fortschritt bleibt je Zuweisung getrennt.
+- Prüfstatus-Fallback für Altdaten und Bereinigung ungültiger/leerer Prüfstatuswerte.
+- Neuinstallationsschema mit bisher fehlenden Feldern synchronisiert.
+- Achievement-CSV-Import korrigiert (`note` statt `notes`).
+
+## 2.1.1 — 2026-07-29
+
+- Namenssortierung in `view=trainerathletes` alphabetisch nach Vorname und Nachname korrigiert
+- fehlende Übersetzungen für Ergebnis-Prüfstatus ergänzt
+- neue Trainingstagebuch-Einträge erhalten automatisch das aktuelle Datum in Joomla-Zeitzone
+- Achievements ohne Bild erhalten ein einheitliches Stern-Fallback im Schützen-, Trainer- und Backendbereich
+
+## 2.1.0 — 2026-07-29
+
+- automatischer Klassenwechsel beim Wechsel des aktuellen Sportjahres
+- Klassen werden anhand von Sportjahr, Geburtsjahr, Geschlecht und den konfigurierten Altersgrenzen neu zugeordnet
+- automatische Klassenumstellung wird je Sportjahr nur einmal ausgeführt und im Audit-Log protokolliert
+- Sportjahresübersicht erhält eine manuelle Funktion zum erneuten Berechnen der Klassen
+- `view=trainertrainings` zeigt standardmäßig die kommenden 14 Tage
+- Filter für Zeitraum und Trainingsgruppe in der Trainer-Trainingsübersicht
+- `view=trainerathletes` erhält sortierbare Spaltenüberschriften
+- Backend-Titel werden explizit übersetzt, damit keine `COM_JUGENDTRAINING_*`-Platzhalter mehr angezeigt werden
 
 ## 2.0.3 — 2026-07-28
 

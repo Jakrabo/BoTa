@@ -4,6 +4,7 @@ namespace Jugendtraining\Component\Jugendtraining\Site\Model;
 use Joomla\CMS\Factory; use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Jugendtraining\Component\Jugendtraining\Site\Service\CalendarService;
 use Jugendtraining\Component\Jugendtraining\Site\Service\SelfAttendanceService;
+use Jugendtraining\Component\Jugendtraining\Site\Service\SelfCheckinService;
 class DashboardModel extends BaseDatabaseModel
 {
  public function getAthlete(): ?object { $user=Factory::getApplication()->getIdentity(); if($user->guest)return null; $db=$this->getDatabase();$q=$db->getQuery(true)->select('a.*,c.name club_name,cl.name class_name,t.name trainer_name')->from($db->quoteName('#__jt_athletes','a'))->leftJoin($db->quoteName('#__jt_clubs','c').' ON c.id=a.club_id')->leftJoin($db->quoteName('#__jt_classes','cl').' ON cl.id=a.class_id')->leftJoin($db->quoteName('#__users','t').' ON t.id=a.trainer_user_id')->where('a.user_id='.(int)$user->id)->where('a.published=1');$db->setQuery($q,0,1);return $db->loadObject() ?: null; }

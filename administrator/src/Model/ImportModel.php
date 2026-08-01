@@ -159,6 +159,27 @@ public function saveSelfCancelSettings(array$data):void
  $this->upsert('self_cancel_late_set_excused',(string)$lateSetExcused);
 }
 
+public function getSelfCheckinSettings(): array
+{
+ $defaults=['enabled'=>0,'radius_m'=>100,'lead_minutes'=>60,'fallback_duration_minutes'=>120];
+ $db=$this->getDatabase();$keys=['self_checkin_enabled','self_checkin_radius_m','self_checkin_lead_minutes','self_checkin_fallback_duration_minutes'];
+ $q=$db->getQuery(true)->select(['setting_key','setting_value'])->from('#__jt_settings')->where('setting_key IN ('.implode(',',array_map([$db,'quote'],$keys)).')');
+ $db->setQuery($q);$rows=$db->loadAssocList('setting_key','setting_value');
+ return['enabled'=>(int)($rows['self_checkin_enabled']??$defaults['enabled']),'radius_m'=>max(10,min(5000,(int)($rows['self_checkin_radius_m']??$defaults['radius_m']))),'lead_minutes'=>max(0,min(1440,(int)($rows['self_checkin_lead_minutes']??$defaults['lead_minutes']))),'fallback_duration_minutes'=>max(1,min(1440,(int)($rows['self_checkin_fallback_duration_minutes']??$defaults['fallback_duration_minutes'])))];
+}
+
+public function saveSelfCheckinSettings(array$data):void
+{
+ $enabled=!empty($data['enabled'])?1:0;
+ $radius=max(10,min(5000,(int)($data['radius_m']??100)));
+ $lead=max(0,min(1440,(int)($data['lead_minutes']??60)));
+ $fallback=max(1,min(1440,(int)($data['fallback_duration_minutes']??120)));
+ $this->upsert('self_checkin_enabled',(string)$enabled);
+ $this->upsert('self_checkin_radius_m',(string)$radius);
+ $this->upsert('self_checkin_lead_minutes',(string)$lead);
+ $this->upsert('self_checkin_fallback_duration_minutes',(string)$fallback);
+}
+
 public function getDashboardConfigs(): array
 {
  $athleteDefaults=[

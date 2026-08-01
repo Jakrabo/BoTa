@@ -6,6 +6,7 @@ namespace Jugendtraining\Component\Jugendtraining\Administrator\View\Result;
 
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Toolbar\ToolbarHelper;
+use Joomla\CMS\Language\Text;
 
 final class HtmlView extends BaseHtmlView
 {
@@ -17,10 +18,7 @@ final class HtmlView extends BaseHtmlView
         $this->form = $this->get('Form');
         $this->item = $this->get('Item');
 
-        ToolbarHelper::title(
-            $this->item->id ? 'COM_JUGENDTRAINING_RESULT_EDIT' : 'COM_JUGENDTRAINING_RESULT_NEW',
-            'chart'
-        );
+        ToolbarHelper::title(Text::_($this->item->id ? 'COM_JUGENDTRAINING_RESULT_EDIT' : 'COM_JUGENDTRAINING_RESULT_NEW'), 'chart');
         ToolbarHelper::apply('result.apply');
         ToolbarHelper::save('result.save');
         ToolbarHelper::save2new('result.save2new');

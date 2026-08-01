@@ -76,6 +76,23 @@ CREATE TABLE IF NOT EXISTS `#__jt_athletes` (
   CONSTRAINT `fk_jt_athletes_class` FOREIGN KEY (`class_id`) REFERENCES `#__jt_classes` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `#__jt_training_locations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(190) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `latitude` decimal(10,7) NOT NULL,
+  `longitude` decimal(10,7) NOT NULL,
+  `published` tinyint NOT NULL DEFAULT 1,
+  `ordering` int NOT NULL DEFAULT 0,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int unsigned NOT NULL DEFAULT 0,
+  `modified` datetime DEFAULT NULL,
+  `modified_by` int unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_jt_training_locations_name` (`name`),
+  KEY `idx_jt_training_locations_published` (`published`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `#__jt_training_sessions` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(190) NOT NULL,
@@ -83,6 +100,7 @@ CREATE TABLE IF NOT EXISTS `#__jt_training_sessions` (
   `training_date` date NOT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
+  `location_id` int unsigned NOT NULL DEFAULT 0,
   `location` varchar(190) DEFAULT NULL,
   `trainer_user_id` int unsigned NOT NULL DEFAULT 0,
   `notes` text DEFAULT NULL,
@@ -101,6 +119,7 @@ CREATE TABLE IF NOT EXISTS `#__jt_training_sessions` (
   PRIMARY KEY (`id`),
   KEY `idx_jt_training_date` (`training_date`),
   KEY `idx_jt_training_trainer` (`trainer_user_id`),
+  KEY `idx_jt_training_location` (`location_id`),
   KEY `idx_jt_training_published` (`published`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
@@ -148,6 +167,7 @@ CREATE TABLE IF NOT EXISTS `#__jt_audit_log` (
 CREATE TABLE IF NOT EXISTS `#__jt_results` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `athlete_id` int unsigned NOT NULL,
+  `bow_setup_id` int unsigned DEFAULT NULL,
   `result_date` date NOT NULL,
   `event_type` varchar(30) NOT NULL DEFAULT 'training',
   `event_name` varchar(190) DEFAULT NULL,
@@ -230,8 +250,9 @@ CREATE TABLE IF NOT EXISTS `#__jt_athlete_programs` (
   `assigned_at` datetime DEFAULT NULL,
   `due_date` date DEFAULT NULL,
   `active` tinyint NOT NULL DEFAULT 1,
+  `completed_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_jt_ap_unique` (`athlete_id`,`program_id`),
+  KEY `idx_jt_ap_athlete_program` (`athlete_id`,`program_id`),
   KEY `idx_jt_ap_program` (`program_id`),
   KEY `idx_jt_ap_active` (`active`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
@@ -253,6 +274,7 @@ CREATE TABLE IF NOT EXISTS `#__jt_program_progress` (
 CREATE TABLE IF NOT EXISTS `#__jt_goals` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `athlete_id` int unsigned NOT NULL,
+  `program_id` int unsigned DEFAULT NULL,
   `title` varchar(190) NOT NULL,
   `description` text DEFAULT NULL,
   `target_type` varchar(30) NOT NULL DEFAULT 'score',

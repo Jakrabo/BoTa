@@ -6,6 +6,7 @@ namespace Jugendtraining\Component\Jugendtraining\Administrator\View\Trainings;
 
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Toolbar\ToolbarHelper;
+use Joomla\CMS\Language\Text;
 
 final class HtmlView extends BaseHtmlView
 {
@@ -19,7 +20,7 @@ final class HtmlView extends BaseHtmlView
         $this->pagination = $this->get('Pagination');
         $this->state = $this->get('State');
 
-        ToolbarHelper::title('COM_JUGENDTRAINING_TRAININGS', 'calendar');
+        ToolbarHelper::title(Text::_('COM_JUGENDTRAINING_TRAININGS'), 'calendar');
         ToolbarHelper::addNew('training.add');
         ToolbarHelper::editList('training.edit');
         ToolbarHelper::publish('trainings.publish', 'JTOOLBAR_PUBLISH', true);

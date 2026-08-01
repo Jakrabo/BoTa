@@ -1,0 +1,2 @@
+<?php
+namespace Jugendtraining\Component\Jugendtraining\Site\Model;\defined('_JEXEC') or die;use Joomla\CMS\MVC\Model\BaseDatabaseModel;use Jugendtraining\Component\Jugendtraining\Site\Service\SelfCheckinService;final class SelfcheckinModel extends BaseDatabaseModel{public function getSessions():array{return(new SelfCheckinService())->eligibleSessions();}public function getSettings():object{return(new SelfCheckinService())->settings();}}

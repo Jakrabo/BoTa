@@ -44,8 +44,9 @@ use Joomla\CMS\Router\Route;
 
 <section class="jt-dashboard-block" data-dashboard-key="attendance">
  <div class="card">
-  <div class="card-header">
+  <div class="card-header d-flex justify-content-between align-items-center gap-3">
    <h2 class="h4 mb-0"><?php echo Text::_('COM_JUGENDTRAINING_MY_UPCOMING_TRAININGS');?></h2>
+   <?php if(!empty($this->selfCheckinSettings->enabled)):?><a class="btn btn-sm btn-primary" href="<?php echo Route::_('index.php?option=com_jugendtraining&view=selfcheckin');?>"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_TITLE');?></a><?php endif;?>
   </div>
   <div class="card-body">
    <?php if(empty($this->selfCancelSettings->enabled)):?>
@@ -138,9 +139,13 @@ use Joomla\CMS\Router\Route;
                         <td><?php echo (int) $result->arrows; ?></td>
                         <td><strong><?php echo (int) $result->score; ?></strong></td>
                         <td>
-                            <?php echo \Joomla\CMS\Language\Text::_(
-                                'COM_JUGENDTRAINING_VERIFICATION_' . strtoupper($result->verification_status)
-                            ); ?>
+                            <?php
+                            $verificationStatus = strtolower(trim((string) $result->verification_status));
+                            if (!in_array($verificationStatus, ['pending', 'verified', 'rejected'], true)) {
+                                $verificationStatus = 'pending';
+                            }
+                            echo \Joomla\CMS\Language\Text::_('COM_JUGENDTRAINING_VERIFICATION_' . strtoupper($verificationStatus));
+                            ?>
                         </td>
                         <td class="text-nowrap">
                             <a
@@ -227,7 +232,11 @@ use Joomla\CMS\Router\Route;
     <div class="jt-badge-grid jt-badge-grid-preview">
       <?php foreach ($this->myAchievements as $badge) : ?>
         <article class="jt-badge-card">
-          <img class="jt-badge-image" style="width:48px!important;height:48px!important;max-width:48px!important;max-height:48px!important;object-fit:contain;flex:0 0 48px;" src="<?php echo htmlspecialchars(\Joomla\CMS\Uri\Uri::root() . ltrim($badge->badge_image, '/'), ENT_QUOTES, 'UTF-8'); ?>" alt="">
+          <?php if(!empty($badge->badge_image)):?>
+           <img class="jt-badge-image" style="width:48px!important;height:48px!important;max-width:48px!important;max-height:48px!important;object-fit:contain;flex:0 0 48px;" src="<?php echo htmlspecialchars(\Joomla\CMS\Uri\Uri::root() . ltrim($badge->badge_image, '/'), ENT_QUOTES, 'UTF-8'); ?>" alt="">
+          <?php else:?>
+           <span class="jt-badge-fallback jt-badge-fallback--sm" aria-label="<?php echo Text::_('COM_JUGENDTRAINING_ACHIEVEMENT_NO_IMAGE');?>">★</span>
+          <?php endif;?>
           <div class="jt-badge-card__body">
             <h3 class="h5 mb-1"><?php echo htmlspecialchars($badge->title, ENT_QUOTES, 'UTF-8'); ?></h3>
             <div class="small text-muted"><?php echo \Joomla\CMS\HTML\HTMLHelper::_('date', $badge->awarded_at, Text::_('DATE_FORMAT_LC4')); ?></div>
@@ -257,6 +266,7 @@ use Joomla\CMS\Router\Route;
           <div>
             <h3 class="h4 mb-1"><?php echo htmlspecialchars($program->title, ENT_QUOTES, 'UTF-8'); ?></h3>
             <span class="badge bg-secondary"><?php echo \Joomla\CMS\Language\Text::_('COM_JUGENDTRAINING_CATEGORY_' . strtoupper($program->category)); ?></span>
+            <?php if($program->due_date):?><div class="small text-muted mt-1"><?php echo Text::_('COM_JUGENDTRAINING_FIELD_DUE_DATE');?>: <?php echo \Joomla\CMS\HTML\HTMLHelper::_('date',$program->due_date,Text::_('DATE_FORMAT_LC4'));?></div><?php endif;?>
           </div>
           <strong><?php echo $program->completed_count; ?> / <?php echo $program->exercise_count; ?></strong>
         </div>

@@ -11,22 +11,25 @@ final class TrainerathletetaskModel extends BaseDatabaseModel{
  $athleteId=(int)$data['athlete_id'];
  if(!(new AccessService())->canManageAthlete($athleteId))throw new \RuntimeException('JERROR_ALERTNOAUTHOR',403);
  $db=$this->getDatabase();$id=(int)($data['id']??0);$programId=(int)($data['program_id']??0);
- if($programId<=0)throw new \RuntimeException('Bitte ein Trainingsprogramm auswählen.');
+ if($programId<=0)throw new \RuntimeException('COM_JUGENDTRAINING_PROGRAM_REQUIRED');
  $o=(object)['athlete_id'=>$athleteId,'program_id'=>$programId,'due_date'=>trim((string)($data['due_date']??''))?:null,'active'=>!empty($data['active'])?1:0];
  if($id>0){
-  $q=$db->getQuery(true)->select('athlete_id')->from('#__jt_athlete_programs')->where('id='.$id);$db->setQuery($q);
-  $existingAthleteId=(int)$db->loadResult();
+  $q=$db->getQuery(true)->select(['athlete_id','program_id'])->from('#__jt_athlete_programs')->where('id='.$id);$db->setQuery($q);
+  $existing=$db->loadObject();
+  $existingAthleteId=(int)($existing->athlete_id??0);
   if($existingAthleteId!==$athleteId || !(new AccessService())->canManageAthlete($existingAthleteId))throw new \RuntimeException('JERROR_ALERTNOAUTHOR',403);
-  $q=$db->getQuery(true)->select('id')->from('#__jt_athlete_programs')->where('athlete_id='.$athleteId)->where('program_id='.$programId)->where('id<>'.$id);
-  $db->setQuery($q);$duplicateId=(int)$db->loadResult();
-  if($duplicateId>0){$o->id=$duplicateId;$db->updateObject('#__jt_athlete_programs',$o,'id');$q=$db->getQuery(true)->delete('#__jt_athlete_programs')->where('id='.$id);$db->setQuery($q)->execute();}
-  else{$o->id=$id;$db->updateObject('#__jt_athlete_programs',$o,'id');}
+  $programChanged=(int)($existing->program_id??0)!==$programId;
+  $o->id=$id;
+  if($programChanged)$o->completed_at=null;
+  $db->updateObject('#__jt_athlete_programs',$o,'id');
+  if($programChanged){$q=$db->getQuery(true)->delete('#__jt_program_progress')->where('athlete_program_id='.$id);$db->setQuery($q)->execute();}
  }else{
-  $q=$db->getQuery(true)->select('id')->from('#__jt_athlete_programs')->where('athlete_id='.$athleteId)->where('program_id='.$programId);
-  $db->setQuery($q);$existingId=(int)$db->loadResult();
-  if($existingId>0){$o->id=$existingId;$db->updateObject('#__jt_athlete_programs',$o,'id');}
-  else{$o->assigned_by=(int)Factory::getApplication()->getIdentity()->id;$o->assigned_at=Factory::getDate()->toSql();$db->insertObject('#__jt_athlete_programs',$o);}
+  $o->assigned_by=(int)Factory::getApplication()->getIdentity()->id;
+  $o->assigned_at=Factory::getDate()->toSql();
+  $o->completed_at=null;
+  $db->insertObject('#__jt_athlete_programs',$o);
  }
  return$athleteId;
 }
+
 }

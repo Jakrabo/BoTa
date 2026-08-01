@@ -77,6 +77,44 @@ final class Com_JugendtrainingInstallerScript
     {
         $this->ensureUserGroup('BoTa - Trainer');
         $this->ensureUserGroup('BoTa - Schütze');
+
+        if (in_array($type, ['install', 'update'], true)) {
+            $this->ensureCurrentSchemaColumns();
+        }
+    }
+
+    private function ensureCurrentSchemaColumns(): void
+    {
+        /** @var DatabaseInterface $db */
+        $db = Factory::getContainer()->get(DatabaseInterface::class);
+
+        $required = [
+            '#__jt_results' => [
+                'bow_setup_id' => 'ALTER TABLE `#__jt_results` ADD COLUMN `bow_setup_id` int unsigned DEFAULT NULL AFTER `athlete_id`',
+            ],
+            '#__jt_goals' => [
+                'program_id' => 'ALTER TABLE `#__jt_goals` ADD COLUMN `program_id` int unsigned DEFAULT NULL AFTER `athlete_id`',
+            ],
+            '#__jt_athlete_programs' => [
+                'completed_at' => 'ALTER TABLE `#__jt_athlete_programs` ADD COLUMN `completed_at` datetime DEFAULT NULL AFTER `active`',
+            ],
+        ];
+
+        foreach ($required as $table => $columns) {
+            try {
+                $existing = $db->getTableColumns($table, false);
+                foreach ($columns as $column => $sql) {
+                    if (!isset($existing[$column])) {
+                        $db->setQuery(str_replace('#__', $db->getPrefix(), $sql))->execute();
+                    }
+                }
+            } catch (\Throwable $exception) {
+                Factory::getApplication()->enqueueMessage(
+                    'BoTa-Schema konnte für ' . $table . ' nicht vollständig synchronisiert werden: ' . $exception->getMessage(),
+                    'warning'
+                );
+            }
+        }
     }
 
     private function ensureUserGroup(string $title): void
