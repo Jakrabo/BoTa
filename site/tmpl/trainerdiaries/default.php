@@ -23,7 +23,7 @@ $exportUrl = Route::_(
 </div>
 
 <div class="table-responsive">
-  <table class="table table-striped">
+  <table class="table table-striped jt-mobile-card-table">
     <thead>
       <tr>
         <th><?php echo Text::_('COM_JUGENDTRAINING_FIELD_TRAINING_DATE'); ?></th>
@@ -37,15 +37,15 @@ $exportUrl = Route::_(
     <tbody>
       <?php foreach ($this->diaries as $d) : ?>
         <tr>
-          <td><?php echo HTMLHelper::_('date', $d->training_date, Text::_('DATE_FORMAT_LC4')); ?></td>
-          <td><?php echo htmlspecialchars($d->athlete_name, ENT_QUOTES, 'UTF-8'); ?></td>
-          <td><?php echo htmlspecialchars((string) $d->training_method, ENT_QUOTES, 'UTF-8'); ?></td>
-          <td><?php echo (int) $d->arrow_count; ?></td>
-          <td><?php echo (int) $d->duration_minutes; ?></td>
-          <td><?php echo htmlspecialchars((string) $d->setup_title, ENT_QUOTES, 'UTF-8'); ?></td>
+          <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_TRAINING_DATE'); ?>"><?php echo HTMLHelper::_('date', $d->training_date, Text::_('DATE_FORMAT_LC4')); ?></td>
+          <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_ATHLETE'); ?>"><?php echo htmlspecialchars($d->athlete_name, ENT_QUOTES, 'UTF-8'); ?></td>
+          <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_TRAINING_METHOD'); ?>"><?php echo htmlspecialchars((string) $d->training_method, ENT_QUOTES, 'UTF-8'); ?></td>
+          <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_ARROW_COUNT'); ?>"><?php echo (int) $d->arrow_count; ?></td>
+          <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_DURATION_MINUTES'); ?>"><?php echo (int) $d->duration_minutes; ?></td>
+          <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_BOW_SETUP'); ?>"><?php echo htmlspecialchars((string) $d->setup_title, ENT_QUOTES, 'UTF-8'); ?></td>
         </tr>
         <tr>
-          <td colspan="6">
+          <td colspan="6" data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_NOTES'); ?>">
             <?php echo nl2br(htmlspecialchars((string) $d->notes, ENT_QUOTES, 'UTF-8')); ?>
           </td>
         </tr>

@@ -1,3 +1,11 @@
+## 2.6.4
+
+- Mobile Tabellenansicht der Anwesenheit wieder als kompakte Zeile mit fünf Statussymbolen dargestellt.
+- Trainer-Dashboard, Athleten, Ergebnisse, Achievements, Strafen, Tagebücher, Ziele und Statistiken erhalten mobile Kartenlisten ohne horizontales Wischen.
+- Überlauf der Übungsübersicht bei langen Texten und fehlenden Übersetzungen verhindert.
+- Fehlende Sprachschlüssel der Trainer-Übungsübersicht ergänzt.
+- Mobile Haupt-, Detail- und Bearbeitungsansichten bei 390 Pixeln geprüft.
+
 ## 2.6.3
 
 - Anwesenheitskarten passen ihre Spaltenzahl im Desktoplayout an die tatsächlich verfügbare Breite an.

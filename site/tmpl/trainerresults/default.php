@@ -23,7 +23,7 @@ $exportUrl = Route::_(
 </div>
 
 <div class="table-responsive">
-  <table class="table table-striped">
+  <table class="table table-striped jt-mobile-card-table">
     <thead>
       <tr>
         <th><?php echo Text::_('COM_JUGENDTRAINING_FIELD_RESULT_DATE'); ?></th>
@@ -37,9 +37,9 @@ $exportUrl = Route::_(
     <tbody>
       <?php foreach ($this->results as $r) : ?>
         <tr>
-          <td><?php echo HTMLHelper::_('date', $r->result_date, Text::_('DATE_FORMAT_LC4')); ?></td>
-          <td><?php echo htmlspecialchars($r->athlete_name, ENT_QUOTES, 'UTF-8'); ?></td>
-          <td>
+          <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_RESULT_DATE'); ?>"><?php echo HTMLHelper::_('date', $r->result_date, Text::_('DATE_FORMAT_LC4')); ?></td>
+          <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_ATHLETE'); ?>"><?php echo htmlspecialchars($r->athlete_name, ENT_QUOTES, 'UTF-8'); ?></td>
+          <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_EVENT_NAME'); ?>">
             <?php echo htmlspecialchars(
                 (string) (
                     $r->event_name
@@ -49,9 +49,9 @@ $exportUrl = Route::_(
                 'UTF-8'
             ); ?>
           </td>
-          <td><?php echo (int) $r->distance_m; ?> m</td>
-          <td><strong><?php echo (int) $r->score; ?></strong></td>
-          <td><?php echo number_format((float) $r->average, 2, ',', '.'); ?></td>
+          <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_DISTANCE'); ?>"><?php echo (int) $r->distance_m; ?> m</td>
+          <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_SCORE'); ?>"><strong><?php echo (int) $r->score; ?></strong></td>
+          <td data-label="Ø"><?php echo number_format((float) $r->average, 2, ',', '.'); ?></td>
         </tr>
       <?php endforeach; ?>
     </tbody>

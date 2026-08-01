@@ -82,7 +82,7 @@ $selectedAthleteId=Factory::getApplication()->input->getInt('athlete_id');
                 <p class="text-muted mb-0"><?php echo Text::_('COM_JUGENDTRAINING_NO_PENALTY_ENTRIES'); ?></p>
             <?php else : ?>
                 <div class="table-responsive">
-                    <table class="table align-middle">
+                    <table class="table align-middle jt-mobile-card-table">
                         <thead>
                             <tr>
                                 <th><?php echo Text::_('JDATE'); ?></th>
@@ -97,23 +97,23 @@ $selectedAthleteId=Factory::getApplication()->input->getInt('athlete_id');
                         <tbody>
                         <?php foreach ($this->entries as $entry) : ?>
                             <tr class="<?php echo $entry->status==='open'?'table-warning':''; ?>">
-                                <td><?php echo HTMLHelper::_('date',$entry->assigned_at,Text::_('DATE_FORMAT_LC4')); ?></td>
-                                <td><?php echo htmlspecialchars($entry->athlete_name,ENT_QUOTES,'UTF-8'); ?></td>
-                                <td><?php echo htmlspecialchars($entry->title,ENT_QUOTES,'UTF-8'); ?></td>
-                                <td>
+                                <td data-label="<?php echo Text::_('JDATE'); ?>"><?php echo HTMLHelper::_('date',$entry->assigned_at,Text::_('DATE_FORMAT_LC4')); ?></td>
+                                <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_FIELD_ATHLETE'); ?>"><?php echo htmlspecialchars($entry->athlete_name,ENT_QUOTES,'UTF-8'); ?></td>
+                                <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_PENALTY'); ?>"><?php echo htmlspecialchars($entry->title,ENT_QUOTES,'UTF-8'); ?></td>
+                                <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_PENALTY_VALUE'); ?>">
                                     <?php if ($entry->penalty_type==='monetary') : ?>
                                         <?php echo number_format((float)$entry->amount_snapshot,2,',','.'); ?> €
                                     <?php else : ?>
                                         <?php echo htmlspecialchars((string)$entry->action_snapshot,ENT_QUOTES,'UTF-8'); ?>
                                     <?php endif; ?>
                                 </td>
-                                <td>
+                                <td data-label="<?php echo Text::_('JSTATUS'); ?>">
                                     <span class="badge <?php echo $entry->status==='open'?'text-bg-warning':'text-bg-success'; ?>">
                                         <?php echo Text::_($entry->status==='open'?'COM_JUGENDTRAINING_STATUS_OPEN':'COM_JUGENDTRAINING_STATUS_COMPLETED'); ?>
                                     </span>
                                 </td>
-                                <td><?php echo htmlspecialchars((string)$entry->reason_note,ENT_QUOTES,'UTF-8'); ?></td>
-                                <td class="text-end">
+                                <td data-label="<?php echo Text::_('COM_JUGENDTRAINING_REASON_NOTE'); ?>"><?php echo htmlspecialchars((string)$entry->reason_note,ENT_QUOTES,'UTF-8'); ?></td>
+                                <td class="text-end" data-label="">
                                     <?php if ($entry->status==='open') : ?>
                                         <form class="d-flex gap-2 justify-content-end" action="<?php echo Route::_('index.php?option=com_jugendtraining&task=trainerpenalties.complete'); ?>" method="post">
                                             <input type="hidden" name="id" value="<?php echo (int)$entry->id; ?>">

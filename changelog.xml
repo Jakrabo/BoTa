@@ -3,6 +3,17 @@
   <changelog>
     <element>com_jugendtraining</element>
     <type>component</type>
+    <version>2.6.4</version>
+    <fix>
+      <item>Die mobile Tabellenansicht der Anwesenheit zeigt alle fünf Statussymbole wieder in einer kompakten Zeile.</item>
+      <item>Breite Trainerlisten werden auf Smartphones als vollständig lesbare Karten dargestellt.</item>
+      <item>Die Übungsübersicht verursacht bei langen Texten keinen horizontalen Seitenüberlauf mehr.</item>
+      <item>Fehlende Übersetzungen der Trainer-Übungsübersicht wurden ergänzt.</item>
+    </fix>
+  </changelog>
+  <changelog>
+    <element>com_jugendtraining</element>
+    <type>component</type>
     <version>2.6.3</version>
     <fix>
       <item>Anwesenheitskarten und Statusbuttons bleiben auch im geteilten Desktoplayout innerhalb des verfügbaren Bereichs.</item>

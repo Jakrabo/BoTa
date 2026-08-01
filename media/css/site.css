@@ -1051,10 +1051,91 @@ textarea:focus-visible {
     gap: .35rem;
     padding: .35rem .4rem;
   }
+  .jt-attendance-cards.is-table-view .jt-status-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
   .jt-attendance-cards.is-table-view .jt-athlete-name { font-size: .9rem; }
   .jt-attendance-cards.is-table-view .jt-status-button { min-height: 2.25rem; }
   .jt-attendance-cards.is-table-view .jt-card-save-indicator { width: 1rem; }
   .jt-sticky-actions .btn { flex: 1 1 auto; padding-right: .4rem; padding-left: .4rem; }
+
+  .jt-mobile-card-table,
+  .jt-mobile-card-table tbody,
+  .jt-mobile-card-table tr,
+  .jt-mobile-card-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .jt-mobile-card-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .jt-mobile-card-table tbody {
+    display: grid;
+    gap: .75rem;
+    padding: .75rem;
+  }
+
+  .jt-mobile-card-table tbody tr {
+    padding: .7rem .8rem;
+    border: 1px solid var(--bota-border);
+    border-radius: var(--jt-radius);
+    background: var(--bota-surface);
+    box-shadow: 0 3px 10px var(--bota-shadow-subtle);
+  }
+
+  .jt-mobile-card-table tbody td {
+    display: grid;
+    grid-template-columns: minmax(6.5rem, 40%) minmax(0, 1fr);
+    gap: .65rem;
+    align-items: center;
+    padding: .42rem 0;
+    border: 0;
+    overflow-wrap: anywhere;
+    text-align: left !important;
+  }
+
+  .jt-mobile-card-table tbody td::before {
+    content: attr(data-label);
+    color: var(--bota-text-muted);
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
+
+  .jt-mobile-card-table tbody td[data-label=""] {
+    display: block;
+  }
+
+  .jt-mobile-card-table tbody td[data-label=""]::before {
+    content: none;
+  }
+
+  .jt-mobile-card-table form,
+  .jt-mobile-card-table .btn,
+  .jt-mobile-card-table .form-control {
+    max-width: 100%;
+  }
+
+  .jt-trainerexercises-page,
+  .jt-trainerexercises-page .d-flex > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .jt-trainerexercises-page h1,
+  .jt-trainerexercises-page p {
+    overflow-wrap: anywhere;
+  }
 
   .jt-trainertrainings-list { overflow: visible; }
   .jt-trainertrainings-list table,
