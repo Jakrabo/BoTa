@@ -28,3 +28,5 @@ DROP TABLE IF EXISTS `#__jt_athletes`;
 DROP TABLE IF EXISTS `#__jt_sportyears`;
 DROP TABLE IF EXISTS `#__jt_classes`;
 DROP TABLE IF EXISTS `#__jt_clubs`;
+DROP TABLE IF EXISTS `#__jt_training_unit_items`;
+DROP TABLE IF EXISTS `#__jt_training_units`;

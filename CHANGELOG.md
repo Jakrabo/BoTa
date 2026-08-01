@@ -6,6 +6,9 @@
 - Athleten- und Trainingsfilter im Backend erweitert.
 - Live-Schemafelder für Trainingseinheiten-Zuordnung und Stornierungsstatus synchronisiert.
 - Darkmode-Oberflächen der Dashboard-, Anwesenheits- und mobilen Trainingskacheln vervollständigt.
+- Didaktisches Trainingseinheiten-Raster mit responsiver Detail- und Bearbeitungsansicht wiederhergestellt.
+- Dashboard-Zähler für offene Strafen und sichtbare Kalendertermine korrigiert.
+- Karten-/Tabellenumschaltung der Anwesenheit stabilisiert und gemeinsame Darkmode-Oberflächen ergänzt.
 
 ## 2.2.3
 

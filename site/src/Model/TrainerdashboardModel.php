@@ -5,6 +5,14 @@ namespace Jugendtraining\Component\Jugendtraining\Site\Model;
 
 final class TrainerdashboardModel extends TrainerModel
 {
+    public function getCalendarEventCount(): int
+    {
+        $this->requireTrainer();
+        $calendar = new \Jugendtraining\Component\Jugendtraining\Site\Service\CalendarService();
+
+        return count($calendar->events(['mode' => 'all'], true));
+    }
+
     public function getTodayTrainings(): array
     {
         $this->requireTrainer();

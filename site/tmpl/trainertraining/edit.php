@@ -116,8 +116,8 @@ $ajaxUrl = Route::_(
                 </button>
                </div>
                <div class="btn-group" role="group" aria-label="<?php echo Text::_('COM_JUGENDTRAINING_VIEW_MODE'); ?>">
-                <button type="button" class="btn btn-sm btn-primary jt-view-mode" data-view-mode="cards"><?php echo Text::_('COM_JUGENDTRAINING_CARD_VIEW'); ?></button>
-                <button type="button" class="btn btn-sm btn-outline-secondary jt-view-mode" data-view-mode="table"><?php echo Text::_('COM_JUGENDTRAINING_TABLE_VIEW'); ?></button>
+                <button type="button" class="btn btn-sm btn-primary jt-view-mode" data-view-mode="cards" aria-pressed="true"><?php echo Text::_('COM_JUGENDTRAINING_CARD_VIEW'); ?></button>
+                <button type="button" class="btn btn-sm btn-outline-secondary jt-view-mode" data-view-mode="table" aria-pressed="false"><?php echo Text::_('COM_JUGENDTRAINING_TABLE_VIEW'); ?></button>
                </div>
               </div>
 
@@ -443,31 +443,36 @@ document.addEventListener('DOMContentLoaded', () => {
     if (button) button.click();
   };
 
-  document.querySelectorAll('.jt-view-mode').forEach((button) => {
-    button.addEventListener('click', () => {
-      const tableMode = button.dataset.viewMode === 'table';
+  const applyViewMode = (mode) => {
+      const tableMode = mode === 'table';
       attendanceContainer?.classList.toggle('is-table-view', tableMode);
-      document.querySelector('.jt-attendance-table-head')?.classList.toggle('is-visible', tableMode);
+      const tableHead = document.querySelector('.jt-attendance-table-head');
+      tableHead?.classList.toggle('is-visible', tableMode);
+      if (tableHead) tableHead.hidden = !tableMode;
       document.querySelectorAll('.jt-view-mode').forEach((item) => {
-        const active = item === button;
+        const active = item.dataset.viewMode === mode;
         item.classList.toggle('btn-primary', active);
         item.classList.toggle('btn-outline-secondary', !active);
+        item.setAttribute('aria-pressed', active ? 'true' : 'false');
       });
       try {
-        window.localStorage.setItem('botaAttendanceView', tableMode ? 'table' : 'cards');
+        window.localStorage.setItem('botaAttendanceView', mode);
       } catch (error) {
         // The selected view still works when browser storage is unavailable.
       }
-    });
+  };
+
+  document.querySelectorAll('.jt-view-mode').forEach((button) => {
+    button.addEventListener('click', () => applyViewMode(button.dataset.viewMode || 'cards'));
   });
 
+  let savedViewMode = 'cards';
   try {
-    if (window.localStorage.getItem('botaAttendanceView') === 'table') {
-      document.querySelector('.jt-view-mode[data-view-mode="table"]')?.click();
-    }
+    savedViewMode = window.localStorage.getItem('botaAttendanceView') === 'table' ? 'table' : 'cards';
   } catch (error) {
     // Use the default card view when browser storage is unavailable.
   }
+  applyViewMode(savedViewMode);
 
   applyFilter(initialFilter);
 });

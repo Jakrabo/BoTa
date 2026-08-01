@@ -6,6 +6,8 @@ AP1 implementiert Recovery F auf Basis des bestehenden Joomla-MVC und des produk
 
 Nachtest-Korrektur: Die AP1-Kacheln und Statusschaltflächen besitzen explizite Darkmode-Oberflächen. Die WebAsset-Version `2.6.0.1` erzwingt nach einem erneuten Update das Laden des korrigierten Stylesheets statt einer zwischengespeicherten 2.6.0-Fassung.
 
+Zweiter Nachtest: Die WebAsset-Version `2.6.0.2` liefert die stabilisierte Karten-/Tabellenumschaltung, vollständige gemeinsame Darkmode-Oberflächen und das aus dem Live-Schema wiederhergestellte Trainingseinheiten-MVC. Die Dashboard-Navigation zählt nun offene Strafen statt Athleten und tatsächlich sichtbare Kalendertermine statt eines statischen Nullwerts.
+
 ## Geänderte Dateien
 
 ### Trainerdashboard

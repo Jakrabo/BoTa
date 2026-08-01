@@ -13,6 +13,8 @@
       <item>Dashboard-Strafregister berücksichtigt ausschließlich offene Strafen.</item>
       <item>Trainingsstornierungen werden in Listen und Dashboardauswertungen berücksichtigt.</item>
       <item>Dashboard-, Anwesenheits- und mobile Trainingskacheln werden vollständig im Darkmode dargestellt.</item>
+      <item>Dashboard-Zähler für offene Strafen und sichtbare Kalendertermine wurden korrigiert.</item>
+      <item>Trainingseinheiten-Raster und Anwesenheitsumschaltung wurden responsiv und sprachlich vervollständigt.</item>
     </fix>
   </changelog>
   <changelog>

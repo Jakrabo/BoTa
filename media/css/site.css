@@ -1869,3 +1869,129 @@ html[data-bota-theme-resolved="dark"] .jt-comment-details summary,
 html[data-bota-theme-resolved="dark"] .jt-athlete-meta {
   color: #aab0b6 !important;
 }
+
+/* BoTa 2.6.0: didactic training-unit raster */
+.jt-training-unit-list { display: grid; gap: .85rem; }
+.jt-training-unit-list .card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.jt-raster-summary { display: flex; flex-wrap: wrap; gap: .6rem; }
+.jt-raster-summary span {
+  padding: .4rem .7rem;
+  border: 1px solid var(--jt-border, #dfe7f1);
+  border-radius: 999px;
+  background: var(--jt-surface-soft, #f8fafc);
+  font-weight: 700;
+}
+.jt-raster-grid { display: grid; gap: 1rem; }
+.jt-raster-row,
+.jt-raster-edit-row {
+  overflow: hidden;
+  border: 1px solid var(--jt-border, #dfe7f1);
+  border-radius: 1rem;
+  background: var(--jt-surface, #fff);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, .06);
+}
+.jt-raster-row > header,
+.jt-raster-edit-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .8rem;
+  padding: .85rem 1rem;
+  border-bottom: 1px solid var(--jt-border, #dfe7f1);
+  background: var(--jt-surface-soft, #f8fafc);
+}
+.jt-raster-step,
+.jt-raster-duration {
+  padding: .25rem .55rem;
+  border-radius: 999px;
+  background: var(--jt-accent-soft, rgba(13,110,253,.1));
+  color: var(--jt-primary, #0d6efd);
+  font-size: .82rem;
+  font-weight: 800;
+}
+.jt-raster-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.jt-raster-field { min-width: 0; padding: .8rem 1rem; border-bottom: 1px solid var(--jt-border, #dfe7f1); }
+.jt-raster-field:nth-child(odd) { border-right: 1px solid var(--jt-border, #dfe7f1); }
+.jt-raster-field:last-child { grid-column: 1 / -1; border-bottom: 0; border-right: 0; }
+.jt-raster-field > span { display: block; margin-bottom: .25rem; color: var(--jt-muted, #64748b); font-size: .76rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.jt-raster-field p { margin: 0; white-space: normal; overflow-wrap: anywhere; }
+.jt-raster-edit-row { margin-bottom: 1rem; padding-bottom: 1rem; }
+.jt-raster-edit-row > .row { padding: 1rem; }
+.jt-raster-edit-head { display: flex; justify-content: space-between; }
+
+@media (max-width: 767.98px) {
+  .jt-training-unit-list .card-body { align-items: stretch; flex-direction: column; }
+  .jt-training-unit-list .card-body .btn { flex: 1 1 auto; }
+  .jt-raster-row > header { grid-template-columns: 1fr auto; }
+  .jt-raster-row > header strong { grid-column: 1 / -1; grid-row: 1; font-size: 1.05rem; }
+  .jt-raster-step { grid-column: 1; grid-row: 2; justify-self: start; }
+  .jt-raster-duration { grid-column: 2; grid-row: 2; }
+  .jt-raster-fields { grid-template-columns: 1fr; }
+  .jt-raster-field,
+  .jt-raster-field:nth-child(odd),
+  .jt-raster-field:last-child { grid-column: auto; border-right: 0; border-bottom: 1px solid var(--jt-border, #dfe7f1); }
+  .jt-raster-field:last-child { border-bottom: 0; }
+  .jt-raster-edit-head { align-items: flex-start; gap: .5rem; }
+}
+
+html[data-bota-theme-resolved="dark"] .jt-raster-row,
+html[data-bota-theme-resolved="dark"] .jt-raster-edit-row,
+html[data-bota-theme-resolved="dark"] .jt-training-unit-list .card {
+  background: #1b1f23 !important;
+  color: #e8eaed !important;
+  border-color: #343a40 !important;
+}
+html[data-bota-theme-resolved="dark"] .jt-raster-row > header,
+html[data-bota-theme-resolved="dark"] .jt-raster-edit-head,
+html[data-bota-theme-resolved="dark"] .jt-raster-summary span {
+  background: #24292f !important;
+  color: #e8eaed !important;
+  border-color: #343a40 !important;
+}
+html[data-bota-theme-resolved="dark"] .jt-raster-field { border-color: #343a40 !important; }
+
+/* Shared component surfaces: keep all existing views readable in dark mode. */
+html[data-bota-theme-resolved="dark"] .jt-badge-card,
+html[data-bota-theme-resolved="dark"] .jt-attendance-table .jt-attendance-row,
+html[data-bota-theme-resolved="dark"] .alert-light,
+html[data-bota-theme-resolved="dark"] .input-group-text {
+  background: #1b1f23 !important;
+  color: #e8eaed !important;
+  border-color: #343a40 !important;
+}
+html[data-bota-theme-resolved="dark"] .btn-outline-danger {
+  background: transparent !important;
+  color: #fca5a5 !important;
+  border-color: #ef4444 !important;
+}
+html[data-bota-theme-resolved="dark"] .btn-outline-danger:hover,
+html[data-bota-theme-resolved="dark"] .btn-outline-danger:focus {
+  background: #b91c1c !important;
+  color: #fff !important;
+}
+html[data-bota-theme-resolved="dark"] .progress {
+  background: #343a40 !important;
+}
+html[data-bota-theme-resolved="dark"] hr,
+html[data-bota-theme-resolved="dark"] details,
+html[data-bota-theme-resolved="dark"] .border,
+html[data-bota-theme-resolved="dark"] .border-top,
+html[data-bota-theme-resolved="dark"] .border-bottom {
+  border-color: #343a40 !important;
+}
+
+@media (max-width: 767.98px) {
+  .table-responsive { border: 0; }
+  .card-header.d-flex,
+  .card-body > .d-flex.justify-content-between { align-items: stretch !important; flex-wrap: wrap; }
+  .card-header.d-flex > .btn,
+  .card-body > .d-flex.justify-content-between > .btn { max-width: 100%; }
+}
