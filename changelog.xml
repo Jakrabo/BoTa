@@ -3,6 +3,16 @@
   <changelog>
     <element>com_jugendtraining</element>
     <type>component</type>
+    <version>2.6.1</version>
+    <fix>
+      <item>Zentrales CSS-Variablesystem vereinheitlicht Hell-, Dunkel- und Auto-Darstellung.</item>
+      <item>View-spezifische Darkmode-Regeln und direkte Farbwerte in den Komponenten-Stylesheets wurden entfernt.</item>
+      <item>Frontend- und Backend-Oberflächen verwenden gemeinsame semantische Design-Tokens.</item>
+    </fix>
+  </changelog>
+  <changelog>
+    <element>com_jugendtraining</element>
+    <type>component</type>
     <version>2.6.0</version>
     <new>
       <item>Trainerdashboard zeigt heutige Trainings mit filterbaren Anwesenheitszahlen.</item>

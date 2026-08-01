@@ -1,3 +1,11 @@
+## 2.6.1
+
+- Zentrales CSS-Variablesystem für Hell, Dunkel und Auto eingeführt.
+- Direkte Farbwerte außerhalb der zentralen Token-Deklarationen entfernt.
+- View-spezifische Darkmode-Hacks durch gemeinsame Komponentenoberflächen ersetzt.
+- Cards, Tabellen, Formulare, Dropdowns, Modals, Tabs, Pagination, Alerts, Badges und Charts an das Designsystem angebunden.
+- Backend-Styles an die nativen Joomla-Administratorvariablen angebunden.
+
 ## 2.6.0
 
 - Trainerdashboard um heutige Trainings, verlinkte Anwesenheitsfilter und Trainingseinheiten-Link erweitert.
