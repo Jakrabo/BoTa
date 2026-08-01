@@ -1,3 +1,9 @@
+## 2.6.3
+
+- Anwesenheitskarten passen ihre Spaltenzahl im Desktoplayout an die tatsächlich verfügbare Breite an.
+- Statusbuttons brechen lange Beschriftungen um, ohne aus der Karte herauszulaufen.
+- Der Joomla-Updatefeed enthält eine SHA-256-Prüfsumme für das Installationspaket.
+
 ## 2.6.2
 
 - Komponentenstylesheet wird zusätzlich zur WebAsset-Registry zentral und versioniert geladen.

@@ -1194,6 +1194,7 @@ textarea:focus-visible {
 
 .jt-attendance-cards {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 34rem), 1fr));
   gap: 1rem;
 }
 
@@ -1306,6 +1307,7 @@ textarea:focus-visible {
   display: grid;
   place-items: center;
   gap: 0.18rem;
+  min-width: 0;
   min-height: 4rem;
   padding: 0.5rem 0.35rem;
   border: 1px solid var(--bota-border-strong);
@@ -1316,6 +1318,7 @@ textarea:focus-visible {
   font-size: 0.72rem;
   font-weight: 700;
   line-height: 1.1;
+  overflow-wrap: anywhere;
   text-align: center;
   cursor: pointer;
   touch-action: manipulation;
@@ -1452,12 +1455,6 @@ textarea:focus-visible {
 
   .jt-athlete-name {
     font-size: 1.08rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .jt-attendance-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

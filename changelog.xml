@@ -3,6 +3,15 @@
   <changelog>
     <element>com_jugendtraining</element>
     <type>component</type>
+    <version>2.6.3</version>
+    <fix>
+      <item>Anwesenheitskarten und Statusbuttons bleiben auch im geteilten Desktoplayout innerhalb des verfügbaren Bereichs.</item>
+      <item>Der Updatefeed veröffentlicht die SHA-256-Prüfsumme des Installationspakets.</item>
+    </fix>
+  </changelog>
+  <changelog>
+    <element>com_jugendtraining</element>
+    <type>component</type>
     <version>2.6.2</version>
     <fix>
       <item>Das zentrale Komponentenstylesheet wird im Frontend zuverlässig und versioniert geladen.</item>
