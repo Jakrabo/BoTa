@@ -3,6 +3,17 @@
   <changelog>
     <element>com_jugendtraining</element>
     <type>component</type>
+    <version>2.6.2</version>
+    <fix>
+      <item>Das zentrale Komponentenstylesheet wird im Frontend zuverlässig und versioniert geladen.</item>
+      <item>Der BoTa-Theme-Resolver synchronisiert den Bootstrap-Theme-Selektor.</item>
+      <item>BoTa-Design-Tokens steuern nun auch die von Cassiopeia und Bootstrap verwendeten Komponentenvariablen.</item>
+      <item>Cards, Formulare, Tabellen, Dropdowns, List-Groups und Buttons besitzen konsistente Kontraste in Hell und Dunkel.</item>
+    </fix>
+  </changelog>
+  <changelog>
+    <element>com_jugendtraining</element>
+    <type>component</type>
     <version>2.6.1</version>
     <fix>
       <item>Zentrales CSS-Variablesystem vereinheitlicht Hell-, Dunkel- und Auto-Darstellung.</item>

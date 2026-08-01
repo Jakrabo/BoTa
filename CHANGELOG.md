@@ -1,3 +1,10 @@
+## 2.6.2
+
+- Komponentenstylesheet wird zusätzlich zur WebAsset-Registry zentral und versioniert geladen.
+- Theme-Resolver setzt synchron `data-bota-theme-resolved` und `data-bs-theme`.
+- Cassiopeia-/Bootstrap-Variablen für Body, Cards, Borders, Dropdowns, List-Groups, Tabs und Oberflächen an die BoTa-Tokens gekoppelt.
+- Light- und Dark-Kontraste für Cards, Formulare, Tabellen, Dropdowns und Buttons gegen das produktive Cassiopeia-CSS geprüft.
+
 ## 2.6.1
 
 - Zentrales CSS-Variablesystem für Hell, Dunkel und Auto eingeführt.

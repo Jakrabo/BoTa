@@ -6,6 +6,7 @@ namespace Jugendtraining\Component\Jugendtraining\Site\Controller;
 
 use Joomla\CMS\MVC\Controller\BaseController;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Uri\Uri;
 
 final class DisplayController extends BaseController
 {
@@ -47,6 +48,10 @@ final class DisplayController extends BaseController
 
         $document=$app->getDocument();
         $document->getWebAssetManager()->useStyle('com_jugendtraining.site');
+        $document->addStyleSheet(
+            Uri::root(true).'/media/com_jugendtraining/css/site.css',
+            ['version'=>'auto']
+        );
 
         // Apply the resolved theme immediately in the document head.
         // This deliberately does not depend on the Joomla WebAsset script registry.
@@ -63,6 +68,7 @@ final class DisplayController extends BaseController
             .'var resolved=configured==="auto"?(mq.matches?"dark":"light"):configured;'
             .'document.documentElement.setAttribute("data-bota-theme",configured);'
             .'document.documentElement.setAttribute("data-bota-theme-resolved",resolved);'
+            .'document.documentElement.setAttribute("data-bs-theme",resolved);'
             .'document.documentElement.style.colorScheme=resolved;'
             .'if(document.body){'
             .'document.body.classList.toggle("bota-theme-dark",resolved==="dark");'

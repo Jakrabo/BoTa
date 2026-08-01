@@ -13,6 +13,7 @@ html[data-bota-theme-resolved="light"] {
   color-scheme: light;
 
   --bota-bg: #f4f7fb;
+  --bota-bg-rgb: 244, 247, 251;
   --bota-card: #ffffff;
   --bota-card-hover: #f8fafc;
   --bota-surface: #ffffff;
@@ -21,6 +22,7 @@ html[data-bota-theme-resolved="light"] {
   --bota-border: #dfe7f1;
   --bota-border-strong: #cbd5e1;
   --bota-text: #172033;
+  --bota-text-rgb: 23, 32, 51;
   --bota-text-soft: #334155;
   --bota-text-muted: #64748b;
   --bota-text-on-accent: #ffffff;
@@ -105,6 +107,46 @@ html[data-bota-theme-resolved="light"] {
   --bota-transparent: transparent;
   --bota-current-color: currentColor;
 
+  /* Joomla/Cassiopeia and Bootstrap component bridge. */
+  --body-bg: var(--bota-bg);
+  --body-bg-rgb: var(--bota-bg-rgb);
+  --body-color: var(--bota-text);
+  --body-color-rgb: var(--bota-text-rgb);
+  --border-color: var(--bota-border);
+  --border-color-translucent: var(--bota-border);
+  --secondary-bg: var(--bota-surface-raised);
+  --tertiary-bg: var(--bota-surface-subtle);
+  --card-bg: var(--bota-card);
+  --card-color: var(--bota-text);
+  --card-border-color: var(--bota-border);
+  --card-cap-bg: var(--bota-surface-raised);
+  --card-cap-color: var(--bota-text);
+  --dropdown-bg: var(--bota-dropdown-bg);
+  --dropdown-color: var(--bota-text);
+  --dropdown-border-color: var(--bota-border);
+  --dropdown-link-color: var(--bota-text);
+  --dropdown-link-hover-color: var(--bota-text);
+  --dropdown-link-hover-bg: var(--bota-dropdown-hover);
+  --list-group-bg: var(--bota-card);
+  --list-group-color: var(--bota-text);
+  --list-group-border-color: var(--bota-border);
+  --list-group-action-color: var(--bota-text);
+  --list-group-action-hover-color: var(--bota-text);
+  --list-group-action-hover-bg: var(--bota-card-hover);
+  --nav-link-color: var(--bota-secondary);
+  --nav-link-hover-color: var(--bota-secondary-hover);
+  --nav-tabs-border-color: var(--bota-border);
+  --nav-tabs-link-active-bg: var(--bota-surface-raised);
+  --nav-tabs-link-active-color: var(--bota-text);
+  --nav-tabs-link-active-border-color: var(--bota-border);
+  --bs-body-bg: var(--bota-bg);
+  --bs-body-color: var(--bota-text);
+  --bs-border-color: var(--bota-border);
+  --bs-secondary-bg: var(--bota-surface-raised);
+  --bs-tertiary-bg: var(--bota-surface-subtle);
+  --bs-card-bg: var(--bota-card);
+  --bs-card-color: var(--bota-text);
+
   --jt-primary: var(--bota-primary);
   --jt-primary-dark: var(--bota-primary-hover);
   --jt-primary-soft: var(--bota-primary-soft);
@@ -137,6 +179,7 @@ html[data-bota-theme-resolved="light"] {
 html[data-bota-theme-resolved="dark"] {
   color-scheme: dark;
   --bota-bg: #121417;
+  --bota-bg-rgb: 18, 20, 23;
   --bota-card: #1b1f23;
   --bota-card-hover: #24292f;
   --bota-surface: #1b1f23;
@@ -145,6 +188,7 @@ html[data-bota-theme-resolved="dark"] {
   --bota-border: #343a40;
   --bota-border-strong: #4b5560;
   --bota-text: #e8eaed;
+  --bota-text-rgb: 232, 234, 237;
   --bota-text-soft: #c9d1d9;
   --bota-text-muted: #aab0b6;
   --bota-primary-soft: #153f3b;
@@ -551,6 +595,7 @@ a.card:hover {
 
 .btn-primary {
   border-color: var(--bota-transparent);
+  color: var(--bota-text-on-accent);
   background: linear-gradient(135deg, var(--jt-primary), var(--jt-secondary));
   box-shadow: 0 8px 20px var(--bota-secondary-alpha-20);
 }

@@ -4,7 +4,9 @@ Stand: 1. August 2026
 
 ## Ergebnis
 
-Der Dark Mode der Komponente wird nicht mehr durch view-spezifische Darkmode-Regeln gesteuert. `media/css/site.css` enthält ein zentrales Variablesystem für Hell und Dunkel. Der vorhandene Theme-Resolver bleibt unverändert und setzt weiterhin `data-bota-theme-resolved="light"` beziehungsweise `data-bota-theme-resolved="dark"`; die Einstellung `auto` wird dadurch weiterhin aus `prefers-color-scheme` aufgelöst.
+Der Dark Mode der Komponente wird nicht mehr durch view-spezifische Darkmode-Regeln gesteuert. `media/css/site.css` enthält ein zentrales Variablesystem für Hell und Dunkel. Der vorhandene Theme-Resolver setzt weiterhin `data-bota-theme-resolved="light"` beziehungsweise `data-bota-theme-resolved="dark"`; die Einstellung `auto` wird dadurch weiterhin aus `prefers-color-scheme` aufgelöst.
+
+Seit dem Live-Cascade-Fix wird zusätzlich `data-bs-theme` zentral synchronisiert. Die BoTa-Tokens speisen außerdem die von Cassiopeia tatsächlich verwendeten Variablen wie `--body-bg`, `--card-bg`, `--dropdown-bg` und `--list-group-bg`. Das Komponentenstylesheet wird neben dem WebAssetManager über den zentralen Display-Controller direkt und versioniert registriert, weil es im Testsystem trotz vorhandener WebAsset-Definition nicht im gerenderten `<head>` ausgegeben wurde.
 
 Außerhalb der zentralen Token-Deklarationen existieren in den CSS-Dateien keine direkten Hex-, RGB- oder RGBA-Farbwerte mehr. `media/css/admin.css` bindet die BoTa-Tokens an die nativen Joomla-Administratorvariablen an und folgt damit automatisch dem Backend-Farbschema.
 
@@ -107,7 +109,13 @@ Verbleibende `!important`-Deklarationen betreffen ausschließlich Layout, Respon
 - keine direkten Farbwerte als `var()`-Fallback
 - ausgeglichene CSS-Klammerstruktur
 - `git diff --check` ohne Fehler
-- keine PHP-, JavaScript-, SQL-, Manifest- oder Sprachdatei geändert
+- keine View-, JavaScript-, SQL-, Manifest- oder Sprachdatei geändert; PHP-Änderung ausschließlich im zentralen Display-Controller zur Stylesheet- und Bootstrap-Theme-Kopplung
+
+## Live-Cascade-Prüfung
+
+Das Testsystem `training.jugendcup-nrw.de` lieferte Bootstrap 5.3.8 mit Cassiopeia aus. Vor dem Fix war `data-bs-theme` nicht gesetzt und `media/com_jugendtraining/css/site.css` trotz vorhandener Datei und WebAsset-Definition nicht geladen. Die Karten wurden dadurch aus Cassiopeias Light-Variablen weiß berechnet.
+
+Die korrigierte Kaskade wurde mit dem tatsächlich ausgelieferten Cassiopeia- und `user.css` geprüft. Cards, Card-Header/-Body, Formulare, Dropdowns, List-Groups und Tabellen verwenden nun in beiden Farbschemata die zentralen BoTa-Werte.
 
 ## Noch manuell zu testende Views
 
