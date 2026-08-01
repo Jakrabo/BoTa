@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS `#__jt_training_locations`;
 DROP TABLE IF EXISTS `#__jt_calendar_attachments`;
 DROP TABLE IF EXISTS `#__jt_calendar_events`;
+DROP TABLE IF EXISTS `#__jt_athlete_achievements`;
+DROP TABLE IF EXISTS `#__jt_achievements`;
 DROP TABLE IF EXISTS `#__jt_penalty_register`;
 DROP TABLE IF EXISTS `#__jt_penalty_definitions`;
 DROP TABLE IF EXISTS `#__jt_bow_setups`;
@@ -16,6 +18,7 @@ DROP TABLE IF EXISTS `#__jt_athlete_programs`;
 DROP TABLE IF EXISTS `#__jt_program_exercises`;
 DROP TABLE IF EXISTS `#__jt_training_programs`;
 DROP TABLE IF EXISTS `#__jt_exercises`;
+DROP TABLE IF EXISTS `#__jt_results`;
 
 DROP TABLE IF EXISTS `#__jt_audit_log`;
 DROP TABLE IF EXISTS `#__jt_settings`;

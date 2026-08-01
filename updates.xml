@@ -5,12 +5,12 @@
     <description>BoTa – Bogensport-Training</description>
     <element>com_jugendtraining</element>
     <type>component</type>
-    <version>2.2.2</version>
+    <version>2.2.3</version>
     <client>administrator</client>
     <downloads>
-      <downloadurl type="full" format="zip">https://github.com/Jakrabo/BoTa/releases/download/v2.2.2/com_bota-2.2.2.zip</downloadurl>
+      <downloadurl type="full" format="zip">https://github.com/Jakrabo/BoTa/releases/download/v2.2.3/com_bota-2.2.3.zip</downloadurl>
     </downloads>
-    <infourl title="BoTa 2.2.2">https://github.com/Jakrabo/BoTa/releases/tag/v2.2.2</infourl>
+    <infourl title="BoTa 2.2.3">https://github.com/Jakrabo/BoTa/releases/tag/v2.2.3</infourl>
     <changelogurl>https://raw.githubusercontent.com/Jakrabo/BoTa/main/changelog.xml</changelogurl>
     <targetplatform name="joomla" version="6\.[0-9]+" />
     <php_minimum>8.3.0</php_minimum>

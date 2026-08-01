@@ -118,6 +118,7 @@ CREATE TABLE IF NOT EXISTS `#__jt_training_sessions` (
   `modified_by` int unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `idx_jt_training_date` (`training_date`),
+  KEY `idx_jt_training_group_id` (`training_group_id`),
   KEY `idx_jt_training_trainer` (`trainer_user_id`),
   KEY `idx_jt_training_location` (`location_id`),
   KEY `idx_jt_training_published` (`published`)
@@ -192,6 +193,7 @@ CREATE TABLE IF NOT EXISTS `#__jt_results` (
   `modified_by` int unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `idx_jt_results_athlete` (`athlete_id`),
+  KEY `idx_jt_results_bow_setup` (`bow_setup_id`),
   KEY `idx_jt_results_date` (`result_date`),
   KEY `idx_jt_results_event_type` (`event_type`),
   KEY `idx_jt_results_distance` (`distance_m`)
@@ -292,6 +294,7 @@ CREATE TABLE IF NOT EXISTS `#__jt_goals` (
   `modified_by` int unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `idx_jt_goals_athlete` (`athlete_id`),
+  KEY `idx_jt_goals_program_id` (`program_id`),
   KEY `idx_jt_goals_completed` (`completed`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
@@ -309,7 +312,8 @@ CREATE TABLE IF NOT EXISTS `#__jt_trainer_notes` (
   `modified_by` int unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `idx_jt_notes_athlete` (`athlete_id`),
-  KEY `idx_jt_notes_date` (`note_date`)
+  KEY `idx_jt_notes_date` (`note_date`),
+  KEY `idx_jt_notes_status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 

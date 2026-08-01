@@ -3,6 +3,26 @@
   <changelog>
     <element>com_jugendtraining</element>
     <type>component</type>
+    <version>2.2.3</version>
+    <fix>
+      <item>Manifest, Updatefeed, Changelog und WebAsset-Version wurden synchronisiert.</item>
+      <item>Fehlende ACL- und Konfigurations-Sprachschlüssel wurden ergänzt.</item>
+      <item>Installations- und Deinstallationsschema wurden mit dem vorhandenen Komponentenbestand synchronisiert.</item>
+      <item>Administrator-WebAssets werden über den Joomla WebAssetManager geladen.</item>
+    </fix>
+  </changelog>
+  <changelog>
+    <element>com_jugendtraining</element>
+    <type>component</type>
+    <version>2.2.2</version>
+    <fix>
+      <item>GPS-Check-in-JavaScript wird direkt in der Self-Check-in-View geladen.</item>
+      <item>Der GPS-Check-in reagiert unabhängig vom Zustand der Joomla-WebAsset-Registry.</item>
+    </fix>
+  </changelog>
+  <changelog>
+    <element>com_jugendtraining</element>
+    <type>component</type>
     <version>2.2.1</version>
     <fix>
       <item>Prüfstatus leerer oder ungültiger Altdaten wird als ausstehend behandelt.</item>

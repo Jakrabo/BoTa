@@ -14,6 +14,10 @@ final class DisplayController extends BaseController
     {
         $this->syncCurrentSportyear();
 
+        Factory::getApplication()->getDocument()->getWebAssetManager()
+            ->useStyle('com_jugendtraining.admin')
+            ->useScript('com_jugendtraining.admin');
+
         $user=Factory::getApplication()->getIdentity();
         if(!$user->authorise('core.manage','com_jugendtraining')&&!$user->authorise('core.admin')){
             throw new \RuntimeException('JERROR_ALERTNOAUTHOR',403);

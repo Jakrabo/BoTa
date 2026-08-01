@@ -11,4 +11,4 @@
  data-position-unavailable="<?php echo htmlspecialchars(Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_POSITION_UNAVAILABLE'),ENT_QUOTES,'UTF-8');?>"
  data-timeout="<?php echo htmlspecialchars(Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_TIMEOUT'),ENT_QUOTES,'UTF-8');?>"><?php echo Text::_('COM_JUGENDTRAINING_SELF_CHECKIN_GPS_BUTTON');?></button><div id="jt-selfcheckin-status" class="small mt-3" role="status" aria-live="polite"></div><?php echo HTMLHelper::_('form.token');?></form></div></div><?php endif;?></div>
 
-<script src="<?php echo htmlspecialchars(Uri::root(true) . '/media/com_jugendtraining/js/selfcheckin.js?v=2.2.2', ENT_QUOTES, 'UTF-8'); ?>" defer></script>
+<script src="<?php echo htmlspecialchars(Uri::root(true) . '/media/com_jugendtraining/js/selfcheckin.js?v=2.2.3', ENT_QUOTES, 'UTF-8'); ?>" defer></script>

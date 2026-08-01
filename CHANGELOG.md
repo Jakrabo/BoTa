@@ -1,3 +1,11 @@
+## 2.2.3
+
+- Recovery-Version zur Synchronisierung von Manifest, Updatefeed, Changelog und WebAsset-Version.
+- Fehlende ACL- und Konfigurations-Sprachschlüssel ergänzt.
+- Neuinstallationsschema mit den vorhandenen Update-Indizes synchronisiert.
+- Deinstallationsschema um bislang nicht entfernte Komponententabellen vervollständigt.
+- Administrator-WebAssets werden über den WebAssetManager geladen.
+
 ## 2.2.2
 - GPS-Check-in-JavaScript wird in der Self-Check-in-View direkt geladen und ist damit nicht mehr von einer möglicherweise veralteten Joomla-WebAsset-Registry abhängig.
 - Behebt den Fall, dass beim Klick auf „Per GPS einchecken“ keinerlei Reaktion erfolgt.
